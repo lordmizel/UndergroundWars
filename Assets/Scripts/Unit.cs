@@ -14,6 +14,9 @@ public class Unit : MonoBehaviour {
 	public ClickableTile originTile;
 	[SerializeField]
 	int movementPoints = 5;
+	bool unitMoving = false;
+	List<ClickableTile> path;
+	float moveSpeed = 5f;
 
 	//Delete this
 	public int initialX; 
@@ -32,23 +35,13 @@ public class Unit : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
-
-	/*void OnMouseDown()
+	void Update () 
 	{
-		if (GameManager.gameState != GameManager.state.MOVING_UNIT) {
-			unitSelected = true;
-			army.unitSelected = this;
-			map.CalculateMovementMatrix (originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints);
-			GameManager.gameState = GameManager.state.MOVING_UNIT;
-		} 
-		else 
+		if (unitMoving == true) 
 		{
-			MoveUnitTo (originTile.GetTileCoordX(), originTile.GetTileCoordY());
+			OnMyMerryWay ();
 		}
-	}*/
+	}
 
 	public void UnitSelected()
 	{
@@ -61,11 +54,37 @@ public class Unit : MonoBehaviour {
 		} 
 		else 
 		{
-			MoveUnitTo (originTile.GetTileCoordX(), originTile.GetTileCoordY());
+			EstablishNewTile (originTile.GetTileCoordX(), originTile.GetTileCoordY());
 		}
 	}
 
-	public void MoveUnitTo(int x, int y)
+	public void StartMoving(List<ClickableTile> newPath)
+	{
+		map.ReturnTilesToNormal ();
+		path = newPath;
+		unitMoving = true;
+	}
+
+	void OnMyMerryWay()
+	{
+		Vector3 destination = new Vector3 (path [path.Count - 1].GetTileCoordX (), path [path.Count - 1].GetTileCoordY (), transform.position.z);
+		if (Vector3.Distance(transform.position, destination) > 0.01f) 
+		{
+			transform.position = Vector3.MoveTowards (transform.position, destination, moveSpeed * Time.deltaTime);
+		} 
+		else 
+		{
+			gameObject.transform.position = new Vector3(path [path.Count - 1].GetTileCoordX (), path [path.Count - 1].GetTileCoordY (), gameObject.transform.position.z);
+			path.RemoveAt (path.Count - 1);
+			if (path.Count == 0) 
+			{
+				EstablishNewTile ((int)destination.x, (int)destination.y);
+				unitMoving = false;
+			}
+		}
+	}
+
+	public void EstablishNewTile(int x, int y)
 	{
 		gameObject.transform.position = new Vector3(x, y, gameObject.transform.position.z);
 		ClickableTile newTile = map.GetTile (x, y);
@@ -73,7 +92,6 @@ public class Unit : MonoBehaviour {
 		newTile.AssignUnit(this);
 		originTile = newTile;
 		army.unitSelected = null;
-		map.ReturnTilesToNormal ();
 		GameManager.gameState = GameManager.state.MOVING_CURSOR;
 	}
 

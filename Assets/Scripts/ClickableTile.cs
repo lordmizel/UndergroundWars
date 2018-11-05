@@ -63,14 +63,14 @@ public class ClickableTile : MonoBehaviour {
 		return unitAssigned;
 	}
 
-	void OnMouseDown()
+	/*void OnMouseDown()
 	{
 		if (GameManager.gameState == GameManager.state.MOVING_UNIT && moveColorOverlay.activeSelf == true) 
 		{
 			Debug.Log ("Unit moved");
 			gameManager.activePlayer.unitSelected.MoveUnitTo (coordX, coordY);
 		}
-	}
+	}*/
 
 	public void TileSelected()
 	{
@@ -88,8 +88,7 @@ public class ClickableTile : MonoBehaviour {
 			break;
 
 		case GameManager.state.MOVING_UNIT:
-			map.CalculateShortestPath (gameManager.activePlayer.unitSelected.originTile, this);
-			gameManager.activePlayer.unitSelected.MoveUnitTo (coordX, coordY);
+			gameManager.activePlayer.unitSelected.StartMoving (map.CalculateShortestPath (gameManager.activePlayer.unitSelected.originTile, this));
 			break;
 		}
 	}

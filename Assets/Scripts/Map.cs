@@ -152,9 +152,9 @@ public class Map : MonoBehaviour {
 		}
 	}
 
-	public void /*ClickableTile[]*/ CalculateShortestPath(ClickableTile origin, ClickableTile destination)
+	public List<ClickableTile> CalculateShortestPath(ClickableTile origin, ClickableTile destination)
 	{
-		ClickableTile[] path;
+		List<ClickableTile> path = new List<ClickableTile>();
 		int[,] heuristicMatrix = new int[mapWidth, mapHeight];
 		int[,] costMatrix = new int[mapWidth, mapHeight];
 		List<ClickableTile> pendingTiles = new List<ClickableTile> ();
@@ -180,8 +180,7 @@ public class Map : MonoBehaviour {
 
 			if (currentTile == destination) 
 			{
-				RetracePath (origin, destination);
-				return;
+				return RetracePath (origin, destination);
 			}
 
 			foreach (ClickableTile neighbor in currentTile.neighbors) 
@@ -204,6 +203,10 @@ public class Map : MonoBehaviour {
 				}
 			}
 		}
+
+		//It should never get here
+		Debug.LogError("Something went wrong with the A* algorithm");
+		return RetracePath (origin, destination);
 	}
 
 	int GetFCost(ClickableTile tile, int[,] heuristicMatrix){
@@ -226,7 +229,7 @@ public class Map : MonoBehaviour {
 		return heuristicMatrix;
 	}
 
-	void RetracePath(ClickableTile origin, ClickableTile destination){
+	List<ClickableTile> RetracePath(ClickableTile origin, ClickableTile destination){
 		List<ClickableTile> path = new List<ClickableTile> ();
 		ClickableTile currentTile = destination;
 
@@ -237,7 +240,7 @@ public class Map : MonoBehaviour {
 			currentTile = currentTile.parent;
 		}
 
-
+		return path;
 	}
 
 	/*class Location
