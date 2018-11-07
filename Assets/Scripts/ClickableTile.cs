@@ -88,7 +88,16 @@ public class ClickableTile : MonoBehaviour {
 			break;
 
 		case GameManager.state.MOVING_UNIT:
-			gameManager.activePlayer.unitSelected.StartMoving (map.CalculateShortestPath (gameManager.activePlayer.unitSelected.originTile, this));
+			if (gameManager.activePlayer.unitSelected.originTile == this) 
+			{
+				Debug.Log ("Same tile");
+				map.unitMovementManager.ReturnTilesToNormal ();
+				gameManager.activePlayer.unitSelected.EstablishNewTile (coordX, coordY);
+			} 
+			else 
+			{
+				gameManager.activePlayer.unitSelected.StartMoving (map.unitMovementManager.CalculateShortestPath (gameManager.activePlayer.unitSelected.originTile, this));
+			}
 			break;
 		}
 	}

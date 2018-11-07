@@ -5,7 +5,6 @@ using UnityEngine;
 public class Unit : MonoBehaviour {
 
 	Map map;
-	TerrainMovement movementManager;
 	Army army;
 
 	bool unitSelected = false;
@@ -49,7 +48,7 @@ public class Unit : MonoBehaviour {
 		{
 			unitSelected = true;
 			army.unitSelected = this;
-			map.CalculateMovementMatrix (originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints);
+			map.unitMovementManager.CalculateMovementMatrix (originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints);
 			GameManager.gameState = GameManager.state.MOVING_UNIT;
 		} 
 		else 
@@ -60,7 +59,7 @@ public class Unit : MonoBehaviour {
 
 	public void StartMoving(List<ClickableTile> newPath)
 	{
-		map.ReturnTilesToNormal ();
+		map.unitMovementManager.ReturnTilesToNormal ();
 		path = newPath;
 		unitMoving = true;
 	}
