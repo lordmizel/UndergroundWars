@@ -46,7 +46,6 @@ public class TerrainMovement : MonoBehaviour {
 		costMatrix [x, y] = 0;
 		pendingTiles.Add (map.GetTile(x, y));
 		map.GetTile(x, y).ActivateMoveOverlay ();
-		Debug.Log (pendingTiles.Count);
 
 		while (pendingTiles.Count > 0) 
 		{
@@ -58,7 +57,8 @@ public class TerrainMovement : MonoBehaviour {
 					costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] = costMatrix [pendingTiles [0].GetTileCoordX (), pendingTiles [0].GetTileCoordY ()] + tile.movementCost;
 					if (costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] <= movementPoints && 
 						alreadyInspectedTiles.Contains(map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ())) == false
-						&& map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ()).GetUnitAssigned() == null) 
+						&& (map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ()).GetUnitAssigned() == null
+						|| map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ()).GetUnitAssigned().propietary == gameManager.activePlayer.unitSelected.propietary)) 
 					{
 						pendingTiles.Add (map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ()));
 						map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ()).ActivateMoveOverlay ();
@@ -72,23 +72,17 @@ public class TerrainMovement : MonoBehaviour {
 
 	public List<ClickableTile> CalculateShortestPath(ClickableTile origin, ClickableTile destination)
 	{
-		List<ClickableTile> path = new List<ClickableTile>();
-		int[,] heuristicMatrix = new int[map.mapWidth, map.mapHeight];
-		int[,] costMatrix = new int[map.mapWidth, map.mapHeight];
 		List<ClickableTile> pendingTiles = new List<ClickableTile> ();
 		List<ClickableTile> alreadyInspectedTiles = new List<ClickableTile> ();
 		pendingTiles.Add (origin);
-		costMatrix [origin.GetTileCoordX (), origin.GetTileCoordY ()] = 0;
-
-		heuristicMatrix = CreateHeuristicMatrix (destination);
 
 		while (pendingTiles.Count > 0) 
 		{
 			ClickableTile currentTile = pendingTiles [0];
 			for (int i = 0; i < pendingTiles.Count; i++) 
 			{
-				if (GetFCost (pendingTiles [i], heuristicMatrix) < GetFCost (currentTile, heuristicMatrix) ||
-					GetFCost (pendingTiles [i], heuristicMatrix) == GetFCost (currentTile, heuristicMatrix) && heuristicMatrix [pendingTiles [i].GetTileCoordX(), pendingTiles [i].GetTileCoordY()] < heuristicMatrix [currentTile.GetTileCoordX(), currentTile.GetTileCoordY()]) 
+				if (pendingTiles[i].GetFCost() < currentTile.GetFCost() ||
+					pendingTiles [i].GetFCost() == currentTile.GetFCost() && pendingTiles[i].hCost < currentTile.hCost) 
 				{
 					currentTile = pendingTiles [i];
 				}
@@ -103,16 +97,18 @@ public class TerrainMovement : MonoBehaviour {
 
 			foreach (ClickableTile neighbor in currentTile.neighbors) 
 			{
-				if(alreadyInspectedTiles.Contains(neighbor))
+				if(alreadyInspectedTiles.Contains(neighbor) || 
+					neighbor.GetUnitAssigned() != null && neighbor.GetUnitAssigned().propietary != gameManager.activePlayer.unitSelected.propietary)
 				{
 					continue;
 				}
 
-				int newMovementCostToNeighbor = costMatrix [currentTile.GetTileCoordX (), currentTile.GetTileCoordY ()] + neighbor.movementCost;
-				if (newMovementCostToNeighbor < costMatrix [neighbor.GetTileCoordX (), neighbor.GetTileCoordY ()] ||
+				int newMovementCostToNeighbor = currentTile.gCost + neighbor.movementCost;
+				if (newMovementCostToNeighbor < neighbor.gCost ||
 					pendingTiles.Contains (neighbor) == false) 
 				{
-					costMatrix [neighbor.GetTileCoordX (), neighbor.GetTileCoordY ()] = newMovementCostToNeighbor;
+					neighbor.gCost = newMovementCostToNeighbor;
+					neighbor.hCost = GetHCost (neighbor, destination);
 					neighbor.parent = currentTile;
 					if (pendingTiles.Contains (neighbor) == false) 
 					{
@@ -124,27 +120,12 @@ public class TerrainMovement : MonoBehaviour {
 
 		//It should never get here
 		Debug.LogError("Something went wrong with the A* algorithm");
-		return RetracePath (origin, destination);
+		return null;
 	}
 
-	int GetFCost(ClickableTile tile, int[,] heuristicMatrix){
-		int cost = tile.movementCost + heuristicMatrix [tile.GetTileCoordX(), tile.GetTileCoordY()];
-		return cost;
-	}
-
-	int[,] CreateHeuristicMatrix(ClickableTile destination)
+	int GetHCost(ClickableTile origin, ClickableTile destination)
 	{
-		int[,] heuristicMatrix = new int[map.mapWidth, map.mapHeight];
-
-		for (int i = 0; i < map.mapWidth; i++) 
-		{
-			for (int j = 0; j < map.mapHeight; j++) 
-			{
-				heuristicMatrix [i, j] = Math.Abs (i - destination.GetTileCoordX()) + Math.Abs(j - destination.GetTileCoordY());
-			}
-		}
-
-		return heuristicMatrix;
+		return Math.Abs (origin.GetTileCoordX() - destination.GetTileCoordX ()) + Math.Abs (origin.GetTileCoordY() - destination.GetTileCoordY ());
 	}
 
 	List<ClickableTile> RetracePath(ClickableTile origin, ClickableTile destination){
@@ -154,7 +135,6 @@ public class TerrainMovement : MonoBehaviour {
 		while (currentTile != origin) 
 		{
 			path.Add (currentTile);
-			Debug.Log (currentTile.GetTileCoordX() + " " +  currentTile.GetTileCoordY());
 			currentTile = currentTile.parent;
 		}
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,9 @@ public class ClickableTile : MonoBehaviour {
 	public int movementCost = 1;
 	public List<ClickableTile> neighbors;
 	public ClickableTile parent;
+	[HideInInspector]
+	public int gCost;
+	public int hCost;
 
 	void Awake()
 	{
@@ -90,13 +94,15 @@ public class ClickableTile : MonoBehaviour {
 		case GameManager.state.MOVING_UNIT:
 			if (gameManager.activePlayer.unitSelected.originTile == this) 
 			{
-				Debug.Log ("Same tile");
 				map.unitMovementManager.ReturnTilesToNormal ();
 				gameManager.activePlayer.unitSelected.EstablishNewTile (coordX, coordY);
 			} 
 			else 
 			{
-				gameManager.activePlayer.unitSelected.StartMoving (map.unitMovementManager.CalculateShortestPath (gameManager.activePlayer.unitSelected.originTile, this));
+				if (unitAssigned == null) 
+				{
+					gameManager.activePlayer.unitSelected.StartMoving (map.unitMovementManager.CalculateShortestPath (gameManager.activePlayer.unitSelected.originTile, this));
+				}
 			}
 			break;
 		}
@@ -115,5 +121,10 @@ public class ClickableTile : MonoBehaviour {
 	public bool IsReachableByMovement()
 	{
 		return moveColorOverlay.activeSelf;
+	}
+
+	public int GetFCost()
+	{
+		return gCost + hCost;
 	}
 }

@@ -7,12 +7,13 @@ public class Unit : MonoBehaviour {
 	Map map;
 	Army army;
 
+	public int propietary;
+
 	bool unitSelected = false;
 
 	[Header("Movement stuff")]
 	public ClickableTile originTile;
-	[SerializeField]
-	int movementPoints = 5;
+	public int movementPoints = 5;
 	bool unitMoving = false;
 	List<ClickableTile> path;
 	float moveSpeed = 5f;
@@ -59,9 +60,12 @@ public class Unit : MonoBehaviour {
 
 	public void StartMoving(List<ClickableTile> newPath)
 	{
-		map.unitMovementManager.ReturnTilesToNormal ();
-		path = newPath;
-		unitMoving = true;
+		if (newPath != null) 
+		{
+			map.unitMovementManager.ReturnTilesToNormal ();
+			path = newPath;
+			unitMoving = true;
+		}
 	}
 
 	void OnMyMerryWay()
