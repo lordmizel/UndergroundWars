@@ -7,6 +7,10 @@ public class Unit : MonoBehaviour {
 	Map map;
 	Army army;
 
+	//Delete this
+	public int initialX; 
+	public int initialY;
+
 	public int propietary;
 
 	bool unitSelected = false;
@@ -17,10 +21,13 @@ public class Unit : MonoBehaviour {
 	bool unitMoving = false;
 	List<ClickableTile> path;
 	float moveSpeed = 5f;
-
-	//Delete this
-	public int initialX; 
-	public int initialY;
+	public enum typeOfMovement{
+		FOOT,
+		VEHICLE,
+		FLYING,
+		WATER
+	}
+	public typeOfMovement movementType = typeOfMovement.FOOT;
 
 	// Use this for initialization
 	void Start () {

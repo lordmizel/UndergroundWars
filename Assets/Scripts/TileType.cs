@@ -7,11 +7,16 @@ public class TileType : ScriptableObject{
 
 	public enum typeOfTerrain{
 		PLAINS,
-		SWAMP,
-		MOUNTAIN
+		ROAD,
+		RIVER,
+		FOREST,
+		MOUNTAIN,
+		SAND,
+		WATER,
+		REEF
 	}
 
-	public typeOfTerrain terrainName;
+	public typeOfTerrain terrainName = typeOfTerrain.PLAINS;
 
 	public GameObject tileVisualPrefab;
 
@@ -19,7 +24,7 @@ public class TileType : ScriptableObject{
 		switch (terrainName) {
 		case typeOfTerrain.PLAINS:
 			return 1;
-		case typeOfTerrain.SWAMP:
+		case typeOfTerrain.FOREST:
 			return 2;
 		case typeOfTerrain.MOUNTAIN:
 			return 3;

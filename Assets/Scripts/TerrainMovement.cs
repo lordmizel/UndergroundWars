@@ -9,11 +9,21 @@ public class TerrainMovement : MonoBehaviour {
 	Map map;
 	GameManager gameManager;
 
+	int[,] movementCostMatrix = new int[,] { {1, 2, 1, 100},
+		{1, 1, 1, 100},
+		{2, 100, 1, 100},
+		{2, 3, 1, 100},
+		{2, 100, 1, 100},
+		{1, 3, 1, 100},
+		{100, 100, 1, 1},
+		{100, 100, 1, 2}};
+
 	// Use this for initialization
 	void Start () 
 	{
 		gameManager = FindObjectOfType<GameManager> ();
 		map = gameObject.GetComponent<Map> ();
+
 	}
 	
 	// Update is called once per frame
@@ -52,9 +62,9 @@ public class TerrainMovement : MonoBehaviour {
 			foreach (ClickableTile tile in pendingTiles[0].neighbors) 
 			{
 				if (costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] == 0 || 
-					costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] > costMatrix [pendingTiles[0].GetTileCoordX (), pendingTiles[0].GetTileCoordY ()] + tile.movementCost) 
+					costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] > costMatrix [pendingTiles[0].GetTileCoordX (), pendingTiles[0].GetTileCoordY ()] + GetCostForMovementType((int)gameManager.activePlayer.unitSelected.movementType, (int)tile.typeOfTerrain.terrainName)) 
 				{
-					costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] = costMatrix [pendingTiles [0].GetTileCoordX (), pendingTiles [0].GetTileCoordY ()] + tile.movementCost;
+						costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] = costMatrix [pendingTiles [0].GetTileCoordX (), pendingTiles [0].GetTileCoordY ()] + GetCostForMovementType((int)gameManager.activePlayer.unitSelected.movementType, (int)tile.typeOfTerrain.terrainName);
 					if (costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] <= movementPoints && 
 						alreadyInspectedTiles.Contains(map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ())) == false
 						&& (map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ()).GetUnitAssigned() == null
@@ -126,6 +136,11 @@ public class TerrainMovement : MonoBehaviour {
 	int GetHCost(ClickableTile origin, ClickableTile destination)
 	{
 		return Math.Abs (origin.GetTileCoordX() - destination.GetTileCoordX ()) + Math.Abs (origin.GetTileCoordY() - destination.GetTileCoordY ());
+	}
+
+	int GetCostForMovementType(int movementType, int terrainType)
+	{
+		return movementCostMatrix [terrainType, movementType];
 	}
 
 	List<ClickableTile> RetracePath(ClickableTile origin, ClickableTile destination){

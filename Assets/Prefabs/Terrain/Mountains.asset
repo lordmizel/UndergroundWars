@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eb4a6ea177f64a46bf9d1507e77b191, type: 3}
   m_Name: Mountains
   m_EditorClassIdentifier: 
-  terrainName: 2
+  terrainName: 4
   tileVisualPrefab: {fileID: 1761883741193872, guid: b00d67263d3f36241ac4124c362ab176,
     type: 2}

@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 114407369981778936}
   - component: {fileID: 61273686669242056}
   m_Layer: 0
-  m_Name: Tile_Swamp
+  m_Name: Tile_Forest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,10 +108,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938355a9a8d4c0948a7f43d0b112721d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeOfTerrain: {fileID: 0}
+  typeOfTerrain: {fileID: 11400000, guid: 63f87b455e03054408b7d1c841d1bc80, type: 2}
   moveColorOverlay: {fileID: 1124928530579056}
   movementCost: 1
   neighbors: []
+  parent: {fileID: 0}
+  gCost: 0
+  hCost: 0
 --- !u!212 &212194971852288810
 SpriteRenderer:
   m_ObjectHideFlags: 1

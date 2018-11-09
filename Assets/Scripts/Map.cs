@@ -71,11 +71,11 @@ public class Map : MonoBehaviour {
 			}
 		}
 
-		tilesSeed [5, 5] = (int)TileType.typeOfTerrain.MOUNTAIN;
-		tilesSeed [5, 6] = (int)TileType.typeOfTerrain.MOUNTAIN;
-		tilesSeed [5, 7] = (int)TileType.typeOfTerrain.MOUNTAIN;
-		tilesSeed [6, 2] = (int)TileType.typeOfTerrain.MOUNTAIN;
-		tilesSeed [8, 8] = (int)TileType.typeOfTerrain.MOUNTAIN;
+		tilesSeed [5, 5] = (int)TileType.typeOfTerrain.FOREST;
+		tilesSeed [5, 6] = (int)TileType.typeOfTerrain.FOREST;
+		tilesSeed [5, 7] = (int)TileType.typeOfTerrain.FOREST;
+		tilesSeed [6, 2] = (int)TileType.typeOfTerrain.FOREST;
+		tilesSeed [8, 8] = (int)TileType.typeOfTerrain.FOREST;
 	}
 
 	void AssignNeighbors()

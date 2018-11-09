@@ -108,10 +108,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938355a9a8d4c0948a7f43d0b112721d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeOfTerrain: {fileID: 0}
+  typeOfTerrain: {fileID: 11400000, guid: 8850a6610ce1e8e4f8463b401066c1d2, type: 2}
   moveColorOverlay: {fileID: 1927045345872098}
   movementCost: 1
   neighbors: []
+  parent: {fileID: 0}
+  gCost: 0
+  hCost: 0
 --- !u!212 &212295697952064468
 SpriteRenderer:
   m_ObjectHideFlags: 1
