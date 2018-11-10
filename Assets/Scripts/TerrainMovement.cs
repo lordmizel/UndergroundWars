@@ -113,7 +113,7 @@ public class TerrainMovement : MonoBehaviour {
 					continue;
 				}
 
-				int newMovementCostToNeighbor = currentTile.gCost + neighbor.movementCost;
+				int newMovementCostToNeighbor = currentTile.gCost + GetCostForMovementType((int)gameManager.activePlayer.unitSelected.movementType, (int)neighbor.typeOfTerrain.terrainName);
 				if (newMovementCostToNeighbor < neighbor.gCost ||
 					pendingTiles.Contains (neighbor) == false) 
 				{
