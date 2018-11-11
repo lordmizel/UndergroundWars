@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour {
 
+	GameManager gameManager;
 	Map map;
-	Army army;
+	//TODO: This is public for debug purposes
+	public Army propietary;
 
 	//Delete this
 	public int initialX; 
 	public int initialY;
 
-	public int propietary;
+
 
 	bool unitSelected = false;
 
@@ -31,8 +33,9 @@ public class Unit : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		gameManager = FindObjectOfType<GameManager> ();
 		map = FindObjectOfType<Map> ();
-		army = FindObjectOfType<Army> ();
+		//army = FindObjectOfType<Army> ();
 
 		//TODO: This is only for debug
 		originTile = map.GetTile (initialX, initialY);
@@ -52,16 +55,23 @@ public class Unit : MonoBehaviour {
 
 	public void UnitSelected()
 	{
-		if (GameManager.gameState != GameManager.state.MOVING_UNIT) 
+		if (propietary == gameManager.activePlayer) 
 		{
-			unitSelected = true;
-			army.unitSelected = this;
-			map.unitMovementManager.CalculateMovementMatrix (originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints);
-			GameManager.gameState = GameManager.state.MOVING_UNIT;
+			if (GameManager.gameState != GameManager.state.MOVING_UNIT) 
+			{
+				unitSelected = true;
+				propietary.unitSelected = this;
+				map.unitMovementManager.CalculateMovementMatrix (originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints);
+				GameManager.gameState = GameManager.state.MOVING_UNIT;
+			} 
+			else 
+			{
+				EstablishNewTile (originTile.GetTileCoordX (), originTile.GetTileCoordY ());
+			}
 		} 
 		else 
 		{
-			EstablishNewTile (originTile.GetTileCoordX(), originTile.GetTileCoordY());
+			//TODO: What happens when you select a unit in a turn that is not it's?
 		}
 	}
 
@@ -101,7 +111,7 @@ public class Unit : MonoBehaviour {
 		originTile.UnassignUnit ();
 		newTile.AssignUnit(this);
 		originTile = newTile;
-		army.unitSelected = null;
+		propietary.unitSelected = null;
 		GameManager.gameState = GameManager.state.MOVING_CURSOR;
 	}
 

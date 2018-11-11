@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
 
 	Army[] players;
 	public Army activePlayer;
+	int playerTurnIndex = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +26,20 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		//TODO: This is not the way turns are going to work, just a placeholder for debug
+		if (Input.GetKeyDown (KeyCode.Space)) 
+		{
+			PassTurn ();
+		}
+	}
+
+	void PassTurn()
+	{
+		if (playerTurnIndex == players.Length - 1) {
+			playerTurnIndex = 0;
+		} else {
+			playerTurnIndex++;
+		}
+		activePlayer = players [playerTurnIndex];
 	}
 }
