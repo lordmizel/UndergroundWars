@@ -11,11 +11,19 @@ public class Army : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		unitsInArmy = FindObjectsOfType<Unit> ();
+		unitsInArmy = GetComponentsInChildren<Unit> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public void RefreshAllUnits()
+	{
+		foreach (Unit unit in unitsInArmy) 
+		{
+			unit.RefreshUnit ();
+		}
 	}
 }

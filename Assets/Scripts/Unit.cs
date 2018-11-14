@@ -14,7 +14,7 @@ public class Unit : MonoBehaviour {
 	public int initialY;
 
 
-
+	bool unitUsed = false;
 	bool unitSelected = false;
 
 	[Header("Movement stuff")]
@@ -55,7 +55,7 @@ public class Unit : MonoBehaviour {
 
 	public void UnitSelected()
 	{
-		if (propietary == gameManager.activePlayer) 
+		if (propietary == gameManager.activePlayer && unitUsed == false) 
 		{
 			if (GameManager.gameState != GameManager.state.MOVING_UNIT) 
 			{
@@ -112,8 +112,13 @@ public class Unit : MonoBehaviour {
 		newTile.AssignUnit(this);
 		originTile = newTile;
 		propietary.unitSelected = null;
+		//TODO: Change these last lines to show the end of movement menu first
+		unitUsed = true;
 		GameManager.gameState = GameManager.state.MOVING_CURSOR;
 	}
 
-
+	public void RefreshUnit()
+	{
+		unitUsed = false;
+	}
 }

@@ -35,11 +35,15 @@ public class GameManager : MonoBehaviour {
 
 	void PassTurn()
 	{
-		if (playerTurnIndex == players.Length - 1) {
+		if (playerTurnIndex == players.Length - 1) 
+		{
 			playerTurnIndex = 0;
-		} else {
+		} 
+		else 
+		{
 			playerTurnIndex++;
 		}
 		activePlayer = players [playerTurnIndex];
+		activePlayer.RefreshAllUnits ();
 	}
 }
