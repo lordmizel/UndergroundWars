@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour {
 	{
 		MOVING_CURSOR,
 		IDLE,
-		MOVING_UNIT
+		MOVING_UNIT,
+		NAVIGATING_MENU
 	}
 
 	public static state gameState;

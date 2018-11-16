@@ -113,9 +113,15 @@ public class Unit : MonoBehaviour {
 		newTile.AssignUnit(this);
 		originTile = newTile;
 		propietary.unitSelected = null;
-		//TODO: Change these last lines to show the end of movement menu first
+
+		//TODO: Unit shouldn't tire here but after the menu has been dealt with
 		TireUnit();
-		GameManager.gameState = GameManager.state.MOVING_CURSOR;
+
+		//TODO: Create a new method to evaluate menu options here
+		InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.ATTACK);
+		InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.WAIT);
+		InGameMenu.inGameMenu.ActivateMenu ();
+		GameManager.gameState = GameManager.state.NAVIGATING_MENU;
 	}
 
 	public void TireUnit()
