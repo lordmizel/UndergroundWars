@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour {
 
+	SpriteRenderer mySprite;
+
 	GameManager gameManager;
 	Map map;
 	//TODO: This is public for debug purposes
@@ -12,7 +14,6 @@ public class Unit : MonoBehaviour {
 	//Delete this
 	public int initialX; 
 	public int initialY;
-
 
 	bool unitUsed = false;
 	bool unitSelected = false;
@@ -35,7 +36,7 @@ public class Unit : MonoBehaviour {
 	void Start () {
 		gameManager = FindObjectOfType<GameManager> ();
 		map = FindObjectOfType<Map> ();
-		//army = FindObjectOfType<Army> ();
+		mySprite = gameObject.GetComponent<SpriteRenderer> ();
 
 		//TODO: This is only for debug
 		originTile = map.GetTile (initialX, initialY);
@@ -113,12 +114,34 @@ public class Unit : MonoBehaviour {
 		originTile = newTile;
 		propietary.unitSelected = null;
 		//TODO: Change these last lines to show the end of movement menu first
-		unitUsed = true;
+		TireUnit();
 		GameManager.gameState = GameManager.state.MOVING_CURSOR;
+	}
+
+	public void TireUnit()
+	{
+		GrayUnGray (true);
+		unitUsed = true;
 	}
 
 	public void RefreshUnit()
 	{
+		GrayUnGray (false);
 		unitUsed = false;
+	}
+
+	void GrayUnGray(bool gray)
+	{
+		float h, s, v;
+		Color.RGBToHSV(mySprite.color, out h, out s, out v);
+		if (gray == true) 
+		{
+			v = 0.5f;
+		} 
+		else 
+		{
+			v = 1f;
+		}
+		mySprite.color = Color.HSVToRGB (h, s, v);
 	}
 }
