@@ -87,7 +87,9 @@ public class ClickableTile : MonoBehaviour {
 			} 
 			else 
 			{
-				Debug.Log("No unit found");
+				InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.END_TURN);
+				InGameMenu.inGameMenu.ActivateMenu ();
+				GameManager.gameState = GameManager.state.NAVIGATING_MENU;
 			}
 			break;
 

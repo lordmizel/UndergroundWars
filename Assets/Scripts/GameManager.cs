@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour {
 		MOVING_CURSOR,
 		IDLE,
 		MOVING_UNIT,
-		NAVIGATING_MENU
+		NAVIGATING_MENU,
+		AFTER_MENU_BUFFER
 	}
 
 	public static state gameState;
@@ -26,15 +27,19 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		//TODO: This is not the way turns are going to work, just a placeholder for debug
-		if (Input.GetKeyDown (KeyCode.Space)) 
+	void Update () 
+	{
+		//This is a patch for avoiding selecting a tile right as you select an option from the menu
+		if (gameState == state.AFTER_MENU_BUFFER) 
 		{
-			PassTurn ();
+			if (Input.GetKeyUp (KeyCode.Return)) 
+			{
+				gameState = state.MOVING_CURSOR;
+			}
 		}
 	}
 
-	void PassTurn()
+	public void PassTurn()
 	{
 		if (playerTurnIndex == players.Length - 1) 
 		{

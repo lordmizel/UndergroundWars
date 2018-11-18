@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class InGameMenu : MonoBehaviour {
 
+	GameManager gameManager;
 	public static InGameMenu inGameMenu;
 	[SerializeField]
 	GameObject menuPanel;
@@ -23,7 +24,7 @@ public class InGameMenu : MonoBehaviour {
 
 	void Start()
 	{
-		Debug.Log (menuPanel.transform.childCount);
+		gameManager = FindObjectOfType<GameManager> ();
 	}
 
 	// Update is called once per frame
@@ -77,6 +78,7 @@ public class InGameMenu : MonoBehaviour {
 			break;
 		case MenuOption.menuOptions.END_TURN:
 			Debug.Log ("End turn selected");
+			gameManager.PassTurn ();
 			break;
 		case MenuOption.menuOptions.TEST_OPTION:
 			Debug.Log ("Test option selected");
@@ -85,7 +87,6 @@ public class InGameMenu : MonoBehaviour {
 			Debug.Log ("Something else selected");
 			break;
 		}
-
 		HideMenu ();
 	}
 
@@ -116,8 +117,15 @@ public class InGameMenu : MonoBehaviour {
 
 	void HideMenu()
 	{
+		Debug.Log("Hiding menu");
+		foreach (MenuOption optionInMenu in optionsShowing) 
+		{
+			optionInMenu.GetComponent<Image> ().color = Color.white;
+			optionInMenu.gameObject.SetActive (false);
+		}
+		optionIndex = 0;
 		optionsShowing.Clear ();
 		menuPanel.SetActive (false);
-		GameManager.gameState = GameManager.state.MOVING_CURSOR;
+		GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
 	}
 }
