@@ -16,6 +16,8 @@ public class ClickableTile : MonoBehaviour {
 
 	[SerializeField]
 	GameObject moveColorOverlay;
+	[SerializeField]
+	GameObject attackColorOverlay;
 
 	//Pathfinding stuff
 	public int movementCost = 1;
@@ -96,7 +98,7 @@ public class ClickableTile : MonoBehaviour {
 		case GameManager.state.MOVING_UNIT:
 			if (gameManager.activePlayer.unitSelected.originTile == this) 
 			{
-				map.unitMovementManager.ReturnTilesToNormal ();
+				map.ReturnTilesToNormal ();
 				gameManager.activePlayer.unitSelected.EstablishNewTile (coordX, coordY);
 			} 
 			else 
@@ -115,9 +117,15 @@ public class ClickableTile : MonoBehaviour {
 		moveColorOverlay.SetActive (true);
 	}
 
+	public void ActivateAttackOverlay()
+	{
+		attackColorOverlay.SetActive (true);
+	}
+
 	public void DeactivateAllOverlays()
 	{
 		moveColorOverlay.SetActive (false);
+		attackColorOverlay.SetActive (false);
 	}
 
 	public bool IsReachableByMovement()

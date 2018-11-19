@@ -18,6 +18,13 @@ public class Unit : MonoBehaviour {
 	bool unitUsed = false;
 	bool unitSelected = false;
 
+	[SerializeField]
+	bool ranged = false;
+	[SerializeField]
+	int minAttackRange = 1;
+	[SerializeField]
+	int maxAttackRange = 1;
+
 	[Header("Movement stuff")]
 	public ClickableTile originTile;
 	public int movementPoints = 5;
@@ -62,7 +69,8 @@ public class Unit : MonoBehaviour {
 			{
 				unitSelected = true;
 				propietary.unitSelected = this;
-				map.unitMovementManager.CalculateMovementMatrix (originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints);
+				map.ActivateMovementArea (originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints);
+				//map.unitMovementManager.CalculateMovementMatrix (originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints);
 				GameManager.gameState = GameManager.state.MOVING_UNIT;
 			} 
 			else 
@@ -73,6 +81,9 @@ public class Unit : MonoBehaviour {
 		else 
 		{
 			//TODO: What happens when you select a unit in a turn that is not it's?
+			gameManager.activePlayer.unitSelected = this;
+			map.ActivateAttackArea(originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints, ranged, minAttackRange, maxAttackRange);
+			GameManager.gameState = GameManager.state.CHECKING_ENEMY_UNIT;
 		}
 	}
 
@@ -80,7 +91,7 @@ public class Unit : MonoBehaviour {
 	{
 		if (newPath != null) 
 		{
-			map.unitMovementManager.ReturnTilesToNormal ();
+			map.ReturnTilesToNormal ();
 			path = newPath;
 			unitMoving = true;
 		}

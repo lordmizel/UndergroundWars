@@ -22,6 +22,8 @@ public class Map : MonoBehaviour {
 
 	bool movementMode = false; 
 
+	//List<ClickableTile> tilesToWorkWith = new List<ClickableTile>();
+
 	// Use this for initialization
 	void Awake () 
 	{
@@ -108,5 +110,42 @@ public class Map : MonoBehaviour {
 	{
 		return tiles [x, y];
 	}
-		
+
+	public void ActivateMovementArea(int x, int y, int movementPoints)
+	{
+		List<ClickableTile> tilesToActivate = unitMovementManager.CalculateMovementMatrix (x, y, movementPoints);
+		foreach (ClickableTile tile in tilesToActivate) 
+		{
+			tile.ActivateMoveOverlay ();
+		}
+	}
+
+	public void ActivateAttackArea(int x, int y, int movementPoints, bool ranged, int minRange, int maxRange)
+	{
+		if (ranged == true) {
+			//TODO: Unit is ranged. Calculate attack matrix
+		} 
+		else 
+		{
+			List<ClickableTile> tilesItCanMoveTo = unitMovementManager.CalculateMovementMatrix (x, y, movementPoints);
+			foreach (ClickableTile tile in tilesItCanMoveTo) 
+			{
+				foreach (ClickableTile neighbor in tile.neighbors) 
+				{
+					neighbor.ActivateAttackOverlay ();
+				}
+			}
+		}
+	}
+
+	public void ReturnTilesToNormal()
+	{
+		for (int x = 0; x < mapWidth; x++) 
+		{
+			for (int y = 0; y < mapHeight; y++) 
+			{
+				tiles[x, y].DeactivateAllOverlays ();
+			}
+		}
+	}
 }

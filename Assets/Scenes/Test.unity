@@ -283,6 +283,9 @@ MonoBehaviour:
   propietary: {fileID: 478958790}
   initialX: 3
   initialY: 4
+  ranged: 0
+  minAttackRange: 1
+  maxAttackRange: 1
   originTile: {fileID: 0}
   movementPoints: 5
   movementType: 2
@@ -464,6 +467,9 @@ MonoBehaviour:
   propietary: {fileID: 478958790}
   initialX: 1
   initialY: 1
+  ranged: 0
+  minAttackRange: 1
+  maxAttackRange: 1
   originTile: {fileID: 0}
   movementPoints: 5
   movementType: 1
@@ -581,6 +587,9 @@ MonoBehaviour:
   propietary: {fileID: 2107136744}
   initialX: 7
   initialY: 7
+  ranged: 0
+  minAttackRange: 1
+  maxAttackRange: 1
   originTile: {fileID: 0}
   movementPoints: 5
   movementType: 0
@@ -1061,6 +1070,9 @@ MonoBehaviour:
   propietary: {fileID: 478958790}
   initialX: 2
   initialY: 2
+  ranged: 0
+  minAttackRange: 1
+  maxAttackRange: 1
   originTile: {fileID: 0}
   movementPoints: 5
   movementType: 0
@@ -1261,6 +1273,9 @@ MonoBehaviour:
   propietary: {fileID: 478958790}
   initialX: 6
   initialY: 4
+  ranged: 0
+  minAttackRange: 1
+  maxAttackRange: 1
   originTile: {fileID: 0}
   movementPoints: 5
   movementType: 3

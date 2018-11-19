@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour {
 		IDLE,
 		MOVING_UNIT,
 		NAVIGATING_MENU,
-		AFTER_MENU_BUFFER
+		AFTER_MENU_BUFFER,
+		CHECKING_ENEMY_UNIT
 	}
 
 	public static state gameState;
@@ -19,21 +20,25 @@ public class GameManager : MonoBehaviour {
 	public Army activePlayer;
 	int playerTurnIndex = 0;
 
+	Map map;
+
 	// Use this for initialization
 	void Start () {
 		gameState = state.MOVING_CURSOR;
 		players = FindObjectsOfType<Army> ();
 		activePlayer = players [0];
+		map = FindObjectOfType<Map> ();
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
 		//This is a patch for avoiding selecting a tile right as you select an option from the menu
-		if (gameState == state.AFTER_MENU_BUFFER) 
+		if (gameState == state.AFTER_MENU_BUFFER || gameState == state.CHECKING_ENEMY_UNIT) 
 		{
 			if (Input.GetKeyUp (KeyCode.Return)) 
 			{
+				map.ReturnTilesToNormal ();
 				gameState = state.MOVING_CURSOR;
 			}
 		}

@@ -37,25 +37,16 @@ public class TerrainMovement : MonoBehaviour {
 		gameManager.activePlayer.unitSelected.originTile.ActivateMoveOverlay ();
 	}
 
-	public void ReturnTilesToNormal()
-	{
-		for (int x = 0; x < map.mapWidth; x++) 
-		{
-			for (int y = 0; y < map.mapHeight; y++) 
-			{
-				map.GetTile(x, y).DeactivateAllOverlays ();
-			}
-		}
-	}
-
-	public void CalculateMovementMatrix(int x, int y, int movementPoints)
+	public List<ClickableTile> CalculateMovementMatrix(int x, int y, int movementPoints)
 	{
 		int[,] costMatrix = new int[map.mapWidth, map.mapHeight];
 		List<ClickableTile> pendingTiles = new List<ClickableTile>();
 		List<ClickableTile> alreadyInspectedTiles = new List<ClickableTile>();
+		List<ClickableTile> returnableTiles = new List<ClickableTile> ();
 		costMatrix [x, y] = 0;
 		pendingTiles.Add (map.GetTile(x, y));
-		map.GetTile(x, y).ActivateMoveOverlay ();
+		returnableTiles.Add(map.GetTile(x, y));
+		//map.GetTile(x, y).ActivateMoveOverlay ();
 
 		while (pendingTiles.Count > 0) 
 		{
@@ -64,20 +55,23 @@ public class TerrainMovement : MonoBehaviour {
 				if (costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] == 0 || 
 					costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] > costMatrix [pendingTiles[0].GetTileCoordX (), pendingTiles[0].GetTileCoordY ()] + GetCostForMovementType((int)gameManager.activePlayer.unitSelected.movementType, (int)tile.typeOfTerrain.terrainName)) 
 				{
-						costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] = costMatrix [pendingTiles [0].GetTileCoordX (), pendingTiles [0].GetTileCoordY ()] + GetCostForMovementType((int)gameManager.activePlayer.unitSelected.movementType, (int)tile.typeOfTerrain.terrainName);
+					//Debug.Log ("GetCostForMovementType(" + (int)gameManager.activePlayer.unitSelected.movementType);// + ", " + (int)tile.typeOfTerrain.terrainName);
+					costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] = costMatrix [pendingTiles [0].GetTileCoordX (), pendingTiles [0].GetTileCoordY ()] + GetCostForMovementType((int)gameManager.activePlayer.unitSelected.movementType, (int)tile.typeOfTerrain.terrainName);
 					if (costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] <= movementPoints && 
 						alreadyInspectedTiles.Contains(map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ())) == false
 						&& (map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ()).GetUnitAssigned() == null
 						|| map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ()).GetUnitAssigned().propietary == gameManager.activePlayer.unitSelected.propietary)) 
 					{
 						pendingTiles.Add (map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ()));
-						map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ()).ActivateMoveOverlay ();
+						returnableTiles.Add (map.GetTile (tile.GetTileCoordX (), tile.GetTileCoordY ()));
+						//map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ()).ActivateMoveOverlay ();
 					}
 				}
 			}
 			alreadyInspectedTiles.Add (pendingTiles [0]);
 			pendingTiles.RemoveAt (0);
 		}
+		return returnableTiles;
 	}
 
 	public List<ClickableTile> CalculateShortestPath(ClickableTile origin, ClickableTile destination)
