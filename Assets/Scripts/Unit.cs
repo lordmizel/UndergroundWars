@@ -129,7 +129,16 @@ public class Unit : MonoBehaviour {
 		TireUnit();
 
 		//TODO: Create a new method to evaluate menu options here
-		InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.ATTACK);
+		if (ranged == false) {
+			foreach (ClickableTile neighbor in map.GetTile(x, y).neighbors) 
+			{
+				if (neighbor.GetUnitAssigned () != null && neighbor.GetUnitAssigned ().propietary != propietary) 
+				{
+					InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.ATTACK);
+					break;
+				}
+			}
+		}
 		InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.WAIT);
 		InGameMenu.inGameMenu.ActivateMenu ();
 		GameManager.gameState = GameManager.state.NAVIGATING_MENU;
