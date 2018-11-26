@@ -46,7 +46,6 @@ public class TerrainMovement : MonoBehaviour {
 		costMatrix [x, y] = 0;
 		pendingTiles.Add (map.GetTile(x, y));
 		returnableTiles.Add(map.GetTile(x, y));
-		//map.GetTile(x, y).ActivateMoveOverlay ();
 
 		while (pendingTiles.Count > 0) 
 		{
@@ -55,7 +54,6 @@ public class TerrainMovement : MonoBehaviour {
 				if (costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] == 0 || 
 					costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] > costMatrix [pendingTiles[0].GetTileCoordX (), pendingTiles[0].GetTileCoordY ()] + GetCostForMovementType((int)gameManager.activePlayer.unitSelected.movementType, (int)tile.typeOfTerrain.terrainName)) 
 				{
-					//Debug.Log ("GetCostForMovementType(" + (int)gameManager.activePlayer.unitSelected.movementType);// + ", " + (int)tile.typeOfTerrain.terrainName);
 					costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] = costMatrix [pendingTiles [0].GetTileCoordX (), pendingTiles [0].GetTileCoordY ()] + GetCostForMovementType((int)gameManager.activePlayer.unitSelected.movementType, (int)tile.typeOfTerrain.terrainName);
 					if (costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] <= movementPoints && 
 						alreadyInspectedTiles.Contains(map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ())) == false
@@ -64,7 +62,6 @@ public class TerrainMovement : MonoBehaviour {
 					{
 						pendingTiles.Add (map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ()));
 						returnableTiles.Add (map.GetTile (tile.GetTileCoordX (), tile.GetTileCoordY ()));
-						//map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ()).ActivateMoveOverlay ();
 					}
 				}
 			}
@@ -125,6 +122,44 @@ public class TerrainMovement : MonoBehaviour {
 		//It should never get here
 		Debug.LogError("Something went wrong with the A* algorithm");
 		return null;
+	}
+
+	public List<ClickableTile> CalculateRangeMatrix(int x, int y, int maxRange, int minRange)
+	{
+		int[,] costMatrix = new int[map.mapWidth, map.mapHeight];
+		List<ClickableTile> pendingTiles = new List<ClickableTile>();
+		List<ClickableTile> alreadyInspectedTiles = new List<ClickableTile>();
+		List<ClickableTile> returnableTiles = new List<ClickableTile> ();
+		costMatrix [x, y] = 0;
+		pendingTiles.Add (map.GetTile(x, y));
+		if (minRange == 0) 
+		{
+			returnableTiles.Add (map.GetTile (x, y));
+		}
+
+		while (pendingTiles.Count > 0) 
+		{
+			foreach (ClickableTile tile in pendingTiles[0].neighbors) 
+			{
+				if (costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] == 0 || 
+					costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] > costMatrix [pendingTiles[0].GetTileCoordX (), pendingTiles[0].GetTileCoordY ()] + GetCostForMovementType((int)gameManager.activePlayer.unitSelected.movementType, (int)tile.typeOfTerrain.terrainName)) 
+				{
+					costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] = costMatrix [pendingTiles [0].GetTileCoordX (), pendingTiles [0].GetTileCoordY ()] + 1;
+					if (costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] <= maxRange &&
+						alreadyInspectedTiles.Contains(map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ())) == false) 
+					{
+						pendingTiles.Add (map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ()));
+						if (costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] >= minRange) 
+						{
+							returnableTiles.Add (map.GetTile (tile.GetTileCoordX (), tile.GetTileCoordY ()));
+						}
+					}
+				}
+			}
+			alreadyInspectedTiles.Add (pendingTiles [0]);
+			pendingTiles.RemoveAt (0);
+		}
+		return returnableTiles;
 	}
 
 	int GetHCost(ClickableTile origin, ClickableTile destination)

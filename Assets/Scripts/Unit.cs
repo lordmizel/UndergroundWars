@@ -5,9 +5,9 @@ using UnityEngine;
 public class Unit : MonoBehaviour {
 
 	SpriteRenderer mySprite;
-
 	GameManager gameManager;
 	Map map;
+
 	//TODO: This is public for debug purposes
 	public Army propietary;
 
@@ -16,6 +16,7 @@ public class Unit : MonoBehaviour {
 	public int initialY;
 
 	bool unitUsed = false;
+	bool unitHasMoved = false;
 	bool unitSelected = false;
 
 	[SerializeField]
@@ -27,6 +28,7 @@ public class Unit : MonoBehaviour {
 
 	[Header("Movement stuff")]
 	public ClickableTile originTile;
+	public ClickableTile possibleDestination;
 	public int movementPoints = 5;
 	bool unitMoving = false;
 	List<ClickableTile> path;
@@ -70,12 +72,11 @@ public class Unit : MonoBehaviour {
 				unitSelected = true;
 				propietary.unitSelected = this;
 				map.ActivateMovementArea (originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints);
-				//map.unitMovementManager.CalculateMovementMatrix (originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints);
 				GameManager.gameState = GameManager.state.MOVING_UNIT;
 			} 
 			else 
 			{
-				EstablishNewTile (originTile.GetTileCoordX (), originTile.GetTileCoordY ());
+				ArrivedAtDestination (originTile.GetTileCoordX (), originTile.GetTileCoordY ());
 			}
 		} 
 		else 
@@ -94,6 +95,7 @@ public class Unit : MonoBehaviour {
 			map.ReturnTilesToNormal ();
 			path = newPath;
 			unitMoving = true;
+			unitHasMoved = true;
 		}
 	}
 
@@ -110,29 +112,21 @@ public class Unit : MonoBehaviour {
 			path.RemoveAt (path.Count - 1);
 			if (path.Count == 0) 
 			{
-				EstablishNewTile ((int)destination.x, (int)destination.y);
+				ArrivedAtDestination ((int)destination.x, (int)destination.y);
 				unitMoving = false;
 			}
 		}
 	}
 
-	public void EstablishNewTile(int x, int y)
+	public void ArrivedAtDestination(int x, int y)
 	{
-		gameObject.transform.position = new Vector3(x, y, gameObject.transform.position.z);
-		ClickableTile newTile = map.GetTile (x, y);
-		originTile.UnassignUnit ();
-		newTile.AssignUnit(this);
-		originTile = newTile;
-		propietary.unitSelected = null;
-
-		//TODO: Unit shouldn't tire here but after the menu has been dealt with
-		TireUnit();
-
-		//TODO: Create a new method to evaluate menu options here
-		if (ranged == false) {
-			foreach (ClickableTile neighbor in map.GetTile(x, y).neighbors) 
+		possibleDestination = map.GetTile (x, y);
+		if (ranged == false || unitHasMoved == false) {
+			List<ClickableTile> tilesInAttackRange = map.unitMovementManager.CalculateRangeMatrix (x, y, maxAttackRange, minAttackRange);
+			foreach (ClickableTile tile in tilesInAttackRange) 
 			{
-				if (neighbor.GetUnitAssigned () != null && neighbor.GetUnitAssigned ().propietary != propietary) 
+				tile.ActivateAttackOverlay ();
+				if (tile.GetUnitAssigned () != null && tile.GetUnitAssigned ().propietary != propietary) 
 				{
 					InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.ATTACK);
 					break;
@@ -144,6 +138,19 @@ public class Unit : MonoBehaviour {
 		GameManager.gameState = GameManager.state.NAVIGATING_MENU;
 	}
 
+	public void EstablishNewTile()
+	{ 
+		ClickableTile newTile = possibleDestination;
+
+		gameObject.transform.position = new Vector3(newTile.GetTileCoordX(), newTile.GetTileCoordY(), gameObject.transform.position.z);
+		originTile.UnassignUnit ();
+		newTile.AssignUnit(this);
+		originTile = newTile;
+		propietary.unitSelected = null;
+		TireUnit();
+		map.ReturnTilesToNormal ();
+	}
+
 	public void TireUnit()
 	{
 		GrayUnGray (true);
@@ -153,6 +160,7 @@ public class Unit : MonoBehaviour {
 	public void RefreshUnit()
 	{
 		GrayUnGray (false);
+		unitHasMoved = false;
 		unitUsed = false;
 	}
 

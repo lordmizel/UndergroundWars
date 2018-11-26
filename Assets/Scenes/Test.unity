@@ -287,6 +287,7 @@ MonoBehaviour:
   minAttackRange: 1
   maxAttackRange: 1
   originTile: {fileID: 0}
+  possibleDestination: {fileID: 0}
   movementPoints: 5
   movementType: 2
 --- !u!212 &331148354
@@ -467,10 +468,11 @@ MonoBehaviour:
   propietary: {fileID: 478958790}
   initialX: 1
   initialY: 1
-  ranged: 0
-  minAttackRange: 1
-  maxAttackRange: 1
+  ranged: 1
+  minAttackRange: 3
+  maxAttackRange: 5
   originTile: {fileID: 0}
+  possibleDestination: {fileID: 0}
   movementPoints: 5
   movementType: 1
 --- !u!212 &431222030
@@ -591,6 +593,7 @@ MonoBehaviour:
   minAttackRange: 1
   maxAttackRange: 1
   originTile: {fileID: 0}
+  possibleDestination: {fileID: 0}
   movementPoints: 5
   movementType: 0
 --- !u!212 &467861600
@@ -1074,6 +1077,7 @@ MonoBehaviour:
   minAttackRange: 1
   maxAttackRange: 1
   originTile: {fileID: 0}
+  possibleDestination: {fileID: 0}
   movementPoints: 5
   movementType: 0
 --- !u!224 &836394403 stripped
@@ -1277,6 +1281,7 @@ MonoBehaviour:
   minAttackRange: 1
   maxAttackRange: 1
   originTile: {fileID: 0}
+  possibleDestination: {fileID: 0}
   movementPoints: 5
   movementType: 3
 --- !u!212 &999665965

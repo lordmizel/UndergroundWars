@@ -71,9 +71,11 @@ public class InGameMenu : MonoBehaviour {
 	{
 		switch (optionsShowing [optionSelected].myOption) {
 		case MenuOption.menuOptions.ATTACK:
+			gameManager.activePlayer.unitSelected.EstablishNewTile ();
 			Debug.Log ("Attack selected");
 			break;
 		case MenuOption.menuOptions.WAIT:
+			gameManager.activePlayer.unitSelected.EstablishNewTile ();
 			Debug.Log ("Wait selected");
 			break;
 		case MenuOption.menuOptions.END_TURN:

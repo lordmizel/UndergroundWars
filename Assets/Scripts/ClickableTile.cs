@@ -99,11 +99,11 @@ public class ClickableTile : MonoBehaviour {
 			if (gameManager.activePlayer.unitSelected.originTile == this) 
 			{
 				map.ReturnTilesToNormal ();
-				gameManager.activePlayer.unitSelected.EstablishNewTile (coordX, coordY);
+				gameManager.activePlayer.unitSelected.ArrivedAtDestination (coordX, coordY);
 			} 
 			else 
 			{
-				if (unitAssigned == null) 
+				if (unitAssigned == null || unitAssigned == gameManager.activePlayer.unitSelected) 
 				{
 					gameManager.activePlayer.unitSelected.StartMoving (map.unitMovementManager.CalculateShortestPath (gameManager.activePlayer.unitSelected.originTile, this));
 				}
