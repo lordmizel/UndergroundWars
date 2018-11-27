@@ -129,7 +129,6 @@ public class Unit : MonoBehaviour {
 				if (tile.GetUnitAssigned () != null && tile.GetUnitAssigned ().propietary != propietary) 
 				{
 					InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.ATTACK);
-					break;
 				}
 			}
 		}
@@ -148,6 +147,13 @@ public class Unit : MonoBehaviour {
 		originTile = newTile;
 		propietary.unitSelected = null;
 		TireUnit();
+		map.ReturnTilesToNormal ();
+	}
+
+	public void ReturnBackToOrigin()
+	{
+		gameObject.transform.position = new Vector3(originTile.GetTileCoordX(), originTile.GetTileCoordY(), gameObject.transform.position.z);
+		propietary.unitSelected = null;
 		map.ReturnTilesToNormal ();
 	}
 

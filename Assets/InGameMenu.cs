@@ -64,6 +64,15 @@ public class InGameMenu : MonoBehaviour {
 			{
 				SelectOption (optionIndex);
 			}
+			if (Input.GetKeyDown (KeyCode.Escape)) 
+			{
+				if (gameManager.activePlayer.unitSelected != null) 
+				{
+					gameManager.activePlayer.unitSelected.ReturnBackToOrigin ();
+				}
+				HideMenu ();
+				GameManager.gameState = GameManager.state.MOVING_CURSOR;
+			}
 		}
 	}
 

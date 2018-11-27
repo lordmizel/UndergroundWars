@@ -142,7 +142,7 @@ public class TerrainMovement : MonoBehaviour {
 			foreach (ClickableTile tile in pendingTiles[0].neighbors) 
 			{
 				if (costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] == 0 || 
-					costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] > costMatrix [pendingTiles[0].GetTileCoordX (), pendingTiles[0].GetTileCoordY ()] + GetCostForMovementType((int)gameManager.activePlayer.unitSelected.movementType, (int)tile.typeOfTerrain.terrainName)) 
+					costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] > costMatrix [pendingTiles[0].GetTileCoordX (), pendingTiles[0].GetTileCoordY ()] + 1) 
 				{
 					costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] = costMatrix [pendingTiles [0].GetTileCoordX (), pendingTiles [0].GetTileCoordY ()] + 1;
 					if (costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] <= maxRange &&
