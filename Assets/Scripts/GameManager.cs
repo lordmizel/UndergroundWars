@@ -10,7 +10,9 @@ public class GameManager : MonoBehaviour {
 		IDLE,
 		MOVING_UNIT,
 		NAVIGATING_MENU,
+		SELECTING_ATTACK,
 		AFTER_MENU_BUFFER,
+		AFTER_MENU_ATTACK_BUFFER,
 		CHECKING_ENEMY_UNIT
 	}
 
@@ -34,12 +36,19 @@ public class GameManager : MonoBehaviour {
 	void Update () 
 	{
 		//This is a patch for avoiding selecting a tile right as you select an option from the menu
-		if (gameState == state.AFTER_MENU_BUFFER || gameState == state.CHECKING_ENEMY_UNIT) 
+		if (gameState == state.AFTER_MENU_BUFFER || gameState == state.AFTER_MENU_ATTACK_BUFFER || gameState == state.CHECKING_ENEMY_UNIT) 
 		{
 			if (Input.GetKeyUp (KeyCode.Return)) 
 			{
 				map.ReturnTilesToNormal ();
-				gameState = state.MOVING_CURSOR;
+				if (gameState == state.AFTER_MENU_ATTACK_BUFFER) 
+				{
+					gameState = state.SELECTING_ATTACK;
+				} 
+				else 
+				{
+					gameState = state.MOVING_CURSOR;
+				}
 			}
 		}
 	}

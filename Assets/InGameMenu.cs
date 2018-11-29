@@ -28,68 +28,76 @@ public class InGameMenu : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown (KeyCode.O)) 
+	void Update () 
+	{
+		if (GameManager.gameState == GameManager.state.NAVIGATING_MENU) 
 		{
-			ActivateMenuOption (MenuOption.menuOptions.WAIT);
-		} 
-		if (GameManager.gameState == GameManager.state.NAVIGATING_MENU) {
-			if (Input.GetKeyDown (KeyCode.W)) 
-			{
-				optionsShowing [optionIndex].GetComponent<Image> ().color = Color.white;
-				if (optionIndex != 0) 
-				{
-					optionIndex--;
-				} 
-				else 
-				{
-					optionIndex = optionsShowing.Count - 1;
-				}
-				optionsShowing [optionIndex].GetComponent<Image> ().color = Color.yellow;
-			}
-			if (Input.GetKeyDown (KeyCode.S)) 
-			{
-				optionsShowing [optionIndex].GetComponent<Image> ().color = Color.white;
-				if (optionIndex != optionsShowing.Count - 1) 
-				{
-					optionIndex++;
-				} 
-				else 
-				{
-					optionIndex = 0;
-				}
-				optionsShowing [optionIndex].GetComponent<Image> ().color = Color.yellow;
-			}
-			if (Input.GetKeyDown (KeyCode.Return)) 
-			{
-				SelectOption (optionIndex);
-			}
-			if (Input.GetKeyDown (KeyCode.Escape)) 
-			{
-				if (gameManager.activePlayer.unitSelected != null) 
-				{
-					gameManager.activePlayer.unitSelected.ReturnBackToOrigin ();
-				}
-				HideMenu ();
-				GameManager.gameState = GameManager.state.MOVING_CURSOR;
-			}
+			SelectMenuOption ();
 		}
+	}
+
+	void SelectMenuOption()
+	{
+		
+		if (Input.GetKeyDown (KeyCode.W)) 
+		{
+			optionsShowing [optionIndex].GetComponent<Image> ().color = Color.white;
+			if (optionIndex != 0) 
+			{
+				optionIndex--;
+			} 
+			else 
+			{
+				optionIndex = optionsShowing.Count - 1;
+			}
+			optionsShowing [optionIndex].GetComponent<Image> ().color = Color.yellow;
+		}
+		if (Input.GetKeyDown (KeyCode.S)) 
+		{
+			optionsShowing [optionIndex].GetComponent<Image> ().color = Color.white;
+			if (optionIndex != optionsShowing.Count - 1) 
+			{
+				optionIndex++;
+			} 
+			else 
+			{
+				optionIndex = 0;
+			}
+			optionsShowing [optionIndex].GetComponent<Image> ().color = Color.yellow;
+		}
+		if (Input.GetKeyDown (KeyCode.Return)) 
+		{
+			SelectOption (optionIndex);
+		}
+		if (Input.GetKeyDown (KeyCode.Escape)) 
+		{
+			if (gameManager.activePlayer.unitSelected != null) 
+			{
+				gameManager.activePlayer.unitSelected.ReturnBackToOrigin ();
+			}
+			HideMenu ();
+			GameManager.gameState = GameManager.state.MOVING_CURSOR;
+		}
+
 	}
 
 	void SelectOption(int optionSelected)
 	{
 		switch (optionsShowing [optionSelected].myOption) {
 		case MenuOption.menuOptions.ATTACK:
-			gameManager.activePlayer.unitSelected.EstablishNewTile ();
+			gameManager.activePlayer.unitSelected.PrepareToAttack();
+			GameManager.gameState = GameManager.state.AFTER_MENU_ATTACK_BUFFER;
 			Debug.Log ("Attack selected");
 			break;
 		case MenuOption.menuOptions.WAIT:
 			gameManager.activePlayer.unitSelected.EstablishNewTile ();
+			GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
 			Debug.Log ("Wait selected");
 			break;
 		case MenuOption.menuOptions.END_TURN:
 			Debug.Log ("End turn selected");
 			gameManager.PassTurn ();
+			GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
 			break;
 		case MenuOption.menuOptions.TEST_OPTION:
 			Debug.Log ("Test option selected");
@@ -128,7 +136,6 @@ public class InGameMenu : MonoBehaviour {
 
 	void HideMenu()
 	{
-		Debug.Log("Hiding menu");
 		foreach (MenuOption optionInMenu in optionsShowing) 
 		{
 			optionInMenu.GetComponent<Image> ().color = Color.white;
@@ -137,6 +144,5 @@ public class InGameMenu : MonoBehaviour {
 		optionIndex = 0;
 		optionsShowing.Clear ();
 		menuPanel.SetActive (false);
-		GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
 	}
 }

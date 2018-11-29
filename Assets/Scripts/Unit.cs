@@ -6,6 +6,7 @@ public class Unit : MonoBehaviour {
 
 	SpriteRenderer mySprite;
 	GameManager gameManager;
+	PlayerCursor cursor;
 	Map map;
 
 	//TODO: This is public for debug purposes
@@ -25,6 +26,10 @@ public class Unit : MonoBehaviour {
 	int minAttackRange = 1;
 	[SerializeField]
 	int maxAttackRange = 1;
+	List<ClickableTile> attackSpots;
+	int attackIndex;
+	[HideInInspector]
+	public bool readyToAttack = false;
 
 	[Header("Movement stuff")]
 	public ClickableTile originTile;
@@ -41,11 +46,16 @@ public class Unit : MonoBehaviour {
 	}
 	public typeOfMovement movementType = typeOfMovement.FOOT;
 
+
+
 	// Use this for initialization
 	void Start () {
 		gameManager = FindObjectOfType<GameManager> ();
 		map = FindObjectOfType<Map> ();
 		mySprite = gameObject.GetComponent<SpriteRenderer> ();
+		cursor = FindObjectOfType<PlayerCursor> ();
+
+		attackSpots = new List<ClickableTile> ();
 
 		//TODO: This is only for debug
 		originTile = map.GetTile (initialX, initialY);
@@ -61,8 +71,13 @@ public class Unit : MonoBehaviour {
 		{
 			OnMyMerryWay ();
 		}
+		if (GameManager.gameState == GameManager.state.SELECTING_ATTACK && readyToAttack == true) 
+		{
+			SelectEnemyToAttack ();
+		}
 	}
 
+	//Unit has been selected by the cursor
 	public void UnitSelected()
 	{
 		if (propietary == gameManager.activePlayer && unitUsed == false) 
@@ -88,6 +103,7 @@ public class Unit : MonoBehaviour {
 		}
 	}
 
+	//Unit has received orders to move
 	public void StartMoving(List<ClickableTile> newPath)
 	{
 		if (newPath != null) 
@@ -99,6 +115,7 @@ public class Unit : MonoBehaviour {
 		}
 	}
 
+	//Unit is moving
 	void OnMyMerryWay()
 	{
 		Vector3 destination = new Vector3 (path [path.Count - 1].GetTileCoordX (), path [path.Count - 1].GetTileCoordY (), transform.position.z);
@@ -118,6 +135,7 @@ public class Unit : MonoBehaviour {
 		}
 	}
 
+	//Unit has finished moving
 	public void ArrivedAtDestination(int x, int y)
 	{
 		possibleDestination = map.GetTile (x, y);
@@ -128,6 +146,7 @@ public class Unit : MonoBehaviour {
 				tile.ActivateAttackOverlay ();
 				if (tile.GetUnitAssigned () != null && tile.GetUnitAssigned ().propietary != propietary) 
 				{
+					attackSpots.Add (tile);
 					InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.ATTACK);
 				}
 			}
@@ -137,6 +156,7 @@ public class Unit : MonoBehaviour {
 		GameManager.gameState = GameManager.state.NAVIGATING_MENU;
 	}
 
+	//Player confirms the movement after the unit has moved and/or attacked
 	public void EstablishNewTile()
 	{ 
 		ClickableTile newTile = possibleDestination;
@@ -150,26 +170,34 @@ public class Unit : MonoBehaviour {
 		map.ReturnTilesToNormal ();
 	}
 
+	//Player cancels the movement after the unit has moved
 	public void ReturnBackToOrigin()
 	{
 		gameObject.transform.position = new Vector3(originTile.GetTileCoordX(), originTile.GetTileCoordY(), gameObject.transform.position.z);
 		propietary.unitSelected = null;
+		attackSpots.Clear ();
+		unitHasMoved = false;
 		map.ReturnTilesToNormal ();
+		cursor.TeleportCursorToTile (originTile.GetTileCoordX (), originTile.GetTileCoordY ());
 	}
 
+	//Unit has already moved and won't be used again this turn
 	public void TireUnit()
 	{
 		GrayUnGray (true);
 		unitUsed = true;
 	}
 
+	//New turn starts, unit is refreshed
 	public void RefreshUnit()
 	{
+		attackSpots.Clear ();
 		GrayUnGray (false);
 		unitHasMoved = false;
 		unitUsed = false;
 	}
 
+	//Change the visual aspect of the unit
 	void GrayUnGray(bool gray)
 	{
 		float h, s, v;
@@ -183,5 +211,59 @@ public class Unit : MonoBehaviour {
 			v = 1f;
 		}
 		mySprite.color = Color.HSVToRGB (h, s, v);
+	}
+
+	public void PrepareToAttack()
+	{
+		attackIndex = 0;
+		readyToAttack = true;
+		PinpointEnemy (attackSpots [attackIndex]);
+	}
+
+	void SelectEnemyToAttack()
+	{
+		if (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown (KeyCode.D)) 
+		{
+			if (attackIndex >= attackSpots.Count - 1) 
+			{
+				attackIndex = 0;
+			} 
+			else 
+			{
+				attackIndex++;
+			}
+			PinpointEnemy (attackSpots [attackIndex]);
+		} 
+		else if (Input.GetKeyDown (KeyCode.A) || Input.GetKeyDown (KeyCode.S)) 
+		{
+			if (attackIndex <= 0) 
+			{
+				attackIndex = attackSpots.Count - 1;
+			} 
+			else 
+			{
+				attackIndex--;
+			}
+			PinpointEnemy (attackSpots [attackIndex]);
+		} 
+		else if (Input.GetKeyDown (KeyCode.Return)) 
+		{
+			AttackUnit (attackSpots [attackIndex].GetUnitAssigned ());
+			EstablishNewTile ();
+
+			//TODO: Maybe should go to another state while the attack transpires before going back to moving the cursor
+			GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
+		}
+	}
+
+	void PinpointEnemy(ClickableTile objective)
+	{
+		cursor.TeleportCursorToTile (objective.GetTileCoordX (), objective.GetTileCoordY ());
+	}
+
+	void AttackUnit(Unit enemy)
+	{
+		readyToAttack = false;
+		Debug.Log ("Attacked " + enemy.name);
 	}
 }

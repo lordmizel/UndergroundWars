@@ -25,8 +25,15 @@ public class PlayerCursor : MonoBehaviour {
 	void Update () {
 		if (GameManager.gameState == GameManager.state.MOVING_CURSOR || GameManager.gameState == GameManager.state.MOVING_UNIT) 
 		{
-			CheckForInput ();
+			MoveCursor ();
 		}
+	}
+
+	public void TeleportCursorToTile(int x, int y)
+	{
+		currentPositionX = x;
+		currentPositionY = y;
+		SetCursorPosition ();
 	}
 
 	void SetCursorPosition()
@@ -34,7 +41,7 @@ public class PlayerCursor : MonoBehaviour {
 		gameObject.transform.position = new Vector3 (currentPositionX, currentPositionY, gameObject.transform.position.z);
 	}
 
-	void CheckForInput()
+	void MoveCursor()
 	{
 		if (Input.GetKeyDown (KeyCode.W) && currentPositionY < map.mapHeight - 1) 
 		{
@@ -77,4 +84,6 @@ public class PlayerCursor : MonoBehaviour {
 			map.GetTile (currentPositionX, currentPositionY).TileSelected ();
 		}
 	}
+
+
 }
