@@ -139,6 +139,7 @@ public class Unit : MonoBehaviour {
 	public void ArrivedAtDestination(int x, int y)
 	{
 		possibleDestination = map.GetTile (x, y);
+		cursor.TeleportCursorToTile (x, y);
 		if (ranged == false || unitHasMoved == false) {
 			List<ClickableTile> tilesInAttackRange = map.unitMovementManager.CalculateRangeMatrix (x, y, maxAttackRange, minAttackRange);
 			foreach (ClickableTile tile in tilesInAttackRange) 
@@ -253,6 +254,10 @@ public class Unit : MonoBehaviour {
 
 			//TODO: Maybe should go to another state while the attack transpires before going back to moving the cursor
 			GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
+		} 
+		else if (Input.GetKeyDown (KeyCode.Escape)) 
+		{
+			ArrivedAtDestination (possibleDestination.GetTileCoordX (), possibleDestination.GetTileCoordY ());
 		}
 	}
 
