@@ -96,7 +96,7 @@ public class Unit : MonoBehaviour {
 		} 
 		else 
 		{
-			//TODO: What happens when you select a unit in a turn that is not it's?
+			//TODO: What happens when you select a unit you cannot move (other player's unit or already used unit)
 			gameManager.activePlayer.unitSelected = this;
 			map.ActivateAttackArea(originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints, ranged, minAttackRange, maxAttackRange);
 			GameManager.gameState = GameManager.state.CHECKING_ENEMY_UNIT;

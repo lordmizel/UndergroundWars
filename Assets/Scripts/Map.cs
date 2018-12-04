@@ -122,8 +122,14 @@ public class Map : MonoBehaviour {
 
 	public void ActivateAttackArea(int x, int y, int movementPoints, bool ranged, int minRange, int maxRange)
 	{
-		if (ranged == true) {
+		if (ranged == true) 
+		{
 			//TODO: Unit is ranged. Calculate attack matrix
+			List<ClickableTile> tilesItCanShootTo = unitMovementManager.CalculateRangeMatrix (x, y, maxRange, minRange);
+			foreach (ClickableTile tile in tilesItCanShootTo) 
+			{
+				tile.ActivateAttackOverlay ();
+			}
 		} 
 		else 
 		{
