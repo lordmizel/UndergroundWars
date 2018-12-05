@@ -50,6 +50,14 @@ public class GameManager : MonoBehaviour {
 					gameState = state.MOVING_CURSOR;
 				}
 			}
+		} 
+		else if (gameState == state.MOVING_UNIT) 
+		{
+			if (Input.GetKeyDown (KeyCode.Escape)) 
+			{
+				map.ReturnTilesToNormal ();
+				gameState = state.MOVING_CURSOR;
+			}
 		}
 	}
 

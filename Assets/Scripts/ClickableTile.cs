@@ -38,6 +38,10 @@ public class ClickableTile : MonoBehaviour {
 		gameManager = FindObjectOfType<GameManager> ();
 	}
 
+	void Update()
+	{
+	}
+
 	public void SetTileCoordinates(int x, int y)
 	{
 		coordX = x;
