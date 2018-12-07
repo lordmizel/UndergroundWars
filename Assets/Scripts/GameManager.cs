@@ -44,8 +44,7 @@ public class GameManager : MonoBehaviour {
 				if (gameState == state.AFTER_MENU_ATTACK_BUFFER) 
 				{
 					gameState = state.SELECTING_ATTACK;
-				} 
-				else 
+				} else 
 				{
 					gameState = state.MOVING_CURSOR;
 				}
@@ -57,6 +56,15 @@ public class GameManager : MonoBehaviour {
 			{
 				map.ReturnTilesToNormal ();
 				gameState = state.MOVING_CURSOR;
+			}
+		} 
+		else if (gameState == state.MOVING_CURSOR) 
+		{
+			if (Input.GetKeyDown (KeyCode.Escape)) 
+			{
+				InGameMenu.inGameMenu.ActivateMenuOption (MenuOption.menuOptions.END_TURN);
+				InGameMenu.inGameMenu.ActivateMenu ();
+				GameManager.gameState = GameManager.state.NAVIGATING_MENU;
 			}
 		}
 	}

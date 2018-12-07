@@ -73,15 +73,6 @@ public class ClickableTile : MonoBehaviour {
 		return unitAssigned;
 	}
 
-	/*void OnMouseDown()
-	{
-		if (GameManager.gameState == GameManager.state.MOVING_UNIT && moveColorOverlay.activeSelf == true) 
-		{
-			Debug.Log ("Unit moved");
-			gameManager.activePlayer.unitSelected.MoveUnitTo (coordX, coordY);
-		}
-	}*/
-
 	public void TileSelected()
 	{
 		switch (GameManager.gameState) 
