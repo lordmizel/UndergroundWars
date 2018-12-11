@@ -5,6 +5,7 @@ using UnityEngine;
 public class Unit : MonoBehaviour {
 
 	SpriteRenderer mySprite;
+	Animator myAnimator;
 	GameManager gameManager;
 	PlayerCursor cursor;
 	Map map;
@@ -38,7 +39,8 @@ public class Unit : MonoBehaviour {
 	bool unitMoving = false;
 	List<ClickableTile> path;
 	float moveSpeed = 5f;
-	public enum typeOfMovement{
+	public enum typeOfMovement
+	{
 		FOOT,
 		VEHICLE,
 		FLYING,
@@ -54,6 +56,7 @@ public class Unit : MonoBehaviour {
 		map = FindObjectOfType<Map> ();
 		mySprite = gameObject.GetComponent<SpriteRenderer> ();
 		cursor = FindObjectOfType<PlayerCursor> ();
+		myAnimator = FindObjectOfType<Animator> ();
 
 		attackSpots = new List<ClickableTile> ();
 
@@ -110,6 +113,7 @@ public class Unit : MonoBehaviour {
 		{
 			map.ReturnTilesToNormal ();
 			path = newPath;
+			ChangeRunningAnimation (path [path.Count - 1].GetTileCoordX (), path [path.Count - 1].GetTileCoordY ());
 			unitMoving = true;
 			unitHasMoved = true;
 		}
@@ -131,6 +135,10 @@ public class Unit : MonoBehaviour {
 			{
 				ArrivedAtDestination ((int)destination.x, (int)destination.y);
 				unitMoving = false;
+			} 
+			else 
+			{
+				ChangeRunningAnimation (path [path.Count - 1].GetTileCoordX (), path [path.Count - 1].GetTileCoordY ());
 			}
 		}
 	}
@@ -138,9 +146,15 @@ public class Unit : MonoBehaviour {
 	//Unit has finished moving
 	public void ArrivedAtDestination(int x, int y)
 	{
+		if (myAnimator != null) 
+		{
+			transform.localScale = new Vector3 (1, 1, 1);
+			myAnimator.SetTrigger ("idleState");
+		}
 		possibleDestination = map.GetTile (x, y);
 		cursor.TeleportCursorToTile (x, y);
-		if (ranged == false || unitHasMoved == false) {
+		if (ranged == false || unitHasMoved == false) 
+		{
 			List<ClickableTile> tilesInAttackRange = map.unitMovementManager.CalculateRangeMatrix (x, y, maxAttackRange, minAttackRange);
 			foreach (ClickableTile tile in tilesInAttackRange) 
 			{
@@ -155,6 +169,33 @@ public class Unit : MonoBehaviour {
 		InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.WAIT);
 		InGameMenu.inGameMenu.ActivateMenu ();
 		GameManager.gameState = GameManager.state.NAVIGATING_MENU;
+	}
+
+	void ChangeRunningAnimation(float nextX, float nextY)
+	{
+		if (myAnimator != null) 
+		{
+			if (nextY > transform.position.y) 
+			{
+				myAnimator.SetTrigger ("runningUp");
+			} 
+			else if (nextY < transform.position.y) 
+			{
+				myAnimator.SetTrigger ("runningDown");
+			} 
+			else 
+			{
+				myAnimator.SetTrigger ("runningSide");
+				if (nextX < transform.position.x) 
+				{
+					transform.localScale = new Vector3 (-1, 1, 1);
+				}
+				else 
+				{
+					transform.localScale = new Vector3 (1, 1, 1);
+				}
+			}
+		}
 	}
 
 	//Player confirms the movement after the unit has moved and/or attacked
