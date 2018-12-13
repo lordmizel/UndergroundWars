@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour {
 
 	Map map;
 
+
+
 	// Use this for initialization
 	void Start () {
 		gameState = state.MOVING_CURSOR;
@@ -58,15 +60,7 @@ public class GameManager : MonoBehaviour {
 				gameState = state.MOVING_CURSOR;
 			}
 		} 
-		else if (gameState == state.MOVING_CURSOR) 
-		{
-			if (Input.GetKeyDown (KeyCode.Escape)) 
-			{
-				InGameMenu.inGameMenu.ActivateMenuOption (MenuOption.menuOptions.END_TURN);
-				InGameMenu.inGameMenu.ActivateMenu ();
-				GameManager.gameState = GameManager.state.NAVIGATING_MENU;
-			}
-		}
+		//else 
 	}
 
 	public void PassTurn()

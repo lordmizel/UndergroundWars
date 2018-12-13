@@ -30,15 +30,24 @@ public class InGameMenu : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (GameManager.gameState == GameManager.state.NAVIGATING_MENU) 
+		if (GameManager.gameState == GameManager.state.MOVING_CURSOR) 
+		{
+			if (Input.GetKeyDown (KeyCode.Escape)) 
+			{
+				InGameMenu.inGameMenu.ActivateMenuOption (MenuOption.menuOptions.END_TURN);
+				InGameMenu.inGameMenu.ActivateMenu ();
+				GameManager.gameState = GameManager.state.NAVIGATING_MENU;
+			}
+		}
+		else if (GameManager.gameState == GameManager.state.NAVIGATING_MENU) 
 		{
 			SelectMenuOption ();
 		}
+
 	}
 
 	void SelectMenuOption()
 	{
-		
 		if (Input.GetKeyDown (KeyCode.W)) 
 		{
 			optionsShowing [optionIndex].GetComponent<Image> ().color = Color.white;
