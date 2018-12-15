@@ -20,6 +20,8 @@ public class TileType : ScriptableObject{
 
 	public GameObject tileVisualPrefab;
 
+	public int defensiveStat = 1;
+
 	public int GetMovementCost() {
 		switch (terrainName) {
 		case typeOfTerrain.PLAINS:

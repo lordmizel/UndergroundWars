@@ -14,3 +14,4 @@ MonoBehaviour:
   terrainName: 3
   tileVisualPrefab: {fileID: 1444575258142006, guid: 9e3468ec387b428419fc19b95abeb570,
     type: 2}
+  defensiveStat: 1

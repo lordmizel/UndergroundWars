@@ -48,6 +48,16 @@ public class Unit : MonoBehaviour {
 	}
 	public typeOfMovement movementType = typeOfMovement.FOOT;
 
+	[Header("Unit stats")]
+	int hp = 10;
+	int maxHP = 10;
+	//TODO: Attack should be based on a table. The attack is given face-value here for debugging purposes.
+	[SerializeField]
+	int attack = 60;
+	[SerializeField]
+	int attackMultiplier = 100;
+	[SerializeField]
+	int defenseMultiplier = 100;
 
 
 	// Use this for initialization
@@ -298,6 +308,7 @@ public class Unit : MonoBehaviour {
 		} 
 		else if (Input.GetKeyDown (KeyCode.Escape)) 
 		{
+			Debug.Log ("This is happening");
 			ArrivedAtDestination (possibleDestination.GetTileCoordX (), possibleDestination.GetTileCoordY ());
 		}
 	}
@@ -310,6 +321,21 @@ public class Unit : MonoBehaviour {
 	void AttackUnit(Unit enemy)
 	{
 		readyToAttack = false;
-		Debug.Log ("Attacked " + enemy.name);
+		float rawDamage = (((attack * attackMultiplier) / 100f) + Random.Range (0, 9)) * (hp / 10f) * ((200f - (enemy.defenseMultiplier + enemy.originTile.typeOfTerrain.defensiveStat * enemy.hp)) / 100f);
+		int actualDamage = (int)rawDamage / 10;
+		enemy.GetDamaged (actualDamage);
+		//TODO: Añadir contraataques
+	}
+
+	public void GetDamaged(int damage)
+	{
+		hp = hp - damage;
+		Debug.Log ("Did " + damage + " damage.");
+		if (hp <= 0) 
+		{
+			hp = 0;
+			//TODO: Destroy effect.
+			Destroy(gameObject);
+		}
 	}
 }
