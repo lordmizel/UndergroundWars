@@ -308,7 +308,6 @@ public class Unit : MonoBehaviour {
 		} 
 		else if (Input.GetKeyDown (KeyCode.Escape)) 
 		{
-			Debug.Log ("This is happening");
 			ArrivedAtDestination (possibleDestination.GetTileCoordX (), possibleDestination.GetTileCoordY ());
 		}
 	}
@@ -324,13 +323,19 @@ public class Unit : MonoBehaviour {
 		float rawDamage = (((attack * attackMultiplier) / 100f) + Random.Range (0, 9)) * (hp / 10f) * ((200f - (enemy.defenseMultiplier + enemy.originTile.typeOfTerrain.defensiveStat * enemy.hp)) / 100f);
 		int actualDamage = (int)rawDamage / 10;
 		enemy.GetDamaged (actualDamage);
-		//TODO: Añadir contraataques
+		//Counter
+		if (ranged == false && enemy != null && enemy.ranged == false) 
+		{
+			rawDamage = (((enemy.attack * enemy.attackMultiplier) / 100f) + Random.Range (0, 9)) * (enemy.hp / 10f) * ((200f - (defenseMultiplier + originTile.typeOfTerrain.defensiveStat * hp)) / 100f);
+			actualDamage = (int)rawDamage / 10;
+			GetDamaged (actualDamage);
+		}
 	}
 
 	public void GetDamaged(int damage)
 	{
 		hp = hp - damage;
-		Debug.Log ("Did " + damage + " damage.");
+		Debug.Log ("Unit " + name + " is at " + hp + " hp");
 		if (hp <= 0) 
 		{
 			hp = 0;
