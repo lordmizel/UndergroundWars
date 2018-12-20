@@ -66,7 +66,7 @@ public class Unit : MonoBehaviour {
 		map = FindObjectOfType<Map> ();
 		mySprite = gameObject.GetComponent<SpriteRenderer> ();
 		cursor = FindObjectOfType<PlayerCursor> ();
-		myAnimator = FindObjectOfType<Animator> ();
+		myAnimator = gameObject.GetComponent<Animator> ();
 
 		attackSpots = new List<ClickableTile> ();
 
@@ -84,7 +84,7 @@ public class Unit : MonoBehaviour {
 		{
 			OnMyMerryWay ();
 		}
-		if (GameManager.gameState == GameManager.state.SELECTING_ATTACK && readyToAttack == true) 
+		if (GameManager.gameState == GameManager.state.SELECTING_ATTACK && readyToAttack == true && gameManager.activePlayer.unitSelected == this) 
 		{
 			SelectEnemyToAttack ();
 		}
