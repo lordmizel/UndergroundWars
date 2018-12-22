@@ -326,25 +326,34 @@ public class Unit : MonoBehaviour {
 		readyToAttack = false;
 		float rawDamage = (((attack * attackMultiplier) / 100f) + Random.Range (0, 9)) * (hp / 10f) * ((200f - (enemy.defenseMultiplier + enemy.originTile.typeOfTerrain.defensiveStat * enemy.hp)) / 100f);
 		int actualDamage = (int)rawDamage / 10;
-		enemy.GetDamaged (actualDamage);
+		enemy.ChangeHP (-actualDamage);
 		//Counter
 		if (ranged == false && enemy != null && enemy.ranged == false) 
 		{
 			rawDamage = (((enemy.attack * enemy.attackMultiplier) / 100f) + Random.Range (0, 9)) * (enemy.hp / 10f) * ((200f - (defenseMultiplier + originTile.typeOfTerrain.defensiveStat * hp)) / 100f);
 			actualDamage = (int)rawDamage / 10;
-			GetDamaged (actualDamage);
+			ChangeHP (-actualDamage);
 		}
 	}
 
-	public void GetDamaged(int damage)
+	public void ChangeHP(int value)
 	{
-		hp = hp - damage;
+		hp = hp + value;
 		Debug.Log ("Unit " + name + " is at " + hp + " hp");
 		if (hp <= 0) 
 		{
 			hp = 0;
 			//TODO: Destroy effect.
-			Destroy(gameObject);
+			Destroy (gameObject);
+		} 
+		else if (hp >= 10) 
+		{
+			hp = 10;
+			hpSprite.sprite = null;
+		} 
+		else 
+		{
+			hpSprite.sprite = hpNumbers [hp - 1];
 		}
 	}
 }
