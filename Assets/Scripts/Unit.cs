@@ -9,6 +9,10 @@ public class Unit : MonoBehaviour {
 	GameManager gameManager;
 	PlayerCursor cursor;
 	Map map;
+	[SerializeField]
+	SpriteRenderer hpSprite;
+	[SerializeField]
+	Sprite[] hpNumbers;
 
 	//TODO: This is public for debug purposes
 	public Army propietary;
