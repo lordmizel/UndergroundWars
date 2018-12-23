@@ -162,7 +162,9 @@ public class Unit : MonoBehaviour {
 	{
 		if (myAnimator != null) 
 		{
-			transform.localScale = new Vector3 (1, 1, 1);
+			mySprite.flipX = false;
+			//transform.localScale = new Vector3 (1, 1, 1);
+			//hpSprite.transform.localScale = new Vector3 (1, 1, 1);
 			myAnimator.SetTrigger ("idleState");
 		}
 		possibleDestination = map.GetTile (x, y);
@@ -202,11 +204,15 @@ public class Unit : MonoBehaviour {
 				myAnimator.SetTrigger ("runningSide");
 				if (nextX < transform.position.x) 
 				{
-					transform.localScale = new Vector3 (-1, 1, 1);
+					mySprite.flipX = true;
+					//transform.localScale = new Vector3 (-1, 1, 1);
+					//hpSprite.transform.localScale = new Vector3 (-1, 1, 1);
 				}
 				else 
 				{
-					transform.localScale = new Vector3 (1, 1, 1);
+					mySprite.flipX = false;
+					//transform.localScale = new Vector3 (1, 1, 1);
+					//hpSprite.transform.localScale = new Vector3 (1, 1, 1);
 				}
 			}
 		}
