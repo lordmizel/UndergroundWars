@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class Army : MonoBehaviour {
 
-	Unit[] unitsInArmy;
+	List<Unit> unitsInArmy;
 
 	public Unit unitSelected;
 
 	// Use this for initialization
 	void Start () 
 	{
-		unitsInArmy = GetComponentsInChildren<Unit> ();
+        unitsInArmy = new List<Unit>();
+        foreach(Unit unit in GetComponentsInChildren<Unit>())
+        {
+            unitsInArmy.Add(unit);
+        }
 	}
 	
 	// Update is called once per frame
@@ -26,4 +30,9 @@ public class Army : MonoBehaviour {
 			unit.RefreshUnit ();
 		}
 	}
+
+    public void EraseUnitFromArmy(Unit unit)
+    {
+        unitsInArmy.Remove(unit);
+    }
 }

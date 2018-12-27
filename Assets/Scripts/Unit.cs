@@ -349,8 +349,7 @@ public class Unit : MonoBehaviour {
 		if (hp <= 0) 
 		{
 			hp = 0;
-			//TODO: Destroy effect.
-			Destroy (gameObject);
+            DestroyMe();
 		} 
 		else if (hp >= 10) 
 		{
@@ -362,4 +361,11 @@ public class Unit : MonoBehaviour {
 			hpSprite.sprite = hpNumbers [hp - 1];
 		}
 	}
+
+    void DestroyMe()
+    {
+        //TODO: Destroy effect.
+        propietary.EraseUnitFromArmy(this);
+        Destroy(gameObject);
+    }
 }
