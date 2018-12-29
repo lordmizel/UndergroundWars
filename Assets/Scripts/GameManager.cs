@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour {
 
 	public void PassTurn()
 	{
+        activePlayer.RefreshAllUnits();
 		if (playerTurnIndex == players.Length - 1) 
 		{
 			playerTurnIndex = 0;
