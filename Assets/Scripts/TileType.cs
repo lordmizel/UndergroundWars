@@ -22,6 +22,8 @@ public class TileType : ScriptableObject{
 
 	public int defensiveStat = 1;
 
+    public bool capturable = false;
+
 	public int GetMovementCost() {
 		switch (terrainName) {
 		case typeOfTerrain.PLAINS:

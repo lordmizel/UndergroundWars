@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb4a6ea177f64a46bf9d1507e77b191, type: 3}
+  m_Name: Village
+  m_EditorClassIdentifier: 
+  terrainName: 1
+  tileVisualPrefab: {fileID: 7782539532466985311, guid: d517704791715304997710a03f897309,
+    type: 3}
+  defensiveStat: 3
+  capturable: 1

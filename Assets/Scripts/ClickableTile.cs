@@ -19,6 +19,8 @@ public class ClickableTile : MonoBehaviour {
 	[SerializeField]
 	GameObject attackColorOverlay;
 
+    public Army propietary = null;
+
 	//Pathfinding stuff
 	public int movementCost = 1;
 	public List<ClickableTile> neighbors;

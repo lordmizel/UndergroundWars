@@ -17,7 +17,7 @@ public class Unit : MonoBehaviour {
 	//TODO: This is public for debug purposes
 	public Army propietary;
 
-	//Delete this
+	//TODO: Delete this
 	public int initialX; 
 	public int initialY;
 
@@ -63,9 +63,13 @@ public class Unit : MonoBehaviour {
 	[SerializeField]
 	int defenseMultiplier = 100;
 
+    [Header("Capturing stuff")]
+    [SerializeField]
+    bool canCapture = false;
+    int capturePoints = 0;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		gameManager = FindObjectOfType<GameManager> ();
 		map = FindObjectOfType<Map> ();
 		mySprite = gameObject.GetComponent<SpriteRenderer> ();
