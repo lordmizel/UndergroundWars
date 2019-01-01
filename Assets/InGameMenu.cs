@@ -98,6 +98,12 @@ public class InGameMenu : MonoBehaviour {
 			GameManager.gameState = GameManager.state.AFTER_MENU_ATTACK_BUFFER;
 			Debug.Log ("Attack selected");
 			break;
+        case MenuOption.menuOptions.CAPTURE:
+            gameManager.activePlayer.unitSelected.CaptureTile();
+            gameManager.activePlayer.unitSelected.EstablishNewTile();
+            GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
+            Debug.Log("Capture Selected");
+            break;
 		case MenuOption.menuOptions.WAIT:
 			gameManager.activePlayer.unitSelected.EstablishNewTile ();
 			GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;

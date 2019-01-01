@@ -134,4 +134,9 @@ public class ClickableTile : MonoBehaviour {
 	{
 		return gCost + hCost;
 	}
+
+    public void ChangePropietary(Army newPropietary)
+    {
+        propietary = newPropietary;
+    }
 }

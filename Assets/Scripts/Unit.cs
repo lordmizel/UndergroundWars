@@ -67,6 +67,7 @@ public class Unit : MonoBehaviour {
     [SerializeField]
     bool canCapture = false;
     int capturePoints = 0;
+    bool decidedToCapture = false;
 
     // Use this for initialization
     void Start () {
@@ -186,6 +187,10 @@ public class Unit : MonoBehaviour {
 				}
 			}
 		}
+        if(canCapture == true && possibleDestination.typeOfTerrain.capturable == true)
+        {
+            InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.CAPTURE);
+        }
 		InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.WAIT);
 		InGameMenu.inGameMenu.ActivateMenu ();
 		GameManager.gameState = GameManager.state.NAVIGATING_MENU;
@@ -227,6 +232,11 @@ public class Unit : MonoBehaviour {
 	{ 
 		ClickableTile newTile = possibleDestination;
 
+        if(unitHasMoved == true && decidedToCapture == false)
+        {
+            capturePoints = 0;
+        }
+
 		gameObject.transform.position = new Vector3(newTile.GetTileCoordX(), newTile.GetTileCoordY(), gameObject.transform.position.z);
 		originTile.UnassignUnit ();
 		newTile.AssignUnit(this);
@@ -261,6 +271,7 @@ public class Unit : MonoBehaviour {
 		GrayUnGray (false);
 		unitHasMoved = false;
 		unitUsed = false;
+        decidedToCapture = false;
 	}
 
 	//Change the visual aspect of the unit
@@ -371,5 +382,19 @@ public class Unit : MonoBehaviour {
         //TODO: Destroy effect.
         propietary.EraseUnitFromArmy(this);
         Destroy(gameObject);
+    }
+
+    public void CaptureTile()
+    {
+        if(unitHasMoved == true)
+        {
+            capturePoints = 0;
+        }
+        decidedToCapture = true;
+        capturePoints += hp;
+        if(capturePoints >= 20)
+        {
+            possibleDestination.ChangePropietary(propietary);
+        }
     }
 }
