@@ -187,7 +187,7 @@ public class Unit : MonoBehaviour {
 				}
 			}
 		}
-        if(canCapture == true && possibleDestination.typeOfTerrain.capturable == true)
+        if(canCapture == true && possibleDestination.typeOfTerrain.capturable == true && possibleDestination.propietary != propietary)
         {
             InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.CAPTURE);
         }
