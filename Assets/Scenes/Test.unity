@@ -488,6 +488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5569af44d584cab44a60c32deeeb9fc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  assignedColor: {r: 0, g: 0, b: 1, a: 1}
   unitSelected: {fileID: 0}
 --- !u!4 &634173311 stripped
 Transform:
@@ -1876,4 +1877,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5569af44d584cab44a60c32deeeb9fc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  assignedColor: {r: 1, g: 0, b: 0, a: 1}
   unitSelected: {fileID: 0}

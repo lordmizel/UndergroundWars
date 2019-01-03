@@ -20,6 +20,8 @@ public class ClickableTile : MonoBehaviour {
 	GameObject attackColorOverlay;
 
     public Army propietary = null;
+    [SerializeField]
+    SpriteRenderer propietaryOverlay = null;
 
 	//Pathfinding stuff
 	public int movementCost = 1;
@@ -138,5 +140,6 @@ public class ClickableTile : MonoBehaviour {
     public void ChangePropietary(Army newPropietary)
     {
         propietary = newPropietary;
+        propietaryOverlay.color = newPropietary.assignedColor;
     }
 }

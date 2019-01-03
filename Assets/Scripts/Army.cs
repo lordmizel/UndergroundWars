@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Army : MonoBehaviour {
 
+    public Color assignedColor;
+
 	List<Unit> unitsInArmy;
 
 	public Unit unitSelected;
+
 
 	// Use this for initialization
 	void Start () 
