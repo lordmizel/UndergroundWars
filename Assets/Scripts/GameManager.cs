@@ -76,5 +76,6 @@ public class GameManager : MonoBehaviour {
 		}
 		activePlayer = players [playerTurnIndex];
 		activePlayer.RefreshAllUnits ();
+        map.RecountPlayerPropierties();
 	}
 }

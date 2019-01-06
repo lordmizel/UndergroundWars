@@ -11,6 +11,10 @@ public class Army : MonoBehaviour {
 	public Unit unitSelected;
 
 
+    int warFunds = 0;
+    [SerializeField]
+    int fundsPerPropierty = 1000;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -37,5 +41,10 @@ public class Army : MonoBehaviour {
     public void EraseUnitFromArmy(Unit unit)
     {
         unitsInArmy.Remove(unit);
+    }
+
+    public void AddFunds()
+    {
+        warFunds = warFunds + fundsPerPropierty;
     }
 }

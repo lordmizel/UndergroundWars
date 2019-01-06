@@ -155,4 +155,15 @@ public class Map : MonoBehaviour {
 			}
 		}
 	}
+
+    public void RecountPlayerPropierties()
+    {
+        foreach(ClickableTile tile in tiles)
+        {
+            if(tile.propietary == gameManager.activePlayer)
+            {
+                gameManager.activePlayer.AddFunds();
+            }
+        }
+    }
 }
