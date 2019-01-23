@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using System.Linq;
 
 public class Map : MonoBehaviour {
@@ -16,11 +17,13 @@ public class Map : MonoBehaviour {
 	int[,] tilesSeed;
 	ClickableTile[,] tiles;
 
-
 	public int mapWidth = 10;
 	public int mapHeight = 10;
 
-	bool movementMode = false; 
+	bool movementMode = false;
+
+    [SerializeField]
+    GameObject tileMap;
 
 	//List<ClickableTile> tilesToWorkWith = new List<ClickableTile>();
 
@@ -29,7 +32,6 @@ public class Map : MonoBehaviour {
 	{
 		gameManager = FindObjectOfType<GameManager> ();
 		unitMovementManager = gameObject.GetComponent<TerrainMovement> ();
-		EstablishMapData ();
 		GenerateMap ();
 	}
 
@@ -47,38 +49,11 @@ public class Map : MonoBehaviour {
 	{
 		tiles = new ClickableTile[mapWidth, mapHeight];
 
-		for (int x = 0; x < mapWidth; x++) 
-		{
-			for (int y = 0; y < mapHeight; y++) 
-			{
-				TileType typeOfTile = tileTypes[tilesSeed [x, y]];
-				GameObject tile = (GameObject)Instantiate (typeOfTile.tileVisualPrefab, new Vector3 (x, y, 0), Quaternion.identity, gameObject.transform);
-				ClickableTile tileData = tile.GetComponent<ClickableTile> ();
-				tileData.SetTileCoordinates (x, y);
-				tileData.typeOfTerrain = typeOfTile;
-				tiles [x, y] = tileData;
-			}
-		}
-	}
-
-	void EstablishMapData()
-	{
-		tilesSeed = new int[mapWidth, mapHeight];
-
-		for (int x = 0; x < mapWidth; x++) 
-		{
-			for (int y = 0; y < mapHeight; y++) 
-			{
-				tilesSeed [x, y] = (int)TileType.typeOfTerrain.PLAINS;
-			}
-		}
-
-		tilesSeed [5, 5] = (int)TileType.typeOfTerrain.FOREST;
-		tilesSeed [5, 6] = (int)TileType.typeOfTerrain.FOREST;
-		tilesSeed [5, 7] = (int)TileType.typeOfTerrain.ROAD;
-        tilesSeed [4, 7] = (int)TileType.typeOfTerrain.ROAD;
-        tilesSeed [6, 2] = (int)TileType.typeOfTerrain.FOREST;
-		tilesSeed [8, 8] = (int)TileType.typeOfTerrain.FOREST;
+        foreach (ClickableTile tile in tileMap.GetComponentsInChildren<ClickableTile>())
+        {
+            tile.SetTileCoordinates((int)tile.transform.position.x, (int)tile.transform.position.y);
+            tiles[tile.GetTileCoordX(), tile.GetTileCoordY()] = tile;
+        }
 	}
 
 	void AssignNeighbors()
