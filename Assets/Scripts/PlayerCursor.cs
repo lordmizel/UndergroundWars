@@ -39,6 +39,7 @@ public class PlayerCursor : MonoBehaviour {
 	void SetCursorPosition()
 	{
 		gameObject.transform.position = new Vector3 (currentPositionX, currentPositionY, gameObject.transform.position.z);
+        CameraController.instance.MoveCameraToPoint(currentPositionX, currentPositionY);
 	}
 
 	void MoveCursor()
