@@ -7,6 +7,8 @@ using System.Linq;
 
 public class Map : MonoBehaviour {
 
+    public static Map instance;
+
 	GameManager gameManager;
 	[HideInInspector]
 	public TerrainMovement unitMovementManager;
@@ -30,6 +32,7 @@ public class Map : MonoBehaviour {
 	// Use this for initialization
 	void Awake () 
 	{
+        instance = this;
 		gameManager = FindObjectOfType<GameManager> ();
 		unitMovementManager = gameObject.GetComponent<TerrainMovement> ();
 		GenerateMap ();
