@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InGameMenu : MonoBehaviour {
-
-	GameManager gameManager;
+public class InGameMenu : MonoBehaviour
+{
 	public static InGameMenu inGameMenu;
 	[SerializeField]
 	GameObject menuPanel;
@@ -24,7 +23,6 @@ public class InGameMenu : MonoBehaviour {
 
 	void Start()
 	{
-		gameManager = FindObjectOfType<GameManager> ();
 	}
 
 	// Update is called once per frame
@@ -34,8 +32,8 @@ public class InGameMenu : MonoBehaviour {
 		{
 			if (Input.GetKeyDown (KeyCode.Escape)) 
 			{
-				InGameMenu.inGameMenu.ActivateMenuOption (MenuOption.menuOptions.END_TURN);
-				InGameMenu.inGameMenu.ActivateMenu ();
+				ActivateMenuOption (MenuOption.menuOptions.END_TURN);
+				ActivateMenu ();
 				GameManager.gameState = GameManager.state.NAVIGATING_MENU;
 			}
 		}
@@ -80,9 +78,9 @@ public class InGameMenu : MonoBehaviour {
 		}
 		if (Input.GetKeyDown (KeyCode.Escape)) 
 		{
-			if (gameManager.activePlayer.unitSelected != null) 
+			if (GameManager.instance.activePlayer.unitSelected != null) 
 			{
-				gameManager.activePlayer.unitSelected.ReturnBackToOrigin ();
+				GameManager.instance.activePlayer.unitSelected.ReturnBackToOrigin ();
 			}
 			HideMenu ();
 			GameManager.gameState = GameManager.state.MOVING_CURSOR;
@@ -94,24 +92,24 @@ public class InGameMenu : MonoBehaviour {
 	{
 		switch (optionsShowing [optionSelected].myOption) {
 		case MenuOption.menuOptions.ATTACK:
-			gameManager.activePlayer.unitSelected.PrepareToAttack();
+			GameManager.instance.activePlayer.unitSelected.PrepareToAttack();
 			GameManager.gameState = GameManager.state.AFTER_MENU_ATTACK_BUFFER;
 			Debug.Log ("Attack selected");
 			break;
         case MenuOption.menuOptions.CAPTURE:
-            gameManager.activePlayer.unitSelected.CaptureTile();
-            gameManager.activePlayer.unitSelected.EstablishNewTile();
+            GameManager.instance.activePlayer.unitSelected.CaptureTile();
+            GameManager.instance.activePlayer.unitSelected.EstablishNewTile();
             GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
             Debug.Log("Capture Selected");
             break;
 		case MenuOption.menuOptions.WAIT:
-			gameManager.activePlayer.unitSelected.EstablishNewTile ();
+			GameManager.instance.activePlayer.unitSelected.EstablishNewTile ();
 			GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
 			Debug.Log ("Wait selected");
 			break;
 		case MenuOption.menuOptions.END_TURN:
 			Debug.Log ("End turn selected");
-			gameManager.PassTurn ();
+			GameManager.instance.PassTurn ();
 			GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
 			break;
 		case MenuOption.menuOptions.TEST_OPTION:

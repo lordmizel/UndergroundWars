@@ -6,7 +6,6 @@ public class Unit : MonoBehaviour {
 
 	SpriteRenderer mySprite;
 	Animator myAnimator;
-	GameManager gameManager;
 	PlayerCursor cursor;
 	Map map;
 	[SerializeField]
@@ -71,7 +70,6 @@ public class Unit : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		gameManager = FindObjectOfType<GameManager> ();
 		map = FindObjectOfType<Map> ();
 		mySprite = gameObject.GetComponent<SpriteRenderer> ();
 		cursor = FindObjectOfType<PlayerCursor> ();
@@ -93,7 +91,7 @@ public class Unit : MonoBehaviour {
 		{
 			OnMyMerryWay ();
 		}
-		if (GameManager.gameState == GameManager.state.SELECTING_ATTACK && readyToAttack == true && gameManager.activePlayer.unitSelected == this) 
+		if (GameManager.gameState == GameManager.state.SELECTING_ATTACK && readyToAttack == true && GameManager.instance.activePlayer.unitSelected == this) 
 		{
 			SelectEnemyToAttack ();
 		}
@@ -102,7 +100,7 @@ public class Unit : MonoBehaviour {
 	//Unit has been selected by the cursor
 	public void UnitSelected()
 	{
-		if (propietary == gameManager.activePlayer && unitUsed == false) 
+		if (propietary == GameManager.instance.activePlayer && unitUsed == false) 
 		{
 			if (GameManager.gameState != GameManager.state.MOVING_UNIT) 
 			{
@@ -119,7 +117,7 @@ public class Unit : MonoBehaviour {
 		else 
 		{
 			//TODO: What happens when you select a unit you cannot move (other player's unit or already used unit)
-			gameManager.activePlayer.unitSelected = this;
+			GameManager.instance.activePlayer.unitSelected = this;
 			map.ActivateAttackArea(originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints, ranged, minAttackRange, maxAttackRange);
 			GameManager.gameState = GameManager.state.CHECKING_ENEMY_UNIT;
 		}

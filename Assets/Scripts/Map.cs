@@ -9,7 +9,6 @@ public class Map : MonoBehaviour {
 
     public static Map instance;
 
-	GameManager gameManager;
 	[HideInInspector]
 	public TerrainMovement unitMovementManager;
 
@@ -33,7 +32,6 @@ public class Map : MonoBehaviour {
 	void Awake () 
 	{
         instance = this;
-		gameManager = FindObjectOfType<GameManager> ();
 		unitMovementManager = gameObject.GetComponent<TerrainMovement> ();
 		GenerateMap ();
 	}
@@ -138,9 +136,9 @@ public class Map : MonoBehaviour {
     {
         foreach(ClickableTile tile in tiles)
         {
-            if(tile.propietary == gameManager.activePlayer)
+            if(tile.propietary == GameManager.instance.activePlayer)
             {
-                gameManager.activePlayer.AddFunds();
+                GameManager.instance.activePlayer.AddFunds();
             }
         }
     }

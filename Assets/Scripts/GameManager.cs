@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
+    public static GameManager instance;
+
 	public enum state
 	{
 		MOVING_CURSOR,
@@ -24,10 +26,13 @@ public class GameManager : MonoBehaviour {
 
 	Map map;
 
+    void Awake()
+    {
+        instance = this;
+    }
 
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		gameState = state.MOVING_CURSOR;
 		players = FindObjectsOfType<Army> ();
 		activePlayer = players [0];

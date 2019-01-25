@@ -10,7 +10,6 @@ public class ClickableTile : MonoBehaviour {
 	public TileType typeOfTerrain;
 
 	Map map;
-	GameManager gameManager;
 
 	Unit unitAssigned;
 
@@ -39,7 +38,6 @@ public class ClickableTile : MonoBehaviour {
 	void Start()
 	{
 		map = FindObjectOfType<Map> ();
-		gameManager = FindObjectOfType<GameManager> ();
 	}
 
 	void Update()
@@ -95,16 +93,16 @@ public class ClickableTile : MonoBehaviour {
 			break;
 
 		case GameManager.state.MOVING_UNIT:
-			if (gameManager.activePlayer.unitSelected.originTile == this) 
+			if (GameManager.instance.activePlayer.unitSelected.originTile == this) 
 			{
 				map.ReturnTilesToNormal ();
-				gameManager.activePlayer.unitSelected.ArrivedAtDestination (coordX, coordY);
+				GameManager.instance.activePlayer.unitSelected.ArrivedAtDestination (coordX, coordY);
 			} 
 			else 
 			{
-				if (unitAssigned == null || unitAssigned == gameManager.activePlayer.unitSelected) 
+				if (unitAssigned == null || unitAssigned == GameManager.instance.activePlayer.unitSelected) 
 				{
-					gameManager.activePlayer.unitSelected.StartMoving (map.unitMovementManager.CalculateShortestPath (gameManager.activePlayer.unitSelected.originTile, this));
+					GameManager.instance.activePlayer.unitSelected.StartMoving (map.unitMovementManager.CalculateShortestPath (GameManager.instance.activePlayer.unitSelected.originTile, this));
 				}
 			}
 			break;
