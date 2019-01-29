@@ -89,7 +89,7 @@ public class Unit : MonoBehaviour {
 		{
 			OnMyMerryWay ();
 		}
-		if (GameManager.gameState == GameManager.state.SELECTING_ATTACK && readyToAttack == true && GameManager.instance.activePlayer.unitSelected == this) 
+		if (GameManager.gameState == GameManager.state.SELECTING_ATTACK && readyToAttack == true && GameManager.instance.unitSelected == this) 
 		{
 			SelectEnemyToAttack ();
 		}
@@ -103,7 +103,7 @@ public class Unit : MonoBehaviour {
 			if (GameManager.gameState != GameManager.state.MOVING_UNIT) 
 			{
 				unitSelected = true;
-				propietary.unitSelected = this;
+				GameManager.instance.unitSelected = this;
 				Map.instance.ActivateMovementArea (originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints);
 				GameManager.gameState = GameManager.state.MOVING_UNIT;
 			} 
@@ -115,7 +115,7 @@ public class Unit : MonoBehaviour {
 		else 
 		{
 			//TODO: What happens when you select a unit you cannot move (other player's unit or already used unit)
-			GameManager.instance.activePlayer.unitSelected = this;
+			GameManager.instance.unitSelected = this;
 			Map.instance.ActivateAttackArea(originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints, ranged, minAttackRange, maxAttackRange);
 			GameManager.gameState = GameManager.state.CHECKING_ENEMY_UNIT;
 		}
@@ -237,7 +237,7 @@ public class Unit : MonoBehaviour {
 		originTile.UnassignUnit ();
 		newTile.AssignUnit(this);
 		originTile = newTile;
-		propietary.unitSelected = null;
+		GameManager.instance.unitSelected = null;
 		TireUnit();
 		Map.instance.ReturnTilesToNormal ();
 	}
@@ -246,7 +246,7 @@ public class Unit : MonoBehaviour {
 	public void ReturnBackToOrigin()
 	{
 		gameObject.transform.position = new Vector3(originTile.GetTileCoordX(), originTile.GetTileCoordY(), gameObject.transform.position.z);
-		propietary.unitSelected = null;
+		GameManager.instance.unitSelected = null;
 		attackSpots.Clear ();
 		unitHasMoved = false;
 		Map.instance.ReturnTilesToNormal ();

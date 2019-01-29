@@ -78,16 +78,16 @@ public class ClickableTile : MonoBehaviour {
 			break;
 
 		case GameManager.state.MOVING_UNIT:
-			if (GameManager.instance.activePlayer.unitSelected.originTile == this) 
+			if (GameManager.instance.unitSelected.originTile == this) 
 			{
 				Map.instance.ReturnTilesToNormal ();
-				GameManager.instance.activePlayer.unitSelected.ArrivedAtDestination (coordX, coordY);
+				GameManager.instance.unitSelected.ArrivedAtDestination (coordX, coordY);
 			} 
 			else 
 			{
-				if (unitAssigned == null || unitAssigned == GameManager.instance.activePlayer.unitSelected) 
+				if (unitAssigned == null || unitAssigned == GameManager.instance.unitSelected) 
 				{
-					GameManager.instance.activePlayer.unitSelected.StartMoving (Map.instance.unitMovementManager.CalculateShortestPath (GameManager.instance.activePlayer.unitSelected.originTile, this));
+					GameManager.instance.unitSelected.StartMoving (Map.instance.unitMovementManager.CalculateShortestPath (GameManager.instance.unitSelected.originTile, this));
 				}
 			}
 			break;

@@ -32,7 +32,7 @@ public class TerrainMovement : MonoBehaviour {
 
 	public void ActivateMovementOverlay()
 	{
-		GameManager.instance.activePlayer.unitSelected.originTile.ActivateMoveOverlay ();
+		GameManager.instance.unitSelected.originTile.ActivateMoveOverlay ();
 	}
 
 	public List<ClickableTile> CalculateMovementMatrix(int x, int y, int movementPoints)
@@ -50,13 +50,13 @@ public class TerrainMovement : MonoBehaviour {
 			foreach (ClickableTile tile in pendingTiles[0].neighbors) 
 			{
 				if (costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] == 0 || 
-					costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] > costMatrix [pendingTiles[0].GetTileCoordX (), pendingTiles[0].GetTileCoordY ()] + GetCostForMovementType((int)GameManager.instance.activePlayer.unitSelected.movementType, (int)tile.typeOfTerrain.terrainName)) 
+					costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] > costMatrix [pendingTiles[0].GetTileCoordX (), pendingTiles[0].GetTileCoordY ()] + GetCostForMovementType((int)GameManager.instance.unitSelected.movementType, (int)tile.typeOfTerrain.terrainName)) 
 				{
-					costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] = costMatrix [pendingTiles [0].GetTileCoordX (), pendingTiles [0].GetTileCoordY ()] + GetCostForMovementType((int)GameManager.instance.activePlayer.unitSelected.movementType, (int)tile.typeOfTerrain.terrainName);
+					costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] = costMatrix [pendingTiles [0].GetTileCoordX (), pendingTiles [0].GetTileCoordY ()] + GetCostForMovementType((int)GameManager.instance.unitSelected.movementType, (int)tile.typeOfTerrain.terrainName);
 					if (costMatrix [tile.GetTileCoordX (), tile.GetTileCoordY ()] <= movementPoints && 
 						alreadyInspectedTiles.Contains(map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ())) == false
 						&& (map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ()).GetUnitAssigned() == null
-						|| map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ()).GetUnitAssigned().propietary == GameManager.instance.activePlayer.unitSelected.propietary)) 
+						|| map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ()).GetUnitAssigned().propietary == GameManager.instance.unitSelected.propietary)) 
 					{
 						pendingTiles.Add (map.GetTile(tile.GetTileCoordX (), tile.GetTileCoordY ()));
 						returnableTiles.Add (map.GetTile (tile.GetTileCoordX (), tile.GetTileCoordY ()));
@@ -97,12 +97,12 @@ public class TerrainMovement : MonoBehaviour {
 			foreach (ClickableTile neighbor in currentTile.neighbors) 
 			{
 				if(alreadyInspectedTiles.Contains(neighbor) || 
-					neighbor.GetUnitAssigned() != null && neighbor.GetUnitAssigned().propietary != GameManager.instance.activePlayer.unitSelected.propietary)
+					neighbor.GetUnitAssigned() != null && neighbor.GetUnitAssigned().propietary != GameManager.instance.unitSelected.propietary)
 				{
 					continue;
 				}
 
-				int newMovementCostToNeighbor = currentTile.gCost + GetCostForMovementType((int)GameManager.instance.activePlayer.unitSelected.movementType, (int)neighbor.typeOfTerrain.terrainName);
+				int newMovementCostToNeighbor = currentTile.gCost + GetCostForMovementType((int)GameManager.instance.unitSelected.movementType, (int)neighbor.typeOfTerrain.terrainName);
 				if (newMovementCostToNeighbor < neighbor.gCost ||
 					pendingTiles.Contains (neighbor) == false) 
 				{

@@ -7,8 +7,6 @@ public class Army : MonoBehaviour {
     public Color assignedColor;
 
 	List<Unit> unitsInArmy;
-
-	public Unit unitSelected;
     
     int warFunds = 0;
     [SerializeField]

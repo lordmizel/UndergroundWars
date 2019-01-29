@@ -79,9 +79,9 @@ public class InGameMenu : MonoBehaviour
 		}
 		if (Input.GetKeyDown (KeyCode.Escape)) 
 		{
-			if (GameManager.instance.activePlayer.unitSelected != null) 
+			if (GameManager.instance.unitSelected != null) 
 			{
-				GameManager.instance.activePlayer.unitSelected.ReturnBackToOrigin ();
+				GameManager.instance.unitSelected.ReturnBackToOrigin ();
 			}
 			HideMenu ();
 			GameManager.gameState = GameManager.state.MOVING_CURSOR;
@@ -93,18 +93,18 @@ public class InGameMenu : MonoBehaviour
 	{
 		switch (optionsShowing [optionSelected].myOption) {
 		case MenuOption.menuOptions.ATTACK:
-			GameManager.instance.activePlayer.unitSelected.PrepareToAttack();
+			GameManager.instance.unitSelected.PrepareToAttack();
 			GameManager.gameState = GameManager.state.AFTER_MENU_ATTACK_BUFFER;
 			Debug.Log ("Attack selected");
 			break;
         case MenuOption.menuOptions.CAPTURE:
-            GameManager.instance.activePlayer.unitSelected.CaptureTile();
-            GameManager.instance.activePlayer.unitSelected.EstablishNewTile();
+            GameManager.instance.unitSelected.CaptureTile();
+            GameManager.instance.unitSelected.EstablishNewTile();
             GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
             Debug.Log("Capture Selected");
             break;
 		case MenuOption.menuOptions.WAIT:
-			GameManager.instance.activePlayer.unitSelected.EstablishNewTile ();
+			GameManager.instance.unitSelected.EstablishNewTile ();
 			GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
 			Debug.Log ("Wait selected");
 			break;

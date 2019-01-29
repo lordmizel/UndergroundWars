@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour {
 	public Army activePlayer;
 	int playerTurnIndex = 0;
 
+    public Unit unitSelected;
+
     void Awake()
     {
         instance = this;
