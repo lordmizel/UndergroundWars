@@ -7,7 +7,6 @@ public class Unit : MonoBehaviour {
 	SpriteRenderer mySprite;
 	Animator myAnimator;
 	PlayerCursor cursor;
-	Map map;
 	[SerializeField]
 	SpriteRenderer hpSprite;
 	[SerializeField]
@@ -70,7 +69,6 @@ public class Unit : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		map = FindObjectOfType<Map> ();
 		mySprite = gameObject.GetComponent<SpriteRenderer> ();
 		cursor = FindObjectOfType<PlayerCursor> ();
 		myAnimator = gameObject.GetComponent<Animator> ();
@@ -78,7 +76,7 @@ public class Unit : MonoBehaviour {
 		attackSpots = new List<ClickableTile> ();
 
 		//TODO: This is only for debug
-		originTile = map.GetTile (initialX, initialY);
+		originTile = Map.instance.GetTile (initialX, initialY);
 		originTile.AssignUnit (this);
 		gameObject.transform.position = new Vector3(originTile.transform.position.x, originTile.transform.position.y, gameObject.transform.position.z);
 		////////
@@ -106,7 +104,7 @@ public class Unit : MonoBehaviour {
 			{
 				unitSelected = true;
 				propietary.unitSelected = this;
-				map.ActivateMovementArea (originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints);
+				Map.instance.ActivateMovementArea (originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints);
 				GameManager.gameState = GameManager.state.MOVING_UNIT;
 			} 
 			else 
@@ -118,7 +116,7 @@ public class Unit : MonoBehaviour {
 		{
 			//TODO: What happens when you select a unit you cannot move (other player's unit or already used unit)
 			GameManager.instance.activePlayer.unitSelected = this;
-			map.ActivateAttackArea(originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints, ranged, minAttackRange, maxAttackRange);
+			Map.instance.ActivateAttackArea(originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints, ranged, minAttackRange, maxAttackRange);
 			GameManager.gameState = GameManager.state.CHECKING_ENEMY_UNIT;
 		}
 	}
@@ -128,7 +126,7 @@ public class Unit : MonoBehaviour {
 	{
 		if (newPath != null) 
 		{
-			map.ReturnTilesToNormal ();
+			Map.instance.ReturnTilesToNormal ();
 			path = newPath;
 			ChangeRunningAnimation (path [path.Count - 1].GetTileCoordX (), path [path.Count - 1].GetTileCoordY ());
 			unitMoving = true;
@@ -170,11 +168,11 @@ public class Unit : MonoBehaviour {
 			//hpSprite.transform.localScale = new Vector3 (1, 1, 1);
 			myAnimator.SetTrigger ("idleState");
 		}
-		possibleDestination = map.GetTile (x, y);
+		possibleDestination = Map.instance.GetTile (x, y);
 		cursor.TeleportCursorToTile (x, y);
 		if (ranged == false || unitHasMoved == false) 
 		{
-			List<ClickableTile> tilesInAttackRange = map.unitMovementManager.CalculateRangeMatrix (x, y, maxAttackRange, minAttackRange);
+			List<ClickableTile> tilesInAttackRange = Map.instance.unitMovementManager.CalculateRangeMatrix (x, y, maxAttackRange, minAttackRange);
 			foreach (ClickableTile tile in tilesInAttackRange) 
 			{
 				tile.ActivateAttackOverlay ();
@@ -241,7 +239,7 @@ public class Unit : MonoBehaviour {
 		originTile = newTile;
 		propietary.unitSelected = null;
 		TireUnit();
-		map.ReturnTilesToNormal ();
+		Map.instance.ReturnTilesToNormal ();
 	}
 
 	//Player cancels the movement after the unit has moved
@@ -251,7 +249,7 @@ public class Unit : MonoBehaviour {
 		propietary.unitSelected = null;
 		attackSpots.Clear ();
 		unitHasMoved = false;
-		map.ReturnTilesToNormal ();
+		Map.instance.ReturnTilesToNormal ();
 		cursor.TeleportCursorToTile (originTile.GetTileCoordX (), originTile.GetTileCoordY ());
 	}
 

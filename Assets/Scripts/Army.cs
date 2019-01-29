@@ -9,8 +9,7 @@ public class Army : MonoBehaviour {
 	List<Unit> unitsInArmy;
 
 	public Unit unitSelected;
-
-
+    
     int warFunds = 0;
     [SerializeField]
     int fundsPerPropierty = 1000;

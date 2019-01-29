@@ -9,8 +9,6 @@ public class ClickableTile : MonoBehaviour {
 	int coordY;
 	public TileType typeOfTerrain;
 
-	Map map;
-
 	Unit unitAssigned;
 
 	[SerializeField]
@@ -29,20 +27,7 @@ public class ClickableTile : MonoBehaviour {
 	[HideInInspector]
 	public int gCost;
 	public int hCost;
-
-	void Awake()
-	{
-		
-	}
-
-	void Start()
-	{
-		map = FindObjectOfType<Map> ();
-	}
-
-	void Update()
-	{
-	}
+    
 
 	public void SetTileCoordinates(int x, int y)
 	{
@@ -95,14 +80,14 @@ public class ClickableTile : MonoBehaviour {
 		case GameManager.state.MOVING_UNIT:
 			if (GameManager.instance.activePlayer.unitSelected.originTile == this) 
 			{
-				map.ReturnTilesToNormal ();
+				Map.instance.ReturnTilesToNormal ();
 				GameManager.instance.activePlayer.unitSelected.ArrivedAtDestination (coordX, coordY);
 			} 
 			else 
 			{
 				if (unitAssigned == null || unitAssigned == GameManager.instance.activePlayer.unitSelected) 
 				{
-					GameManager.instance.activePlayer.unitSelected.StartMoving (map.unitMovementManager.CalculateShortestPath (GameManager.instance.activePlayer.unitSelected.originTile, this));
+					GameManager.instance.activePlayer.unitSelected.StartMoving (Map.instance.unitMovementManager.CalculateShortestPath (GameManager.instance.activePlayer.unitSelected.originTile, this));
 				}
 			}
 			break;

@@ -24,8 +24,6 @@ public class GameManager : MonoBehaviour {
 	public Army activePlayer;
 	int playerTurnIndex = 0;
 
-	Map map;
-
     void Awake()
     {
         instance = this;
@@ -36,7 +34,6 @@ public class GameManager : MonoBehaviour {
 		gameState = state.MOVING_CURSOR;
 		players = FindObjectsOfType<Army> ();
 		activePlayer = players [0];
-		map = FindObjectOfType<Map> ();
 	}
 	
 	// Update is called once per frame
@@ -47,7 +44,7 @@ public class GameManager : MonoBehaviour {
 		{
 			if (Input.GetKeyUp (KeyCode.Return)) 
 			{
-				map.ReturnTilesToNormal ();
+				Map.instance.ReturnTilesToNormal ();
 				if (gameState == state.AFTER_MENU_ATTACK_BUFFER) 
 				{
 					gameState = state.SELECTING_ATTACK;
@@ -61,7 +58,7 @@ public class GameManager : MonoBehaviour {
 		{
 			if (Input.GetKeyDown (KeyCode.Escape)) 
 			{
-				map.ReturnTilesToNormal ();
+				Map.instance.ReturnTilesToNormal ();
 				gameState = state.MOVING_CURSOR;
 			}
 		} 
@@ -81,6 +78,6 @@ public class GameManager : MonoBehaviour {
 		}
 		activePlayer = players [playerTurnIndex];
 		activePlayer.RefreshAllUnits ();
-        map.RecountPlayerPropierties();
+        Map.instance.RecountPlayerPropierties();
 	}
 }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class InGameMenu : MonoBehaviour
 {
 	public static InGameMenu inGameMenu;
+
 	[SerializeField]
 	GameObject menuPanel;
 

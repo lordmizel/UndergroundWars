@@ -7,11 +7,8 @@ public class PlayerCursor : MonoBehaviour {
 	int currentPositionX;
 	int currentPositionY;
 
-	Map map;
-
 	// Use this for initialization
 	void Start () {
-		map = FindObjectOfType<Map> ();
 
 		//TODO: Initialize to a real valid position, this is just for debug
 		currentPositionX = 0;
@@ -44,10 +41,10 @@ public class PlayerCursor : MonoBehaviour {
 
 	void MoveCursor()
 	{
-		if (Input.GetKeyDown (KeyCode.W) && currentPositionY < map.mapHeight - 1) 
+		if (Input.GetKeyDown (KeyCode.W) && currentPositionY < Map.instance.mapHeight - 1) 
 		{
 			if (GameManager.gameState == GameManager.state.MOVING_CURSOR || 
-				GameManager.gameState == GameManager.state.MOVING_UNIT && map.GetTile(currentPositionX, currentPositionY + 1).IsReachableByMovement()) 
+				GameManager.gameState == GameManager.state.MOVING_UNIT && Map.instance.GetTile(currentPositionX, currentPositionY + 1).IsReachableByMovement()) 
 			{
 				currentPositionY++;
 				SetCursorPosition ();
@@ -56,16 +53,16 @@ public class PlayerCursor : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.S) && currentPositionY > 0) 
 		{
 			if (GameManager.gameState == GameManager.state.MOVING_CURSOR ||
-			    GameManager.gameState == GameManager.state.MOVING_UNIT && map.GetTile (currentPositionX, currentPositionY - 1).IsReachableByMovement ()) 
+			    GameManager.gameState == GameManager.state.MOVING_UNIT && Map.instance.GetTile (currentPositionX, currentPositionY - 1).IsReachableByMovement ()) 
 			{
 				currentPositionY--;
 				SetCursorPosition ();
 			}
 		}
-		if (Input.GetKeyDown (KeyCode.D) && currentPositionX < map.mapWidth - 1) 
+		if (Input.GetKeyDown (KeyCode.D) && currentPositionX < Map.instance.mapWidth - 1) 
 		{
 			if (GameManager.gameState == GameManager.state.MOVING_CURSOR ||
-			    GameManager.gameState == GameManager.state.MOVING_UNIT && map.GetTile (currentPositionX + 1, currentPositionY).IsReachableByMovement ()) 
+			    GameManager.gameState == GameManager.state.MOVING_UNIT && Map.instance.GetTile (currentPositionX + 1, currentPositionY).IsReachableByMovement ()) 
 			{
 				currentPositionX++;
 				SetCursorPosition ();
@@ -74,7 +71,7 @@ public class PlayerCursor : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.A) && currentPositionX > 0) 
 		{
 			if (GameManager.gameState == GameManager.state.MOVING_CURSOR ||
-			    GameManager.gameState == GameManager.state.MOVING_UNIT && map.GetTile (currentPositionX - 1, currentPositionY).IsReachableByMovement ()) 
+			    GameManager.gameState == GameManager.state.MOVING_UNIT && Map.instance.GetTile (currentPositionX - 1, currentPositionY).IsReachableByMovement ()) 
 			{
 				currentPositionX--;
 				SetCursorPosition ();
@@ -82,7 +79,7 @@ public class PlayerCursor : MonoBehaviour {
 		}
 		if (Input.GetKeyDown (KeyCode.Return)) 
 		{
-			map.GetTile (currentPositionX, currentPositionY).TileSelected ();
+			Map.instance.GetTile (currentPositionX, currentPositionY).TileSelected ();
 		}
 	}
 
