@@ -3975,10 +3975,11 @@ MonoBehaviour:
     paramContainer:
       m_paramList: []
     prefabData:
-      prefab: {fileID: 0}
+      prefab: {fileID: 7782539532466985311, guid: 986dc3aeec7a44a42b316a31d3a22340,
+        type: 3}
       offset: {x: 0, y: 0, z: 0}
       offsetMode: 0
-      showTileWithPrefab: 0
+      showTileWithPrefab: 1
   - uv:
       serializedVersion: 2
       x: 0.4375
