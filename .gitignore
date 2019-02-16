@@ -5,6 +5,7 @@
 [Bb]uilds/
 Assets/AssetStoreTools*
 CreativeSpore/
+Audio/
 
 # Visual Studio cache directory
 .vs/

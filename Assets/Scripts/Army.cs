@@ -11,6 +11,8 @@ public class Army : MonoBehaviour {
     int warFunds = 0;
     [SerializeField]
     int fundsPerPropierty = 1000;
+    
+    public AudioClip armyTheme;
 
 	// Use this for initialization
 	void Start () 
