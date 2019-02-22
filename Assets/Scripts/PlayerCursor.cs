@@ -81,6 +81,8 @@ public class PlayerCursor : MonoBehaviour {
 		{
 			Map.instance.GetTile (currentPositionX, currentPositionY).TileSelected ();
 		}
+
+        UIMovement.instance.MoveAside(transform.position);
 	}
 
 

@@ -27,7 +27,10 @@ public class MusicManager : MonoBehaviour
 
     public void PlayMusic(AudioClip music)
     {
-        myAudioSource.Stop();
+        if (myAudioSource.isPlaying)
+        {
+            myAudioSource.Stop();
+        }
         myAudioSource.clip = music;
         myAudioSource.Play();
     }
