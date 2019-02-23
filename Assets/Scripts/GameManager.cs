@@ -36,8 +36,7 @@ public class GameManager : MonoBehaviour {
 		gameState = state.MOVING_CURSOR;
 		players = FindObjectsOfType<Army> ();
 		activePlayer = players [0];
-
-        MusicManager.instance.PlayMusic(activePlayer.armyTheme);
+        
 	}
 	
 	// Update is called once per frame
