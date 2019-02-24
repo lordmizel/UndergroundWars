@@ -9,6 +9,9 @@ public class UIMovement : MonoBehaviour
     Camera worldCamera;
 
     [SerializeField]
+    RectTransform armyData, terrainData;
+
+    [SerializeField]
     RectTransform upperLeft, upperRight, lowerRight, lowerLeft;
     bool down = false, right = false;
 
@@ -27,26 +30,26 @@ public class UIMovement : MonoBehaviour
     {
         Vector3 cursorPositionForCamera = worldCamera.WorldToScreenPoint(cursorPosition);
 
-        if(cursorPositionForCamera.x > Screen.width / 2)
+        if(cursorPositionForCamera.y > Screen.height / 2)
         {
-            if (cursorPositionForCamera.y > Screen.height / 2)
+            if (cursorPositionForCamera.x > Screen.width / 2)
             {
-                transform.position = lowerLeft.position;
+                armyData.position = upperLeft.position;
             }
             else
             {
-                transform.position = upperLeft.position;
+                armyData.position = upperRight.position;
             }
         }
         else
         {
-            if (cursorPositionForCamera.y > 0.5f)
+            if (cursorPositionForCamera.x > Screen.width / 2)
             {
-                transform.position = lowerRight.position;
+                terrainData.position = lowerLeft.position;
             }
             else
             {
-                transform.position = upperRight.position;
+                terrainData.position = lowerRight.position;
             }
         }
     }
