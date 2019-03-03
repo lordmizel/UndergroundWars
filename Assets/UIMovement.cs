@@ -10,9 +10,7 @@ public class UIMovement : MonoBehaviour
 
     [SerializeField]
     RectTransform armyData, terrainData;
-
-    [SerializeField]
-    RectTransform upperLeft, upperRight, lowerRight, lowerLeft;
+    
     bool down = false, right = false;
 
     void Awake()
@@ -34,22 +32,22 @@ public class UIMovement : MonoBehaviour
         {
             if (cursorPositionForCamera.x > Screen.width / 2)
             {
-                armyData.position = upperLeft.position;
+                armyData.position = new Vector3(0f, Screen.height, armyData.position.z);
             }
             else
             {
-                armyData.position = upperRight.position;
+                armyData.position = new Vector3(Screen.width - armyData.rect.width, Screen.height, armyData.position.z);
             }
         }
         else
         {
             if (cursorPositionForCamera.x > Screen.width / 2)
             {
-                terrainData.position = lowerLeft.position;
+                terrainData.position = new Vector3(0f, 0f + terrainData.rect.height, terrainData.position.z);
             }
             else
             {
-                terrainData.position = lowerRight.position;
+                terrainData.position = new Vector3(Screen.width - terrainData.rect.width, 0f + terrainData.rect.height, terrainData.position.z);
             }
         }
     }
