@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour {
 		activePlayer = players [playerTurnIndex];
 		activePlayer.RefreshAllUnits ();
         Map.instance.RecountPlayerPropierties();
+        UI.instance.UpdateFundsDisplay();
         MusicManager.instance.PlayMusic(activePlayer.armyTheme);
     }
 }

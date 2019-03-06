@@ -45,5 +45,12 @@ public class Army : MonoBehaviour {
     public void AddFunds()
     {
         warFunds = warFunds + fundsPerPropierty;
+
+        UI.instance.UpdateFundsDisplay();
+    }
+
+    public int GetFunds()
+    {
+        return warFunds;
     }
 }
