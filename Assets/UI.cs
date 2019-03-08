@@ -10,6 +10,16 @@ public class UI : MonoBehaviour
     [SerializeField]
     Text fundsDisplay;
 
+    [SerializeField]
+    Image tileImage;
+    [SerializeField]
+    Text tileName;
+
+    private void OnRenderImage(RenderTexture source, RenderTexture destination)
+    {
+        
+    } 
+
     private void Awake()
     {
         instance = this;
@@ -30,5 +40,10 @@ public class UI : MonoBehaviour
     public void UpdateFundsDisplay()
     {
         fundsDisplay.text = GameManager.instance.activePlayer.GetFunds().ToString();
+    }
+
+    public void UpdateTileInfo(ClickableTile tile)
+    {
+        tileName.text = tile.typeOfTerrain.visibleName;
     }
 }

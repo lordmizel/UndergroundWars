@@ -15,5 +15,6 @@ MonoBehaviour:
   terrainName: 7
   tileVisualPrefab: {fileID: 1716511540098224, guid: c237470ee10c9784892ec0837710a3a0,
     type: 3}
-  defensiveStat: 1
+  visibleName: Reef
+  defensiveStat: 2
   capturable: 0

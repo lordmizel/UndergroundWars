@@ -3,8 +3,9 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -13,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainName: 0
   tileVisualPrefab: {fileID: 1716511540098224, guid: c237470ee10c9784892ec0837710a3a0,
-    type: 2}
+    type: 3}
+  visibleName: Plains
   defensiveStat: 1
+  capturable: 0

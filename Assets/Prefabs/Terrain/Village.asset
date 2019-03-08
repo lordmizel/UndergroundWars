@@ -15,5 +15,6 @@ MonoBehaviour:
   terrainName: 1
   tileVisualPrefab: {fileID: 7782539532466985311, guid: d517704791715304997710a03f897309,
     type: 3}
+  visibleName: Town
   defensiveStat: 3
   capturable: 1

@@ -37,6 +37,7 @@ public class PlayerCursor : MonoBehaviour {
 	{
 		gameObject.transform.position = new Vector3 (currentPositionX, currentPositionY, gameObject.transform.position.z);
         CameraController.instance.MoveCameraToPoint(currentPositionX, currentPositionY);
+        UI.instance.UpdateTileInfo(Map.instance.GetTile(currentPositionX, currentPositionY));
 	}
 
 	void MoveCursor()

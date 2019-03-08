@@ -15,5 +15,6 @@ MonoBehaviour:
   terrainName: 6
   tileVisualPrefab: {fileID: 1716511540098224, guid: c237470ee10c9784892ec0837710a3a0,
     type: 3}
+  visibleName: Water
   defensiveStat: 0
   capturable: 0
