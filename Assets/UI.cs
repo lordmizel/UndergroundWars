@@ -15,6 +15,9 @@ public class UI : MonoBehaviour
     [SerializeField]
     Text tileName;
 
+    [SerializeField]
+    Image[] defenseShields;
+
     private void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
         
@@ -28,7 +31,6 @@ public class UI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -45,5 +47,17 @@ public class UI : MonoBehaviour
     public void UpdateTileInfo(ClickableTile tile)
     {
         tileName.text = tile.typeOfTerrain.visibleName;
+
+        for(int x = 0; x < defenseShields.Length; x++)
+        {
+            if(x < tile.typeOfTerrain.defensiveStat)
+            {
+                defenseShields[x].color = Color.white;
+            }
+            else
+            {
+                defenseShields[x].color = Color.gray;
+            }
+        }
     }
 }
