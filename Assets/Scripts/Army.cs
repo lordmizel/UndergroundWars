@@ -11,6 +11,10 @@ public class Army : MonoBehaviour {
     int warFunds = 0;
     [SerializeField]
     int fundsPerPropierty = 1000;
+
+    [SerializeField]
+    int maxSpecialPower;
+    int currentSpecialPower = 0;
     
     public AudioClip armyTheme;
 
@@ -52,5 +56,25 @@ public class Army : MonoBehaviour {
     public int GetFunds()
     {
         return warFunds;
+    }
+
+    public void AddPower(int value)
+    {
+        currentSpecialPower += value;
+        if(currentSpecialPower > maxSpecialPower)
+        {
+            currentSpecialPower = maxSpecialPower;
+        }
+        UI.instance.UpdatePowerDisplay();
+    }
+
+    public int GetPower()
+    {
+        return currentSpecialPower;
+    }
+
+    public int GetMaxPower()
+    {
+        return maxSpecialPower;
     }
 }

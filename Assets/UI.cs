@@ -9,6 +9,8 @@ public class UI : MonoBehaviour
 
     [SerializeField]
     Text fundsDisplay;
+    [SerializeField]
+    Slider powerDisplay;
 
     [SerializeField]
     Image tileImage;
@@ -36,12 +38,21 @@ public class UI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            GameManager.instance.activePlayer.AddPower(30);
+        }
     }
 
     public void UpdateFundsDisplay()
     {
         fundsDisplay.text = GameManager.instance.activePlayer.GetFunds().ToString();
+    }
+
+    public void UpdatePowerDisplay()
+    {
+        powerDisplay.maxValue = GameManager.instance.activePlayer.GetMaxPower();
+        powerDisplay.value = GameManager.instance.activePlayer.GetPower();
     }
 
     public void UpdateTileInfo(ClickableTile tile)
