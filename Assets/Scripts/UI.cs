@@ -11,6 +11,11 @@ public class UI : MonoBehaviour
     Text fundsDisplay;
     [SerializeField]
     Slider powerDisplay;
+    [SerializeField]
+    Image powerDisplayFill;
+    Color normalPowerFillColor;
+    [SerializeField]
+    Color poweredUpFillColor;
 
     [SerializeField]
     Image tileImage;
@@ -33,6 +38,7 @@ public class UI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        normalPowerFillColor = powerDisplayFill.color;
     }
 
     // Update is called once per frame
@@ -53,6 +59,14 @@ public class UI : MonoBehaviour
     {
         powerDisplay.maxValue = GameManager.instance.activePlayer.GetMaxPower();
         powerDisplay.value = GameManager.instance.activePlayer.GetPower();
+        if(powerDisplay.value == powerDisplay.maxValue)
+        {
+            powerDisplayFill.color = poweredUpFillColor;
+        }
+        else
+        {
+            powerDisplayFill.color = normalPowerFillColor;
+        }
     }
 
     public void UpdateTileInfo(ClickableTile tile)
