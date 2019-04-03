@@ -33,7 +33,8 @@ public class InGameMenu : MonoBehaviour
 		{
 			if (Input.GetKeyDown (KeyCode.Escape)) 
 			{
-				ActivateMenuOption (MenuOption.menuOptions.END_TURN);
+                ActivateMenuOption(MenuOption.menuOptions.SUPER_POWER);
+                ActivateMenuOption (MenuOption.menuOptions.END_TURN);
 				ActivateMenu ();
 				GameManager.gameState = GameManager.state.NAVIGATING_MENU;
 			}
@@ -108,7 +109,11 @@ public class InGameMenu : MonoBehaviour
 			GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
 			Debug.Log ("Wait selected");
 			break;
-		case MenuOption.menuOptions.END_TURN:
+        case MenuOption.menuOptions.SUPER_POWER:
+            GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
+            Debug.Log("Super power selected");
+            break;
+        case MenuOption.menuOptions.END_TURN:
 			Debug.Log ("End turn selected");
 			GameManager.instance.PassTurn ();
 			GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;

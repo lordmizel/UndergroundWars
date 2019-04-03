@@ -8,6 +8,7 @@ public class MenuOption : MonoBehaviour {
 		ATTACK,
         CAPTURE,
 		WAIT,
+        SUPER_POWER,
 		END_TURN,
 		TEST_OPTION
 	}
