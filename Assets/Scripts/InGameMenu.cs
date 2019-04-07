@@ -33,10 +33,7 @@ public class InGameMenu : MonoBehaviour
 		{
 			if (Input.GetKeyDown (KeyCode.Escape)) 
 			{
-                ActivateMenuOption(MenuOption.menuOptions.SUPER_POWER);
-                ActivateMenuOption (MenuOption.menuOptions.END_TURN);
-				ActivateMenu ();
-				GameManager.gameState = GameManager.state.NAVIGATING_MENU;
+                ShowNeutralMenu();
 			}
 		}
 		else if (GameManager.gameState == GameManager.state.NAVIGATING_MENU) 
@@ -164,4 +161,12 @@ public class InGameMenu : MonoBehaviour
 		optionsShowing.Clear ();
 		menuPanel.SetActive (false);
 	}
+
+    public void ShowNeutralMenu()
+    {
+        ActivateMenuOption(MenuOption.menuOptions.SUPER_POWER);
+        ActivateMenuOption(MenuOption.menuOptions.END_TURN);
+        ActivateMenu();
+        GameManager.gameState = GameManager.state.NAVIGATING_MENU;
+    }
 }

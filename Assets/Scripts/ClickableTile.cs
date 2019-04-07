@@ -71,10 +71,7 @@ public class ClickableTile : MonoBehaviour {
 			} 
 			else 
 			{
-                InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.SUPER_POWER);
-                InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.END_TURN);
-				InGameMenu.inGameMenu.ActivateMenu ();
-				GameManager.gameState = GameManager.state.NAVIGATING_MENU;
+                InGameMenu.inGameMenu.ShowNeutralMenu();
 			}
 			break;
 
