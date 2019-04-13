@@ -77,4 +77,11 @@ public class Army : MonoBehaviour {
     {
         return maxSpecialPower;
     }
+
+    //TODO: Check how to activate powers
+    public void ActivatePower()
+    {
+        currentSpecialPower = 0;
+        UI.instance.UpdatePowerDisplay();
+    }
 }

@@ -107,6 +107,7 @@ public class InGameMenu : MonoBehaviour
 			Debug.Log ("Wait selected");
 			break;
         case MenuOption.menuOptions.SUPER_POWER:
+            GameManager.instance.activePlayer.ActivatePower();
             GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
             Debug.Log("Super power selected");
             break;
