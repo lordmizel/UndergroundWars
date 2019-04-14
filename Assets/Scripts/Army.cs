@@ -14,7 +14,7 @@ public class Army : MonoBehaviour {
 
     [SerializeField]
     int maxSpecialPower;
-    int currentSpecialPower = 0;
+    public int currentSpecialPower = 0;
     
     public AudioClip armyTheme;
 
