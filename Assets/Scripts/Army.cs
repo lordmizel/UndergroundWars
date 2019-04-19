@@ -18,6 +18,8 @@ public class Army : MonoBehaviour {
     
     public AudioClip armyTheme;
 
+    Vector2 lastPlaceOfCursor = new Vector2();
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -83,5 +85,16 @@ public class Army : MonoBehaviour {
     {
         currentSpecialPower = 0;
         UI.instance.UpdatePowerDisplay();
+    }
+
+    public void SetLastPlaceOfCursor(int x, int y)
+    {
+        lastPlaceOfCursor.x = x;
+        lastPlaceOfCursor.y = y;
+    }
+
+    public Vector2 GetPlaceOfCursor()
+    {
+        return lastPlaceOfCursor;
     }
 }

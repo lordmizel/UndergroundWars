@@ -668,6 +668,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activePlayer: {fileID: 0}
   unitSelected: {fileID: 0}
+  initialCursorPositions:
+  - {x: 13, y: 10}
+  - {x: 13, y: 18}
 --- !u!4 &20084422
 Transform:
   m_ObjectHideFlags: 0
@@ -14799,6 +14802,7 @@ MonoBehaviour:
   assignedColor: {r: 0, g: 0, b: 1, a: 1}
   fundsPerPropierty: 1000
   maxSpecialPower: 300
+  currentSpecialPower: 0
   armyTheme: {fileID: 8300000, guid: 54ec3d4a8d56d034f854e4c132ca2fa8, type: 3}
 --- !u!1001 &482939432
 PrefabInstance:
@@ -52426,6 +52430,7 @@ MonoBehaviour:
   assignedColor: {r: 1, g: 0, b: 0, a: 1}
   fundsPerPropierty: 1000
   maxSpecialPower: 300
+  currentSpecialPower: 0
   armyTheme: {fileID: 8300000, guid: 172632184364a77478a3e1310bf451b8, type: 3}
 --- !u!1001 &2111449520
 PrefabInstance:

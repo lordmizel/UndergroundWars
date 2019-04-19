@@ -26,17 +26,25 @@ public class GameManager : MonoBehaviour {
 
     public Unit unitSelected;
 
+    [SerializeField]
+    List<Vector2> initialCursorPositions;
+
     void Awake()
     {
         instance = this;
+
+        players = FindObjectsOfType<Army>();
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].SetLastPlaceOfCursor((int)initialCursorPositions[i].x, (int)initialCursorPositions[i].y);
+        }
+        activePlayer = players[0];
     }
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
 		gameState = state.MOVING_CURSOR;
-		players = FindObjectsOfType<Army> ();
-		activePlayer = players [0];
-        
 	}
 	
 	// Update is called once per frame
@@ -71,6 +79,7 @@ public class GameManager : MonoBehaviour {
 	public void PassTurn()
 	{
         activePlayer.RefreshAllUnits();
+        activePlayer.SetLastPlaceOfCursor((int)PlayerCursor.instance.transform.position.x, (int)PlayerCursor.instance.transform.position.y);
 		if (playerTurnIndex == players.Length - 1) 
 		{
 			playerTurnIndex = 0;
@@ -81,6 +90,7 @@ public class GameManager : MonoBehaviour {
 		}
 		activePlayer = players [playerTurnIndex];
 		activePlayer.RefreshAllUnits ();
+        PlayerCursor.instance.TeleportCursorToLastTileOfCharacter();
         Map.instance.RecountPlayerPropierties();
         UI.instance.UpdateFundsDisplay();
         UI.instance.UpdatePowerDisplay();

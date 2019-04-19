@@ -2,20 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCursor : MonoBehaviour {
+public class PlayerCursor : MonoBehaviour
+{
+    public static PlayerCursor instance;
 
 	int currentPositionX;
 	int currentPositionY;
 
-	// Use this for initialization
-	void Start () {
+    void Awake()
+    {
+        instance = this;
+    }
 
-		//TODO: Initialize to a real valid position, this is just for debug
-		currentPositionX = 0;
-		currentPositionY = 0;
-		/////////
-
-		SetCursorPosition ();
+    // Use this for initialization
+    void Start ()
+    {
+        TeleportCursorToLastTileOfCharacter();
 	}
 	
 	// Update is called once per frame
@@ -86,5 +88,8 @@ public class PlayerCursor : MonoBehaviour {
         UIMovement.instance.MoveAside(transform.position);
 	}
 
-
+    public void TeleportCursorToLastTileOfCharacter()
+    {
+        TeleportCursorToTile((int)GameManager.instance.activePlayer.GetPlaceOfCursor().x, (int)GameManager.instance.activePlayer.GetPlaceOfCursor().y);
+    }
 }
