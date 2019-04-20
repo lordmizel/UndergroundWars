@@ -89,7 +89,7 @@ public class Unit : MonoBehaviour {
 		{
 			OnMyMerryWay ();
 		}
-		if (GameManager.gameState == GameManager.state.SELECTING_ATTACK && readyToAttack == true && GameManager.instance.unitSelected == this) 
+		if (GameManager.gameState == GameManager.state.SELECTING_ATTACK && GameManager.instance.unitSelected == this) 
 		{
 			SelectEnemyToAttack ();
 		}
@@ -192,6 +192,23 @@ public class Unit : MonoBehaviour {
 		GameManager.gameState = GameManager.state.NAVIGATING_MENU;
 	}
 
+    //void GetMyAttackRange()
+    //{
+    //    if (ranged == false || unitHasMoved == false)
+    //    {
+    //        List<ClickableTile> tilesInAttackRange = Map.instance.unitMovementManager.CalculateRangeMatrix((int)PlayerCursor.instance.transform.position.x, (int)PlayerCursor.instance.transform.position.y, maxAttackRange, minAttackRange);
+    //        foreach (ClickableTile tile in tilesInAttackRange)
+    //        {
+    //            tile.ActivateAttackOverlay();
+    //            if (tile.GetUnitAssigned() != null && tile.GetUnitAssigned().propietary != propietary)
+    //            {
+    //                attackSpots.Add(tile);
+    //                InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.ATTACK);
+    //            }
+    //        }
+    //    }
+    //}
+
 	void ChangeRunningAnimation(float nextX, float nextY)
 	{
 		if (myAnimator != null) 
@@ -290,6 +307,7 @@ public class Unit : MonoBehaviour {
 	{
 		attackIndex = 0;
 		readyToAttack = true;
+        //GetMyAttackRange();
 		PinpointEnemy (attackSpots [attackIndex]);
 	}
 
@@ -319,19 +337,24 @@ public class Unit : MonoBehaviour {
 			}
 			PinpointEnemy (attackSpots [attackIndex]);
 		} 
-		else if (Input.GetKeyDown (KeyCode.Return)) 
-		{
-			AttackUnit (attackSpots [attackIndex].GetUnitAssigned ());
-			EstablishNewTile ();
-
-			//TODO: Maybe should go to another state while the attack transpires before going back to moving the cursor
-			GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
-		} 
 		else if (Input.GetKeyDown (KeyCode.Escape)) 
 		{
 			ArrivedAtDestination (possibleDestination.GetTileCoordX (), possibleDestination.GetTileCoordY ());
-		}
+            //Map.instance.ReturnTilesToNormal();
+        }
 	}
+
+    public void AttackNow()
+    {
+        if (readyToAttack == true)
+        {
+            AttackUnit(attackSpots[attackIndex].GetUnitAssigned());
+            EstablishNewTile();
+
+            //TODO: Maybe should go to another state while the attack transpires before going back to moving the cursor
+            GameManager.gameState = GameManager.state.MOVING_CURSOR;
+        }
+    }
 
 	void PinpointEnemy(ClickableTile objective)
 	{

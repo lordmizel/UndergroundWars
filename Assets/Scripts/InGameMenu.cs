@@ -71,10 +71,6 @@ public class InGameMenu : MonoBehaviour
 			}
 			optionsShowing [optionIndex].GetComponent<Image> ().color = Color.yellow;
 		}
-		if (Input.GetKeyDown (KeyCode.Return)) 
-		{
-			SelectOption (optionIndex);
-		}
 		if (Input.GetKeyDown (KeyCode.Escape)) 
 		{
 			if (GameManager.instance.unitSelected != null) 
@@ -84,37 +80,42 @@ public class InGameMenu : MonoBehaviour
 			HideMenu ();
 			GameManager.gameState = GameManager.state.MOVING_CURSOR;
 		}
-
 	}
+
+    public void SelectCurrentMenuOption()
+    {
+        SelectOption(optionIndex);
+    }
 
 	void SelectOption(int optionSelected)
 	{
 		switch (optionsShowing [optionSelected].myOption) {
 		case MenuOption.menuOptions.ATTACK:
+            GameManager.instance.attackingWasSelected = true;
 			GameManager.instance.unitSelected.PrepareToAttack();
-			GameManager.gameState = GameManager.state.AFTER_MENU_ATTACK_BUFFER;
+			GameManager.gameState = GameManager.state.SELECTING_ATTACK;
 			Debug.Log ("Attack selected");
 			break;
         case MenuOption.menuOptions.CAPTURE:
             GameManager.instance.unitSelected.CaptureTile();
             GameManager.instance.unitSelected.EstablishNewTile();
-            GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
+            GameManager.gameState = GameManager.state.MOVING_CURSOR;
             Debug.Log("Capture Selected");
             break;
 		case MenuOption.menuOptions.WAIT:
 			GameManager.instance.unitSelected.EstablishNewTile ();
-			GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
+			GameManager.gameState = GameManager.state.MOVING_CURSOR;
 			Debug.Log ("Wait selected");
 			break;
         case MenuOption.menuOptions.SUPER_POWER:
             GameManager.instance.activePlayer.ActivatePower();
-            GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
+            GameManager.gameState = GameManager.state.MOVING_CURSOR;
             Debug.Log("Super power selected");
             break;
         case MenuOption.menuOptions.END_TURN:
 			Debug.Log ("End turn selected");
 			GameManager.instance.PassTurn ();
-			GameManager.gameState = GameManager.state.AFTER_MENU_BUFFER;
+			GameManager.gameState = GameManager.state.MOVING_CURSOR;
 			break;
 		case MenuOption.menuOptions.TEST_OPTION:
 			Debug.Log ("Test option selected");

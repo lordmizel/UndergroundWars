@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour {
 		MOVING_UNIT,
 		NAVIGATING_MENU,
 		SELECTING_ATTACK,
-		AFTER_MENU_BUFFER,
-		AFTER_MENU_ATTACK_BUFFER,
+		//AFTER_MENU_BUFFER,
+		//AFTER_MENU_ATTACK_BUFFER,
 		CHECKING_ENEMY_UNIT
 	}
 
@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour {
 
     [SerializeField]
     List<Vector2> initialCursorPositions;
+
+    [HideInInspector]
+    public bool attackingWasSelected = false;
 
     void Awake()
     {
@@ -50,19 +53,35 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if(gameState == state.NAVIGATING_MENU)
+            {
+                InGameMenu.inGameMenu.SelectCurrentMenuOption();
+            }
+            else if (gameState == state.MOVING_CURSOR || gameState == state.MOVING_UNIT)
+            {
+                PlayerCursor.instance.GetCurrentTile();
+            }
+            else if(gameState == state.SELECTING_ATTACK)
+            {
+                unitSelected.AttackNow();
+            }
+        }
+
 		//This is a patch for avoiding selecting a tile right as you select an option from the menu
-		if (gameState == state.AFTER_MENU_BUFFER || gameState == state.AFTER_MENU_ATTACK_BUFFER || gameState == state.CHECKING_ENEMY_UNIT) 
+		if (gameState == state.CHECKING_ENEMY_UNIT) 
 		{
 			if (Input.GetKeyUp (KeyCode.Return)) 
 			{
 				Map.instance.ReturnTilesToNormal ();
-				if (gameState == state.AFTER_MENU_ATTACK_BUFFER) 
-				{
-					gameState = state.SELECTING_ATTACK;
-				} else 
-				{
+				//if (attackingWasSelected == true) 
+				//{
+				//	gameState = state.SELECTING_ATTACK;
+				//} else 
+				//{
 					gameState = state.MOVING_CURSOR;
-				}
+				//}
 			}
 		} 
 		else if (gameState == state.MOVING_UNIT) 

@@ -80,13 +80,14 @@ public class PlayerCursor : MonoBehaviour
 				SetCursorPosition ();
 			}
 		}
-		if (Input.GetKeyDown (KeyCode.Return)) 
-		{
-			Map.instance.GetTile (currentPositionX, currentPositionY).TileSelected ();
-		}
 
         UIMovement.instance.MoveAside(transform.position);
 	}
+
+    public void GetCurrentTile()
+    {
+        Map.instance.GetTile(currentPositionX, currentPositionY).TileSelected();
+    }
 
     public void TeleportCursorToLastTileOfCharacter()
     {
