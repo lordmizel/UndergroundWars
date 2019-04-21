@@ -13,8 +13,6 @@ public class GameManager : MonoBehaviour {
 		MOVING_UNIT,
 		NAVIGATING_MENU,
 		SELECTING_ATTACK,
-		//AFTER_MENU_BUFFER,
-		//AFTER_MENU_ATTACK_BUFFER,
 		CHECKING_ENEMY_UNIT
 	}
 
@@ -23,6 +21,7 @@ public class GameManager : MonoBehaviour {
 	Army[] players;
 	public Army activePlayer;
 	int playerTurnIndex = 0;
+    int globalTurnIndex = 0;
 
     public Unit unitSelected;
 
@@ -102,6 +101,7 @@ public class GameManager : MonoBehaviour {
 		if (playerTurnIndex == players.Length - 1) 
 		{
 			playerTurnIndex = 0;
+            globalTurnIndex++;
 		} 
 		else 
 		{
