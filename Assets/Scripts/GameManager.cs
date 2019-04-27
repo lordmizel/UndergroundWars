@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour {
 	Army[] players;
 	public Army activePlayer;
 	int playerTurnIndex = 0;
-    int globalTurnIndex = 0;
+    public int globalTurnIndex = 0;
 
     public Unit unitSelected;
 
@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour {
 
     [HideInInspector]
     public bool attackingWasSelected = false;
+
+    [SerializeField]
+    TurnLabel turnLabel;
 
     void Awake()
     {
@@ -47,6 +50,7 @@ public class GameManager : MonoBehaviour {
     void Start ()
     {
 		gameState = state.MOVING_CURSOR;
+        turnLabel.gameObject.SetActive(true);
 	}
 	
 	// Update is called once per frame
@@ -107,12 +111,13 @@ public class GameManager : MonoBehaviour {
 		{
 			playerTurnIndex++;
 		}
-		activePlayer = players [playerTurnIndex];
+        activePlayer = players [playerTurnIndex];
 		activePlayer.RefreshAllUnits ();
         PlayerCursor.instance.TeleportCursorToLastTileOfCharacter();
         Map.instance.RecountPlayerPropierties();
         UI.instance.UpdateFundsDisplay();
         UI.instance.UpdatePowerDisplay();
         MusicManager.instance.PlayMusic(activePlayer.armyTheme);
+        turnLabel.gameObject.SetActive(true);
     }
 }
