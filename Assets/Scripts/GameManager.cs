@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour {
 	Army[] players;
 	public Army activePlayer;
 	int playerTurnIndex = 0;
-    public int globalTurnIndex = 0;
+    public int globalTurnIndex = 1;
 
     public Unit unitSelected;
 
@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviour {
 
 	public void PassTurn()
 	{
+        turnLabel.gameObject.SetActive(false);
         activePlayer.RefreshAllUnits();
         activePlayer.SetLastPlaceOfCursor((int)PlayerCursor.instance.transform.position.x, (int)PlayerCursor.instance.transform.position.y);
 		if (playerTurnIndex == players.Length - 1) 

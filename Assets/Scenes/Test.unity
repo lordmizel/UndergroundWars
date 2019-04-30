@@ -667,7 +667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activePlayer: {fileID: 0}
-  globalTurnIndex: 0
+  globalTurnIndex: 1
   unitSelected: {fileID: 0}
   initialCursorPositions:
   - {x: 13, y: 10}
