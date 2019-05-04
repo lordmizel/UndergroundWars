@@ -50,6 +50,8 @@ public class Unit : MonoBehaviour {
 	}
 	public typeOfMovement movementType = typeOfMovement.FOOT;
 
+    public int moneyValue = 1000;
+
 	[Header("Unit stats")]
 	int hp = 10;
 	int maxHP = 10;
