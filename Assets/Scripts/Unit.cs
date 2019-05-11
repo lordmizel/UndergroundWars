@@ -289,6 +289,15 @@ public class Unit : MonoBehaviour {
         decidedToCapture = false;
 	}
 
+    //Heal due to starting in a property
+    public void HealByProperty()
+    {
+        if(hp < 10)
+        {
+            ChangeHP(2);
+        }
+    }
+
 	//Change the visual aspect of the unit
 	void GrayUnGray(bool gray)
 	{

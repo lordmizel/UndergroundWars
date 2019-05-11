@@ -139,6 +139,11 @@ public class Map : MonoBehaviour {
             if(tile.propietary == GameManager.instance.activePlayer)
             {
                 GameManager.instance.activePlayer.AddFunds();
+
+                if(tile.GetUnitAssigned() != null && tile.propietary == tile.GetUnitAssigned().propietary)
+                {
+                    tile.GetUnitAssigned().HealByProperty();
+                }
             }
         }
     }
