@@ -295,6 +295,7 @@ public class Unit : MonoBehaviour {
         if(hp < 10)
         {
             ChangeHP(2);
+            propietary.ChangeFunds((int)(-moneyValue * 2 / 10));
         }
     }
 

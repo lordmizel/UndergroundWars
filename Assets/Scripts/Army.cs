@@ -60,6 +60,12 @@ public class Army : MonoBehaviour {
         return warFunds;
     }
 
+    public void ChangeFunds(int amount)
+    {
+        warFunds += amount;
+        UI.instance.UpdateFundsDisplay();
+    }
+
     public void AddPower(int value)
     {
         currentSpecialPower += value;
