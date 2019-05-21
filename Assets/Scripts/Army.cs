@@ -63,6 +63,10 @@ public class Army : MonoBehaviour {
     public void ChangeFunds(int amount)
     {
         warFunds += amount;
+        if(warFunds < 0)
+        {
+            warFunds = 0;
+        }
         UI.instance.UpdateFundsDisplay();
     }
 
