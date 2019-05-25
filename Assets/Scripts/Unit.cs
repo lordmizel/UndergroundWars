@@ -2,66 +2,67 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour {
+public class Unit : MonoBehaviour
+{
 
-	SpriteRenderer mySprite;
-	Animator myAnimator;
-	PlayerCursor cursor;
-	[SerializeField]
-	SpriteRenderer hpSprite;
-	[SerializeField]
-	Sprite[] hpNumbers;
+    SpriteRenderer mySprite;
+    Animator myAnimator;
+    PlayerCursor cursor;
+    [SerializeField]
+    SpriteRenderer hpSprite;
+    [SerializeField]
+    Sprite[] hpNumbers;
 
-	//TODO: This is public for debug purposes
-	public Army propietary;
+    //TODO: This is public for debug purposes
+    public Army propietary;
 
-	//TODO: Delete this
-	public int initialX; 
-	public int initialY;
+    //TODO: Delete this
+    public int initialX;
+    public int initialY;
 
-	bool unitUsed = false;
-	bool unitHasMoved = false;
-	bool unitSelected = false;
+    bool unitUsed = false;
+    bool unitHasMoved = false;
+    bool unitSelected = false;
 
-	[SerializeField]
-	bool ranged = false;
-	[SerializeField]
-	int minAttackRange = 1;
-	[SerializeField]
-	int maxAttackRange = 1;
-	List<ClickableTile> attackSpots;
-	int attackIndex;
-	[HideInInspector]
-	public bool readyToAttack = false;
+    [SerializeField]
+    bool ranged = false;
+    [SerializeField]
+    int minAttackRange = 1;
+    [SerializeField]
+    int maxAttackRange = 1;
+    List<ClickableTile> attackSpots;
+    int attackIndex;
+    [HideInInspector]
+    public bool readyToAttack = false;
 
-	[Header("Movement stuff")]
-	public ClickableTile originTile;
-	public ClickableTile possibleDestination;
-	public int movementPoints = 5;
-	bool unitMoving = false;
-	List<ClickableTile> path;
-	float moveSpeed = 5f;
-	public enum typeOfMovement
-	{
-		FOOT,
-		VEHICLE,
-		FLYING,
-		WATER
-	}
-	public typeOfMovement movementType = typeOfMovement.FOOT;
+    [Header("Movement stuff")]
+    public ClickableTile originTile;
+    public ClickableTile possibleDestination;
+    public int movementPoints = 5;
+    bool unitMoving = false;
+    List<ClickableTile> path;
+    float moveSpeed = 5f;
+    public enum typeOfMovement
+    {
+        FOOT,
+        VEHICLE,
+        FLYING,
+        WATER
+    }
+    public typeOfMovement movementType = typeOfMovement.FOOT;
 
     public int moneyValue = 1000;
 
-	[Header("Unit stats")]
-	int hp = 10;
-	int maxHP = 10;
-	//TODO: Attack should be based on a table. The attack is given face-value here for debugging purposes.
-	[SerializeField]
-	int attack = 60;
-	[SerializeField]
-	int attackMultiplier = 100;
-	[SerializeField]
-	int defenseMultiplier = 100;
+    [Header("Unit stats")]
+    int hp = 10;
+    int maxHP = 10;
+    //TODO: Attack should be based on a table. The attack is given face-value here for debugging purposes.
+    [SerializeField]
+    int attack = 60;
+    [SerializeField]
+    int attackMultiplier = 100;
+    [SerializeField]
+    int defenseMultiplier = 100;
 
     [Header("Capturing stuff")]
     [SerializeField]
@@ -70,129 +71,130 @@ public class Unit : MonoBehaviour {
     bool decidedToCapture = false;
 
     // Use this for initialization
-    void Start () {
-		mySprite = gameObject.GetComponent<SpriteRenderer> ();
-		cursor = FindObjectOfType<PlayerCursor> ();
-		myAnimator = gameObject.GetComponent<Animator> ();
+    void Start()
+    {
+        mySprite = gameObject.GetComponent<SpriteRenderer>();
+        cursor = FindObjectOfType<PlayerCursor>();
+        myAnimator = gameObject.GetComponent<Animator>();
 
-		attackSpots = new List<ClickableTile> ();
+        attackSpots = new List<ClickableTile>();
 
-		//TODO: This is only for debug
-		originTile = Map.instance.GetTile (initialX, initialY);
-		originTile.AssignUnit (this);
-		gameObject.transform.position = new Vector3(originTile.transform.position.x, originTile.transform.position.y, gameObject.transform.position.z);
-		////////
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		if (unitMoving == true) 
-		{
-			OnMyMerryWay ();
-		}
-		if (GameManager.gameState == GameManager.state.SELECTING_ATTACK && GameManager.instance.unitSelected == this) 
-		{
-			SelectEnemyToAttack ();
-		}
-	}
+        //TODO: This is only for debug
+        originTile = Map.instance.GetTile(initialX, initialY);
+        originTile.AssignUnit(this);
+        gameObject.transform.position = new Vector3(originTile.transform.position.x, originTile.transform.position.y, gameObject.transform.position.z);
+        ////////
+    }
 
-	//Unit has been selected by the cursor
-	public void UnitSelected()
-	{
-		if (propietary == GameManager.instance.activePlayer && unitUsed == false) 
-		{
-			if (GameManager.gameState != GameManager.state.MOVING_UNIT) 
-			{
-				unitSelected = true;
-				GameManager.instance.unitSelected = this;
-				Map.instance.ActivateMovementArea (originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints);
-				GameManager.gameState = GameManager.state.MOVING_UNIT;
-			} 
-			else 
-			{
-				ArrivedAtDestination (originTile.GetTileCoordX (), originTile.GetTileCoordY ());
-			}
-		} 
-		else 
-		{
-			//TODO: What happens when you select a unit you cannot move (other player's unit or already used unit)
-			GameManager.instance.unitSelected = this;
-			Map.instance.ActivateAttackArea(originTile.GetTileCoordX (), originTile.GetTileCoordY (), movementPoints, ranged, minAttackRange, maxAttackRange);
-			GameManager.gameState = GameManager.state.CHECKING_ENEMY_UNIT;
-		}
-	}
+    // Update is called once per frame
+    void Update()
+    {
+        if (unitMoving == true)
+        {
+            OnMyMerryWay();
+        }
+        if (GameManager.gameState == GameManager.state.SELECTING_ATTACK && GameManager.instance.unitSelected == this)
+        {
+            SelectEnemyToAttack();
+        }
+    }
 
-	//Unit has received orders to move
-	public void StartMoving(List<ClickableTile> newPath)
-	{
-		if (newPath != null) 
-		{
-			Map.instance.ReturnTilesToNormal ();
-			path = newPath;
-			ChangeRunningAnimation (path [path.Count - 1].GetTileCoordX (), path [path.Count - 1].GetTileCoordY ());
-			unitMoving = true;
-			unitHasMoved = true;
-		}
-	}
+    //Unit has been selected by the cursor
+    public void UnitSelected()
+    {
+        if (propietary == GameManager.instance.activePlayer && unitUsed == false)
+        {
+            if (GameManager.gameState != GameManager.state.MOVING_UNIT)
+            {
+                unitSelected = true;
+                GameManager.instance.unitSelected = this;
+                Map.instance.ActivateMovementArea(originTile.GetTileCoordX(), originTile.GetTileCoordY(), movementPoints);
+                GameManager.gameState = GameManager.state.MOVING_UNIT;
+            }
+            else
+            {
+                ArrivedAtDestination(originTile.GetTileCoordX(), originTile.GetTileCoordY());
+            }
+        }
+        else
+        {
+            //TODO: What happens when you select a unit you cannot move (other player's unit or already used unit)
+            GameManager.instance.unitSelected = this;
+            Map.instance.ActivateAttackArea(originTile.GetTileCoordX(), originTile.GetTileCoordY(), movementPoints, ranged, minAttackRange, maxAttackRange);
+            GameManager.gameState = GameManager.state.CHECKING_ENEMY_UNIT;
+        }
+    }
 
-	//Unit is moving
-	void OnMyMerryWay()
-	{
-		Vector3 destination = new Vector3 (path [path.Count - 1].GetTileCoordX (), path [path.Count - 1].GetTileCoordY (), transform.position.z);
-		if (Vector3.Distance(transform.position, destination) > 0.01f) 
-		{
-			transform.position = Vector3.MoveTowards (transform.position, destination, moveSpeed * Time.deltaTime);
-		} 
-		else 
-		{
-			gameObject.transform.position = new Vector3(path [path.Count - 1].GetTileCoordX (), path [path.Count - 1].GetTileCoordY (), gameObject.transform.position.z);
-			path.RemoveAt (path.Count - 1);
-			if (path.Count == 0) 
-			{
-				ArrivedAtDestination ((int)destination.x, (int)destination.y);
-				unitMoving = false;
-			} 
-			else 
-			{
-				ChangeRunningAnimation (path [path.Count - 1].GetTileCoordX (), path [path.Count - 1].GetTileCoordY ());
-			}
-		}
-	}
+    //Unit has received orders to move
+    public void StartMoving(List<ClickableTile> newPath)
+    {
+        if (newPath != null)
+        {
+            Map.instance.ReturnTilesToNormal();
+            path = newPath;
+            ChangeRunningAnimation(path[path.Count - 1].GetTileCoordX(), path[path.Count - 1].GetTileCoordY());
+            unitMoving = true;
+            unitHasMoved = true;
+        }
+    }
 
-	//Unit has finished moving
-	public void ArrivedAtDestination(int x, int y)
-	{
-		if (myAnimator != null) 
-		{
-			mySprite.flipX = false;
-			//transform.localScale = new Vector3 (1, 1, 1);
-			//hpSprite.transform.localScale = new Vector3 (1, 1, 1);
-			myAnimator.SetTrigger ("idleState");
-		}
-		possibleDestination = Map.instance.GetTile (x, y);
-		cursor.TeleportCursorToTile (x, y);
-		if (ranged == false || unitHasMoved == false) 
-		{
-			List<ClickableTile> tilesInAttackRange = Map.instance.unitMovementManager.CalculateRangeMatrix (x, y, maxAttackRange, minAttackRange);
-			foreach (ClickableTile tile in tilesInAttackRange) 
-			{
-				tile.ActivateAttackOverlay ();
-				if (tile.GetUnitAssigned () != null && tile.GetUnitAssigned ().propietary != propietary) 
-				{
-					attackSpots.Add (tile);
-					InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.ATTACK);
-				}
-			}
-		}
-        if(canCapture == true && possibleDestination.typeOfTerrain.capturable == true && possibleDestination.propietary != propietary)
+    //Unit is moving
+    void OnMyMerryWay()
+    {
+        Vector3 destination = new Vector3(path[path.Count - 1].GetTileCoordX(), path[path.Count - 1].GetTileCoordY(), transform.position.z);
+        if (Vector3.Distance(transform.position, destination) > 0.01f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, destination, moveSpeed * Time.deltaTime);
+        }
+        else
+        {
+            gameObject.transform.position = new Vector3(path[path.Count - 1].GetTileCoordX(), path[path.Count - 1].GetTileCoordY(), gameObject.transform.position.z);
+            path.RemoveAt(path.Count - 1);
+            if (path.Count == 0)
+            {
+                ArrivedAtDestination((int)destination.x, (int)destination.y);
+                unitMoving = false;
+            }
+            else
+            {
+                ChangeRunningAnimation(path[path.Count - 1].GetTileCoordX(), path[path.Count - 1].GetTileCoordY());
+            }
+        }
+    }
+
+    //Unit has finished moving
+    public void ArrivedAtDestination(int x, int y)
+    {
+        if (myAnimator != null)
+        {
+            mySprite.flipX = false;
+            //transform.localScale = new Vector3 (1, 1, 1);
+            //hpSprite.transform.localScale = new Vector3 (1, 1, 1);
+            myAnimator.SetTrigger("idleState");
+        }
+        possibleDestination = Map.instance.GetTile(x, y);
+        cursor.TeleportCursorToTile(x, y);
+        if (ranged == false || unitHasMoved == false)
+        {
+            List<ClickableTile> tilesInAttackRange = Map.instance.unitMovementManager.CalculateRangeMatrix(x, y, maxAttackRange, minAttackRange);
+            foreach (ClickableTile tile in tilesInAttackRange)
+            {
+                tile.ActivateAttackOverlay();
+                if (tile.GetUnitAssigned() != null && tile.GetUnitAssigned().propietary != propietary)
+                {
+                    attackSpots.Add(tile);
+                    InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.ATTACK);
+                }
+            }
+        }
+        if (canCapture == true && possibleDestination.typeOfTerrain.capturable == true && possibleDestination.propietary != propietary)
         {
             InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.CAPTURE);
         }
-		InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.WAIT);
-		InGameMenu.inGameMenu.ActivateMenu ();
-		GameManager.gameState = GameManager.state.NAVIGATING_MENU;
-	}
+        InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.WAIT);
+        InGameMenu.inGameMenu.ActivateMenu();
+        GameManager.gameState = GameManager.state.NAVIGATING_MENU;
+    }
 
     //void GetMyAttackRange()
     //{
@@ -211,150 +213,158 @@ public class Unit : MonoBehaviour {
     //    }
     //}
 
-	void ChangeRunningAnimation(float nextX, float nextY)
-	{
-		if (myAnimator != null) 
-		{
-			if (nextY > transform.position.y) 
-			{
-				myAnimator.SetTrigger ("runningUp");
-			} 
-			else if (nextY < transform.position.y) 
-			{
-				myAnimator.SetTrigger ("runningDown");
-			} 
-			else 
-			{
-				myAnimator.SetTrigger ("runningSide");
-				if (nextX < transform.position.x) 
-				{
-					mySprite.flipX = true;
-					//transform.localScale = new Vector3 (-1, 1, 1);
-					//hpSprite.transform.localScale = new Vector3 (-1, 1, 1);
-				}
-				else 
-				{
-					mySprite.flipX = false;
-					//transform.localScale = new Vector3 (1, 1, 1);
-					//hpSprite.transform.localScale = new Vector3 (1, 1, 1);
-				}
-			}
-		}
-	}
+    void ChangeRunningAnimation(float nextX, float nextY)
+    {
+        if (myAnimator != null)
+        {
+            if (nextY > transform.position.y)
+            {
+                myAnimator.SetTrigger("runningUp");
+            }
+            else if (nextY < transform.position.y)
+            {
+                myAnimator.SetTrigger("runningDown");
+            }
+            else
+            {
+                myAnimator.SetTrigger("runningSide");
+                if (nextX < transform.position.x)
+                {
+                    mySprite.flipX = true;
+                    //transform.localScale = new Vector3 (-1, 1, 1);
+                    //hpSprite.transform.localScale = new Vector3 (-1, 1, 1);
+                }
+                else
+                {
+                    mySprite.flipX = false;
+                    //transform.localScale = new Vector3 (1, 1, 1);
+                    //hpSprite.transform.localScale = new Vector3 (1, 1, 1);
+                }
+            }
+        }
+    }
 
-	//Player confirms the movement after the unit has moved and/or attacked
-	public void EstablishNewTile()
-	{ 
-		ClickableTile newTile = possibleDestination;
+    //Player confirms the movement after the unit has moved and/or attacked
+    public void EstablishNewTile()
+    {
+        ClickableTile newTile = possibleDestination;
 
-        if(unitHasMoved == true && decidedToCapture == false)
+        if (unitHasMoved == true && decidedToCapture == false)
         {
             capturePoints = 0;
         }
 
-		gameObject.transform.position = new Vector3(newTile.GetTileCoordX(), newTile.GetTileCoordY(), gameObject.transform.position.z);
-		originTile.UnassignUnit ();
-		newTile.AssignUnit(this);
-		originTile = newTile;
-		GameManager.instance.unitSelected = null;
-		TireUnit();
-		Map.instance.ReturnTilesToNormal ();
-	}
+        gameObject.transform.position = new Vector3(newTile.GetTileCoordX(), newTile.GetTileCoordY(), gameObject.transform.position.z);
+        originTile.UnassignUnit();
+        newTile.AssignUnit(this);
+        originTile = newTile;
+        GameManager.instance.unitSelected = null;
+        TireUnit();
+        Map.instance.ReturnTilesToNormal();
+    }
 
-	//Player cancels the movement after the unit has moved
-	public void ReturnBackToOrigin()
-	{
-		gameObject.transform.position = new Vector3(originTile.GetTileCoordX(), originTile.GetTileCoordY(), gameObject.transform.position.z);
-		GameManager.instance.unitSelected = null;
-		attackSpots.Clear ();
-		unitHasMoved = false;
-		Map.instance.ReturnTilesToNormal ();
-		cursor.TeleportCursorToTile (originTile.GetTileCoordX (), originTile.GetTileCoordY ());
-	}
+    //Player cancels the movement after the unit has moved
+    public void ReturnBackToOrigin()
+    {
+        gameObject.transform.position = new Vector3(originTile.GetTileCoordX(), originTile.GetTileCoordY(), gameObject.transform.position.z);
+        GameManager.instance.unitSelected = null;
+        attackSpots.Clear();
+        unitHasMoved = false;
+        Map.instance.ReturnTilesToNormal();
+        cursor.TeleportCursorToTile(originTile.GetTileCoordX(), originTile.GetTileCoordY());
+    }
 
-	//Unit has already moved and won't be used again this turn
-	public void TireUnit()
-	{
-		GrayUnGray (true);
-		unitUsed = true;
-	}
+    //Unit has already moved and won't be used again this turn
+    public void TireUnit()
+    {
+        GrayUnGray(true);
+        unitUsed = true;
+    }
 
-	//New turn starts, unit is refreshed
-	public void RefreshUnit()
-	{
-		attackSpots.Clear ();
-		GrayUnGray (false);
-		unitHasMoved = false;
-		unitUsed = false;
+    //New turn starts, unit is refreshed
+    public void RefreshUnit()
+    {
+        attackSpots.Clear();
+        GrayUnGray(false);
+        unitHasMoved = false;
+        unitUsed = false;
         decidedToCapture = false;
-	}
+    }
 
     //Heal due to starting in a property
     public void HealByProperty()
     {
-        if(hp < 10)
+        if (hp < 10)
         {
-            ChangeHP(2);
-            propietary.ChangeFunds((int)(-moneyValue * 2 / 10));
+            if (hp < 9 && propietary.GetFunds() >= (int)(moneyValue * 2 / 10))
+            {
+                ChangeHP(2);
+                propietary.ChangeFunds((int)(-moneyValue * 2 / 10));
+            }
+            else if (propietary.GetFunds() >= (int)(moneyValue * 1 / 10))
+            {
+                ChangeHP(1);
+                propietary.ChangeFunds((int)(-moneyValue * 1 / 10));
+            }
         }
     }
 
-	//Change the visual aspect of the unit
-	void GrayUnGray(bool gray)
-	{
-		float h, s, v;
-		Color.RGBToHSV(mySprite.color, out h, out s, out v);
-		if (gray == true) 
-		{
-			v = 0.5f;
-		} 
-		else 
-		{
-			v = 1f;
-		}
-		mySprite.color = Color.HSVToRGB (h, s, v);
-	}
+    //Change the visual aspect of the unit to represent it already being used that turn
+    void GrayUnGray(bool gray)
+    {
+        float h, s, v;
+        Color.RGBToHSV(mySprite.color, out h, out s, out v);
+        if (gray == true)
+        {
+            v = 0.5f;
+        }
+        else
+        {
+            v = 1f;
+        }
+        mySprite.color = Color.HSVToRGB(h, s, v);
+    }
 
-	public void PrepareToAttack()
-	{
-		attackIndex = 0;
-		readyToAttack = true;
+    public void PrepareToAttack()
+    {
+        attackIndex = 0;
+        readyToAttack = true;
         //GetMyAttackRange();
-		PinpointEnemy (attackSpots [attackIndex]);
-	}
+        PinpointEnemy(attackSpots[attackIndex]);
+    }
 
-	void SelectEnemyToAttack()
-	{
-		if (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown (KeyCode.D)) 
-		{
-			if (attackIndex >= attackSpots.Count - 1) 
-			{
-				attackIndex = 0;
-			} 
-			else 
-			{
-				attackIndex++;
-			}
-			PinpointEnemy (attackSpots [attackIndex]);
-		} 
-		else if (Input.GetKeyDown (KeyCode.A) || Input.GetKeyDown (KeyCode.S)) 
-		{
-			if (attackIndex <= 0) 
-			{
-				attackIndex = attackSpots.Count - 1;
-			} 
-			else 
-			{
-				attackIndex--;
-			}
-			PinpointEnemy (attackSpots [attackIndex]);
-		} 
-		else if (Input.GetKeyDown (KeyCode.Escape)) 
-		{
-			ArrivedAtDestination (possibleDestination.GetTileCoordX (), possibleDestination.GetTileCoordY ());
+    void SelectEnemyToAttack()
+    {
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.D))
+        {
+            if (attackIndex >= attackSpots.Count - 1)
+            {
+                attackIndex = 0;
+            }
+            else
+            {
+                attackIndex++;
+            }
+            PinpointEnemy(attackSpots[attackIndex]);
+        }
+        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S))
+        {
+            if (attackIndex <= 0)
+            {
+                attackIndex = attackSpots.Count - 1;
+            }
+            else
+            {
+                attackIndex--;
+            }
+            PinpointEnemy(attackSpots[attackIndex]);
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ArrivedAtDestination(possibleDestination.GetTileCoordX(), possibleDestination.GetTileCoordY());
             //Map.instance.ReturnTilesToNormal();
         }
-	}
+    }
 
     public void AttackNow()
     {
@@ -368,45 +378,45 @@ public class Unit : MonoBehaviour {
         }
     }
 
-	void PinpointEnemy(ClickableTile objective)
-	{
-		cursor.TeleportCursorToTile (objective.GetTileCoordX (), objective.GetTileCoordY ());
-	}
+    void PinpointEnemy(ClickableTile objective)
+    {
+        cursor.TeleportCursorToTile(objective.GetTileCoordX(), objective.GetTileCoordY());
+    }
 
-	void AttackUnit(Unit enemy)
-	{
-		readyToAttack = false;
-		float rawDamage = (((attack * attackMultiplier) / 100f) + Random.Range (0, 9)) * (hp / 10f) * ((200f - (enemy.defenseMultiplier + enemy.originTile.typeOfTerrain.defensiveStat * enemy.hp)) / 100f);
-		int actualDamage = (int)rawDamage / 10;
-		enemy.ChangeHP (-actualDamage);
-		//Counter
-		if (ranged == false && enemy != null && enemy.ranged == false) 
-		{
-			rawDamage = (((enemy.attack * enemy.attackMultiplier) / 100f) + Random.Range (0, 9)) * (enemy.hp / 10f) * ((200f - (defenseMultiplier + originTile.typeOfTerrain.defensiveStat * hp)) / 100f);
-			actualDamage = (int)rawDamage / 10;
-			ChangeHP (-actualDamage);
-		}
-	}
+    void AttackUnit(Unit enemy)
+    {
+        readyToAttack = false;
+        float rawDamage = (((attack * attackMultiplier) / 100f) + Random.Range(0, 9)) * (hp / 10f) * ((200f - (enemy.defenseMultiplier + enemy.originTile.typeOfTerrain.defensiveStat * enemy.hp)) / 100f);
+        int actualDamage = (int)rawDamage / 10;
+        enemy.ChangeHP(-actualDamage);
+        //Counter
+        if (ranged == false && enemy != null && enemy.ranged == false)
+        {
+            rawDamage = (((enemy.attack * enemy.attackMultiplier) / 100f) + Random.Range(0, 9)) * (enemy.hp / 10f) * ((200f - (defenseMultiplier + originTile.typeOfTerrain.defensiveStat * hp)) / 100f);
+            actualDamage = (int)rawDamage / 10;
+            ChangeHP(-actualDamage);
+        }
+    }
 
-	public void ChangeHP(int value)
-	{
-		hp = hp + value;
-		Debug.Log ("Unit " + name + " is at " + hp + " hp");
-		if (hp <= 0) 
-		{
-			hp = 0;
+    public void ChangeHP(int value)
+    {
+        hp = hp + value;
+        Debug.Log("Unit " + name + " is at " + hp + " hp");
+        if (hp <= 0)
+        {
+            hp = 0;
             DestroyMe();
-		} 
-		else if (hp >= 10) 
-		{
-			hp = 10;
-			hpSprite.sprite = null;
-		} 
-		else 
-		{
-			hpSprite.sprite = hpNumbers [hp - 1];
-		}
-	}
+        }
+        else if (hp >= 10)
+        {
+            hp = 10;
+            hpSprite.sprite = null;
+        }
+        else
+        {
+            hpSprite.sprite = hpNumbers[hp - 1];
+        }
+    }
 
     void DestroyMe()
     {
@@ -417,13 +427,13 @@ public class Unit : MonoBehaviour {
 
     public void CaptureTile()
     {
-        if(unitHasMoved == true)
+        if (unitHasMoved == true)
         {
             capturePoints = 0;
         }
         decidedToCapture = true;
         capturePoints += hp;
-        if(capturePoints >= 20)
+        if (capturePoints >= 20)
         {
             possibleDestination.ChangePropietary(propietary);
         }
