@@ -13,7 +13,8 @@ public class TileType : ScriptableObject{
 		MOUNTAIN,
 		SAND,
 		WATER,
-		REEF
+		REEF,
+        PORT
 	}
 
 	public typeOfTerrain terrainName = typeOfTerrain.PLAINS;

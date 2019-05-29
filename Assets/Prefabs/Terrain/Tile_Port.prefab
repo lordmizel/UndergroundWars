@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938355a9a8d4c0948a7f43d0b112721d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeOfTerrain: {fileID: 11400000, guid: 91b6fc46fababff449661d0d06b1f10a, type: 2}
+  typeOfTerrain: {fileID: 11400000, guid: 1a2fa58f123d4f344a53c97f0937cf7f, type: 2}
   moveColorOverlay: {fileID: 1801991070338691561}
   attackColorOverlay: {fileID: 3217338355914513994}
   propietary: {fileID: 0}

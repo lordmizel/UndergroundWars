@@ -8,14 +8,18 @@ public class TerrainMovement : MonoBehaviour {
 
 	Map map;
 
-	int[,] movementCostMatrix = new int[,] { {1, 2, 1, 100},
+	int[,] movementCostMatrix = new int[,] 
+    { 
+        {1, 2, 1, 100},
 		{1, 1, 1, 100},
 		{2, 100, 1, 100},
 		{2, 3, 1, 100},
 		{2, 100, 1, 100},
 		{1, 3, 1, 100},
 		{100, 100, 1, 1},
-		{100, 100, 1, 2}};
+		{100, 100, 1, 2},
+        {1, 1, 1, 1}
+    };
 
 	// Use this for initialization
 	void Start () 
