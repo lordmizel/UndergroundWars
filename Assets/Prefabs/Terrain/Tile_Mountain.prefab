@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfTerrain: {fileID: 11400000, guid: bc58f218043a2164e89b6d242d5eb2d5, type: 2}
+  visibleName: Mountain
   moveColorOverlay: {fileID: 1121447581489412}
   attackColorOverlay: {fileID: 1495993302679104}
   propietary: {fileID: 0}

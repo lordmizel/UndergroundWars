@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfTerrain: {fileID: 11400000, guid: c82b5e5aa9bf01f4eb18a86526de1d91, type: 2}
+  visibleName: Reef
   moveColorOverlay: {fileID: 1329228531054076}
   attackColorOverlay: {fileID: 1124928530579056}
   propietary: {fileID: 0}

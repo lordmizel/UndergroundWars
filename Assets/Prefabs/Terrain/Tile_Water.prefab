@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfTerrain: {fileID: 11400000, guid: 8cb854038b6c350488e6c6a97e996fda, type: 2}
+  visibleName: Water
   moveColorOverlay: {fileID: 1329228531054076}
   attackColorOverlay: {fileID: 1124928530579056}
   propietary: {fileID: 0}

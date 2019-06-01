@@ -71,7 +71,7 @@ public class UI : MonoBehaviour
 
     public void UpdateTileInfo(ClickableTile tile)
     {
-        tileName.text = tile.typeOfTerrain.visibleName;
+        tileName.text = tile.visibleName;
 
         for(int x = 0; x < defenseShields.Length; x++)
         {

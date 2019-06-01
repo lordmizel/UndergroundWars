@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfTerrain: {fileID: 11400000, guid: 8850a6610ce1e8e4f8463b401066c1d2, type: 2}
+  visibleName: Plains
   moveColorOverlay: {fileID: 1864031608988364}
   attackColorOverlay: {fileID: 1927045345872098}
   propietary: {fileID: 0}

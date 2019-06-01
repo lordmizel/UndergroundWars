@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfTerrain: {fileID: 11400000, guid: 63f87b455e03054408b7d1c841d1bc80, type: 2}
+  visibleName: Forest
   moveColorOverlay: {fileID: 1329228531054076}
   attackColorOverlay: {fileID: 1124928530579056}
   propietary: {fileID: 0}

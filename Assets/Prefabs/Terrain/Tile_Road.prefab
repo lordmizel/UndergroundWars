@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfTerrain: {fileID: 11400000, guid: 66acfa31bfc30b7478414dbacff511f7, type: 2}
+  visibleName: Road
   moveColorOverlay: {fileID: 1329228531054076}
   attackColorOverlay: {fileID: 1124928530579056}
   propietary: {fileID: 0}

@@ -22,7 +22,6 @@ public class TileType : ScriptableObject{
 	public GameObject tileVisualPrefab;
 
     [Header("Public tile data")]
-    public string visibleName = "";
     public int defensiveStat = 1;
 
     public bool capturable = false;

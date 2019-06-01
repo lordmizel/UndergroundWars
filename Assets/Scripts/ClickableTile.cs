@@ -8,8 +8,9 @@ public class ClickableTile : MonoBehaviour {
 	int coordX;
 	int coordY;
 	public TileType typeOfTerrain;
+    public string visibleName = "";
 
-	Unit unitAssigned;
+    Unit unitAssigned;
 
 	[SerializeField]
 	GameObject moveColorOverlay;
