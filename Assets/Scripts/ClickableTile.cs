@@ -9,6 +9,7 @@ public class ClickableTile : MonoBehaviour {
 	int coordY;
 	public TileType typeOfTerrain;
     public string visibleName = "";
+    public Sprite tileVisualPrefab;
 
     Unit unitAssigned;
 

@@ -18,9 +18,7 @@ public class TileType : ScriptableObject{
 	}
 
 	public typeOfTerrain terrainName = typeOfTerrain.PLAINS;
-
-	public GameObject tileVisualPrefab;
-
+    
     [Header("Public tile data")]
     public int defensiveStat = 1;
 
