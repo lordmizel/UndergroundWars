@@ -13,7 +13,12 @@ public class Army : MonoBehaviour {
     int fundsPerPropierty = 1000;
 
     [SerializeField]
-    int maxSpecialPower;
+    int specialPowerSections = 6;
+    [SerializeField]
+    int startingFundsPerPowerSection = 9000;
+    int currentMaxSpecialPower;
+    int maxPowerIncrement;
+    int timesPowerWasUsed = 0;
     public int currentSpecialPower = 0;
     
     public AudioClip armyTheme;
@@ -28,6 +33,8 @@ public class Army : MonoBehaviour {
         {
             unitsInArmy.Add(unit);
         }
+        currentMaxSpecialPower = specialPowerSections * startingFundsPerPowerSection;
+        maxPowerIncrement = startingFundsPerPowerSection * 20 / 100;
 	}
 	
 	// Update is called once per frame
@@ -73,9 +80,9 @@ public class Army : MonoBehaviour {
     public void AddPower(int value)
     {
         currentSpecialPower += value;
-        if(currentSpecialPower > maxSpecialPower)
+        if(currentSpecialPower > currentMaxSpecialPower)
         {
-            currentSpecialPower = maxSpecialPower;
+            currentSpecialPower = currentMaxSpecialPower;
         }
         UI.instance.UpdatePowerDisplay();
     }
@@ -87,13 +94,17 @@ public class Army : MonoBehaviour {
 
     public int GetMaxPower()
     {
-        return maxSpecialPower;
+        return currentMaxSpecialPower;
     }
 
     //TODO: Check how to activate powers
     public void ActivatePower()
     {
         currentSpecialPower = 0;
+        timesPowerWasUsed++;
+        if (timesPowerWasUsed <= 10) {
+            currentMaxSpecialPower = currentMaxSpecialPower + (maxPowerIncrement * specialPowerSections);
+        }
         UI.instance.UpdatePowerDisplay();
     }
 

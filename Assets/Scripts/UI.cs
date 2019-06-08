@@ -46,7 +46,7 @@ public class UI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            GameManager.instance.activePlayer.AddPower(30);
+            GameManager.instance.activePlayer.AddPower(1000);
         }
     }
 
