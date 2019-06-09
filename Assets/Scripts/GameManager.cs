@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour {
         turnLabel.gameObject.SetActive(false);
         activePlayer.RefreshAllUnits();
         activePlayer.SetLastPlaceOfCursor((int)PlayerCursor.instance.transform.position.x, (int)PlayerCursor.instance.transform.position.y);
-		if (playerTurnIndex == players.Length - 1) 
+        if (playerTurnIndex == players.Length - 1) 
 		{
 			playerTurnIndex = 0;
             globalTurnIndex++;
@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour {
 		}
         activePlayer = players [playerTurnIndex];
 		activePlayer.RefreshAllUnits ();
+        activePlayer.poweredUp = false;
         PlayerCursor.instance.TeleportCursorToLastTileOfCharacter();
         Map.instance.RecountPlayerPropierties();
         UI.instance.UpdateFundsDisplay();

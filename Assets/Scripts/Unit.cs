@@ -389,6 +389,7 @@ public class Unit : MonoBehaviour
         float rawDamage = (((attack * attackMultiplier) / 100f) + Random.Range(0, 9)) * (hp / 10f) * ((200f - (enemy.defenseMultiplier + enemy.originTile.typeOfTerrain.defensiveStat * enemy.hp)) / 100f);
         int actualDamage = (int)rawDamage / 10;
         enemy.ChangeHP(-actualDamage);
+
         //Counter
         if (ranged == false && enemy != null && enemy.ranged == false)
         {

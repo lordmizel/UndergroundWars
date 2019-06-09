@@ -20,6 +20,7 @@ public class Army : MonoBehaviour {
     int maxPowerIncrement;
     int timesPowerWasUsed = 0;
     public int currentSpecialPower = 0;
+    public bool poweredUp = false;
     
     public AudioClip armyTheme;
 
@@ -79,12 +80,15 @@ public class Army : MonoBehaviour {
 
     public void AddPower(int value)
     {
-        currentSpecialPower += value;
-        if(currentSpecialPower > currentMaxSpecialPower)
+        if (poweredUp == false)
         {
-            currentSpecialPower = currentMaxSpecialPower;
+            currentSpecialPower += value;
+            if (currentSpecialPower > currentMaxSpecialPower)
+            {
+                currentSpecialPower = currentMaxSpecialPower;
+            }
+            UI.instance.UpdatePowerDisplay();
         }
-        UI.instance.UpdatePowerDisplay();
     }
 
     public int GetPower()
@@ -106,6 +110,7 @@ public class Army : MonoBehaviour {
             currentMaxSpecialPower = currentMaxSpecialPower + (maxPowerIncrement * specialPowerSections);
         }
         UI.instance.UpdatePowerDisplay();
+        poweredUp = true;
     }
 
     public void SetLastPlaceOfCursor(int x, int y)
