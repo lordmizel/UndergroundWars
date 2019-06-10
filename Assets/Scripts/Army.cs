@@ -80,6 +80,7 @@ public class Army : MonoBehaviour {
 
     public void AddPower(int value)
     {
+        Debug.Log("Adding " + value);
         if (poweredUp == false)
         {
             currentSpecialPower += value;
