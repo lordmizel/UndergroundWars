@@ -390,6 +390,7 @@ public class Unit : MonoBehaviour
         int actualDamage = (int)rawDamage / 10;
         enemy.ChangeHP(-actualDamage);
         propietary.AddPower((int)((enemy.moneyValue / 10) * actualDamage) / 2);
+        enemy.propietary.AddPower((int)(enemy.moneyValue / 10) * actualDamage);
         //Counter
         if (ranged == false && enemy != null && enemy.ranged == false)
         {
@@ -397,6 +398,7 @@ public class Unit : MonoBehaviour
             actualDamage = (int)rawDamage / 10;
             ChangeHP(-actualDamage);
             propietary.AddPower((int)(moneyValue / 10) * actualDamage);
+            enemy.propietary.AddPower((int)((moneyValue / 10) * actualDamage) / 2);
         }
     }
 
