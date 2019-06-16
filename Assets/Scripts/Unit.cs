@@ -39,7 +39,8 @@ public class Unit : MonoBehaviour
     public ClickableTile originTile;
     public ClickableTile possibleDestination;
     public int movementPoints = 5;
-    bool unitMoving = false;
+    [HideInInspector]
+    public bool unitMoving = false;
     List<ClickableTile> path;
     float moveSpeed = 5f;
     public enum typeOfMovement

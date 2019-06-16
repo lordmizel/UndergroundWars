@@ -85,7 +85,7 @@ public class ClickableTile : MonoBehaviour {
 			} 
 			else 
 			{
-				if (unitAssigned == null || unitAssigned == GameManager.instance.unitSelected) 
+				if ((unitAssigned == null || unitAssigned == GameManager.instance.unitSelected) && GameManager.instance.unitSelected.unitMoving == false) 
 				{
 					GameManager.instance.unitSelected.StartMoving (Map.instance.unitMovementManager.CalculateShortestPath (GameManager.instance.unitSelected.originTile, this));
 				}
