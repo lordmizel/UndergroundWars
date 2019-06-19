@@ -101,7 +101,6 @@ public class Map : MonoBehaviour {
 	{
 		if (ranged == true) 
 		{
-			//TODO: Unit is ranged. Calculate attack matrix
 			List<ClickableTile> tilesItCanShootTo = unitMovementManager.CalculateRangeMatrix (x, y, maxRange, minRange);
 			foreach (ClickableTile tile in tilesItCanShootTo) 
 			{
@@ -113,10 +112,18 @@ public class Map : MonoBehaviour {
 			List<ClickableTile> tilesItCanMoveTo = unitMovementManager.CalculateMovementMatrix (x, y, movementPoints);
 			foreach (ClickableTile tile in tilesItCanMoveTo) 
 			{
-				foreach (ClickableTile neighbor in tile.neighbors) 
-				{
-					neighbor.ActivateAttackOverlay ();
-				}
+                if(maxRange == 0)
+                {
+                    //Unit cannot attack. Show only the tiles it can move to.
+                    tile.ActivateAttackOverlay();
+                }
+                else
+                {
+                    foreach (ClickableTile neighbor in tile.neighbors)
+                    {
+                        neighbor.ActivateAttackOverlay();
+                    }
+                }
 			}
 		}
 	}
