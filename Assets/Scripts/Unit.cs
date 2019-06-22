@@ -34,6 +34,8 @@ public class Unit : MonoBehaviour
     int attackIndex;
     [HideInInspector]
     public bool readyToAttack = false;
+    [HideInInspector]
+    public bool transportUnit = false;
 
     [Header("Movement stuff")]
     public ClickableTile originTile;
@@ -71,6 +73,7 @@ public class Unit : MonoBehaviour
     int capturePoints = 0;
     bool decidedToCapture = false;
 
+
     // Use this for initialization
     void Start()
     {
@@ -79,6 +82,11 @@ public class Unit : MonoBehaviour
         myAnimator = gameObject.GetComponent<Animator>();
 
         attackSpots = new List<ClickableTile>();
+
+        if(GetComponent<Cargo>() != null)
+        {
+            transportUnit = true;
+        }
 
         //TODO: This is only for debug
         originTile = Map.instance.GetTile(initialX, initialY);
