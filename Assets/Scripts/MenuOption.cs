@@ -6,6 +6,7 @@ public class MenuOption : MonoBehaviour {
 
 	public enum menuOptions{
 		ATTACK,
+        LOAD,
         CAPTURE,
 		WAIT,
         SUPER_POWER,
