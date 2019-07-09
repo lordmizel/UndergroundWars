@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-
     SpriteRenderer mySprite;
     Animator myAnimator;
     PlayerCursor cursor;
@@ -199,6 +198,14 @@ public class Unit : MonoBehaviour
         if (canCapture == true && possibleDestination.typeOfTerrain.capturable == true && possibleDestination.propietary != propietary)
         {
             InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.CAPTURE);
+        }
+        foreach(ClickableTile tile in possibleDestination.neighbors)
+        {
+            Unit neighboringUnit = tile.GetUnitAssigned();
+            if (neighboringUnit != null && neighboringUnit.propietary == GameManager.instance.activePlayer && neighboringUnit.transportUnit)
+            {
+                InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.LOAD);
+            }
         }
         InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.WAIT);
         InGameMenu.inGameMenu.ActivateMenu();

@@ -177,6 +177,7 @@ MonoBehaviour:
   menuPanel: {fileID: 1504158781}
   allOptions:
   - {fileID: 1477355071}
+  - {fileID: 1052231200}
   - {fileID: 382089122}
   - {fileID: 211923250}
   - {fileID: 879825954}
@@ -21298,7 +21299,7 @@ PrefabInstance:
     - target: {fileID: 114832705140298574, guid: b5543dd0689d3964aba5d951684de67a,
         type: 3}
       propertyPath: myOption
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114217791466869802, guid: b5543dd0689d3964aba5d951684de67a,
         type: 3}
@@ -28922,7 +28923,7 @@ PrefabInstance:
     - target: {fileID: 114832705140298574, guid: b5543dd0689d3964aba5d951684de67a,
         type: 3}
       propertyPath: myOption
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114217791466869802, guid: b5543dd0689d3964aba5d951684de67a,
         type: 3}
@@ -30767,6 +30768,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a33aa9ce9c8c9d4aae863c85571b54c, type: 3}
+--- !u!114 &1052231200 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114832705140298574, guid: b5543dd0689d3964aba5d951684de67a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2080766380}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5dd2be8372cf59468616beb2477709d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1053626058 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1444575258142006, guid: b89a174731f2efc4cb2c7298f252f730,
@@ -46713,7 +46726,7 @@ PrefabInstance:
     - target: {fileID: 114832705140298574, guid: b5543dd0689d3964aba5d951684de67a,
         type: 3}
       propertyPath: myOption
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114217791466869802, guid: b5543dd0689d3964aba5d951684de67a,
         type: 3}
@@ -47939,7 +47952,7 @@ PrefabInstance:
     - target: {fileID: 114832705140298574, guid: b5543dd0689d3964aba5d951684de67a,
         type: 3}
       propertyPath: myOption
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114217791466869802, guid: b5543dd0689d3964aba5d951684de67a,
         type: 3}
@@ -49313,7 +49326,7 @@ PrefabInstance:
     - target: {fileID: 114832705140298574, guid: b5543dd0689d3964aba5d951684de67a,
         type: 3}
       propertyPath: myOption
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114217791466869802, guid: b5543dd0689d3964aba5d951684de67a,
         type: 3}
@@ -51942,7 +51955,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1761796608720624, guid: b5543dd0689d3964aba5d951684de67a, type: 3}
       propertyPath: m_Name
-      value: Attack Option (1)
+      value: Load Option
       objectReference: {fileID: 0}
     - target: {fileID: 1761796608720624, guid: b5543dd0689d3964aba5d951684de67a, type: 3}
       propertyPath: m_IsActive
