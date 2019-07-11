@@ -199,12 +199,20 @@ public class Unit : MonoBehaviour
         {
             InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.CAPTURE);
         }
+        //Activate LOAD function in menu
         foreach(ClickableTile tile in possibleDestination.neighbors)
         {
             Unit neighboringUnit = tile.GetUnitAssigned();
             if (neighboringUnit != null && neighboringUnit.propietary == GameManager.instance.activePlayer && neighboringUnit.transportUnit)
             {
-                InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.LOAD);
+                Cargo unitCargo = neighboringUnit.GetComponent<Cargo>();
+                foreach(Unit.typeOfMovement movementClass in unitCargo.acceptedMovementTypes)
+                {
+                    if(movementType == movementClass)
+                    {
+                        InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.LOAD);
+                    }
+                }
             }
         }
         InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.WAIT);
