@@ -30,11 +30,11 @@ public class Unit : MonoBehaviour
     [SerializeField]
     int maxAttackRange = 1;
     List<ClickableTile> attackSpots;
-    int attackIndex;
+    List<ClickableTile> loadSpots;
+    public List<ClickableTile> interactableObjectives;
+    int objectiveIndex;
     [HideInInspector]
     public bool readyToAttack = false;
-    [HideInInspector]
-    public bool transportUnit = false;
 
     [Header("Movement stuff")]
     public ClickableTile originTile;
@@ -72,6 +72,12 @@ public class Unit : MonoBehaviour
     int capturePoints = 0;
     bool decidedToCapture = false;
 
+    [Header("Cargo stuff")]
+    [HideInInspector]
+    public bool transportUnit = false;
+    [HideInInspector]
+    public bool readyToLoad = false;
+
 
     // Use this for initialization
     void Start()
@@ -81,6 +87,8 @@ public class Unit : MonoBehaviour
         myAnimator = gameObject.GetComponent<Animator>();
 
         attackSpots = new List<ClickableTile>();
+        loadSpots = new List<ClickableTile>();
+        interactableObjectives = new List<ClickableTile>();
 
         if(GetComponent<Cargo>() != null)
         {
@@ -101,9 +109,9 @@ public class Unit : MonoBehaviour
         {
             OnMyMerryWay();
         }
-        if (GameManager.gameState == GameManager.state.SELECTING_ATTACK && GameManager.instance.unitSelected == this)
+        if (GameManager.gameState == GameManager.state.SELECTING_OBJECTIVE && GameManager.instance.unitSelected == this)
         {
-            SelectEnemyToAttack();
+            SelectObjective();
         }
     }
 
@@ -191,6 +199,7 @@ public class Unit : MonoBehaviour
                 if (tile.GetUnitAssigned() != null && tile.GetUnitAssigned().propietary != propietary)
                 {
                     attackSpots.Add(tile);
+                    //attackSpots.Add(tile);
                     InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.ATTACK);
                 }
             }
@@ -210,6 +219,7 @@ public class Unit : MonoBehaviour
                 {
                     if(movementType == movementClass)
                     {
+                        loadSpots.Add(tile);
                         InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.LOAD);
                     }
                 }
@@ -219,23 +229,6 @@ public class Unit : MonoBehaviour
         InGameMenu.inGameMenu.ActivateMenu();
         GameManager.gameState = GameManager.state.NAVIGATING_MENU;
     }
-
-    //void GetMyAttackRange()
-    //{
-    //    if (ranged == false || unitHasMoved == false)
-    //    {
-    //        List<ClickableTile> tilesInAttackRange = Map.instance.unitMovementManager.CalculateRangeMatrix((int)PlayerCursor.instance.transform.position.x, (int)PlayerCursor.instance.transform.position.y, maxAttackRange, minAttackRange);
-    //        foreach (ClickableTile tile in tilesInAttackRange)
-    //        {
-    //            tile.ActivateAttackOverlay();
-    //            if (tile.GetUnitAssigned() != null && tile.GetUnitAssigned().propietary != propietary)
-    //            {
-    //                attackSpots.Add(tile);
-    //                InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.ATTACK);
-    //            }
-    //        }
-    //    }
-    //}
 
     void ChangeRunningAnimation(float nextX, float nextY)
     {
@@ -293,6 +286,8 @@ public class Unit : MonoBehaviour
         gameObject.transform.position = new Vector3(originTile.GetTileCoordX(), originTile.GetTileCoordY(), gameObject.transform.position.z);
         GameManager.instance.unitSelected = null;
         attackSpots.Clear();
+        loadSpots.Clear();
+        interactableObjectives.Clear();
         unitHasMoved = false;
         Map.instance.ReturnTilesToNormal();
         cursor.TeleportCursorToTile(originTile.GetTileCoordX(), originTile.GetTileCoordY());
@@ -309,6 +304,8 @@ public class Unit : MonoBehaviour
     public void RefreshUnit()
     {
         attackSpots.Clear();
+        loadSpots.Clear();
+        interactableObjectives.Clear();
         GrayUnGray(false);
         unitHasMoved = false;
         unitUsed = false;
@@ -351,37 +348,47 @@ public class Unit : MonoBehaviour
 
     public void PrepareToAttack()
     {
-        attackIndex = 0;
+        objectiveIndex = 0;
         readyToAttack = true;
+        interactableObjectives = attackSpots;
         //GetMyAttackRange();
-        PinpointEnemy(attackSpots[attackIndex]);
+        PinpointUnit(interactableObjectives[objectiveIndex]);
     }
 
-    void SelectEnemyToAttack()
+    public void PrepareToLoad()
+    {
+        objectiveIndex = 0;
+        readyToLoad = true;
+        interactableObjectives = loadSpots;
+        //GetMyAttackRange();
+        PinpointUnit(interactableObjectives[objectiveIndex]);
+    }
+
+    void SelectObjective()
     {
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.D))
         {
-            if (attackIndex >= attackSpots.Count - 1)
+            if (objectiveIndex >= interactableObjectives.Count - 1)
             {
-                attackIndex = 0;
+                objectiveIndex = 0;
             }
             else
             {
-                attackIndex++;
+                objectiveIndex++;
             }
-            PinpointEnemy(attackSpots[attackIndex]);
+            PinpointUnit(interactableObjectives[objectiveIndex]);
         }
         else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S))
         {
-            if (attackIndex <= 0)
+            if (objectiveIndex <= 0)
             {
-                attackIndex = attackSpots.Count - 1;
+                objectiveIndex = interactableObjectives.Count - 1;
             }
             else
             {
-                attackIndex--;
+                objectiveIndex--;
             }
-            PinpointEnemy(attackSpots[attackIndex]);
+            PinpointUnit(interactableObjectives[objectiveIndex]);
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -389,22 +396,22 @@ public class Unit : MonoBehaviour
             //Map.instance.ReturnTilesToNormal();
         }
     }
+    
+    void PinpointUnit(ClickableTile objective)
+    {
+        cursor.TeleportCursorToTile(objective.GetTileCoordX(), objective.GetTileCoordY());
+    }
 
     public void AttackNow()
     {
         if (readyToAttack == true)
         {
-            AttackUnit(attackSpots[attackIndex].GetUnitAssigned());
+            AttackUnit(interactableObjectives[objectiveIndex].GetUnitAssigned());
             EstablishNewTile();
 
             //TODO: Maybe should go to another state while the attack transpires before going back to moving the cursor
             GameManager.gameState = GameManager.state.MOVING_CURSOR;
         }
-    }
-
-    void PinpointEnemy(ClickableTile objective)
-    {
-        cursor.TeleportCursorToTile(objective.GetTileCoordX(), objective.GetTileCoordY());
     }
 
     void AttackUnit(Unit enemy)
@@ -465,5 +472,10 @@ public class Unit : MonoBehaviour
         {
             possibleDestination.ChangePropietary(propietary);
         }
+    }
+
+    public void LoadIntoCargo()
+    {
+        Debug.Log("Cargo done");
     }
 }

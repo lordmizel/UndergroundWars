@@ -94,14 +94,14 @@ public class InGameMenu : MonoBehaviour
             case MenuOption.menuOptions.ATTACK:
                 GameManager.instance.attackingWasSelected = true;
                 GameManager.instance.unitSelected.PrepareToAttack();
-                GameManager.gameState = GameManager.state.SELECTING_ATTACK;
+                GameManager.gameState = GameManager.state.SELECTING_OBJECTIVE;
                 Debug.Log("Attack selected");
                 break;
             case MenuOption.menuOptions.LOAD:
                 //TODO: Program loading option
                 Debug.Log("Load selected");
-                GameManager.instance.unitSelected.EstablishNewTile();
-                GameManager.gameState = GameManager.state.MOVING_CURSOR;
+                GameManager.instance.unitSelected.PrepareToLoad();
+                GameManager.gameState = GameManager.state.SELECTING_OBJECTIVE;
                 break;
             case MenuOption.menuOptions.CAPTURE:
                 GameManager.instance.unitSelected.CaptureTile();

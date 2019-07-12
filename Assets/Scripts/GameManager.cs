@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
 		IDLE,
 		MOVING_UNIT,
 		NAVIGATING_MENU,
-		SELECTING_ATTACK,
+		SELECTING_OBJECTIVE,
 		CHECKING_ENEMY_UNIT
 	}
 
@@ -66,9 +66,16 @@ public class GameManager : MonoBehaviour {
             {
                 PlayerCursor.instance.GetCurrentTile();
             }
-            else if(gameState == state.SELECTING_ATTACK)
+            else if(gameState == state.SELECTING_OBJECTIVE)
             {
-                unitSelected.AttackNow();
+                if (unitSelected.readyToAttack)
+                {
+                    unitSelected.AttackNow();
+                }
+                else if (unitSelected.readyToLoad)
+                {
+                    unitSelected.LoadIntoCargo();
+                }
             }
         }
 
