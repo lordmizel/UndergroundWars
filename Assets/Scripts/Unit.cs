@@ -215,12 +215,15 @@ public class Unit : MonoBehaviour
             if (neighboringUnit != null && neighboringUnit.propietary == GameManager.instance.activePlayer && neighboringUnit.transportUnit)
             {
                 Cargo unitCargo = neighboringUnit.GetComponent<Cargo>();
-                foreach(Unit.typeOfMovement movementClass in unitCargo.acceptedMovementTypes)
+                if (unitCargo.HasFreeSlots())
                 {
-                    if(movementType == movementClass)
+                    foreach (Unit.typeOfMovement movementClass in unitCargo.acceptedMovementTypes)
                     {
-                        loadSpots.Add(tile);
-                        InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.LOAD);
+                        if (movementType == movementClass)
+                        {
+                            loadSpots.Add(tile);
+                            InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.LOAD);
+                        }
                     }
                 }
             }
