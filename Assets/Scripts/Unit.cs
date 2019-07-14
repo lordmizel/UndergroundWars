@@ -479,6 +479,13 @@ public class Unit : MonoBehaviour
 
     public void LoadIntoCargo()
     {
-        Debug.Log("Cargo done");
+        if (readyToLoad == true)
+        {
+            originTile.UnassignUnit();
+            interactableObjectives[objectiveIndex].GetUnitAssigned().GetComponent<Cargo>().LoadUnit(this);
+
+            GameManager.gameState = GameManager.state.MOVING_CURSOR;
+            gameObject.SetActive(false);
+        }
     }
 }
