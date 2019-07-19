@@ -34,6 +34,18 @@ public class Cargo : MonoBehaviour
         return false;
     }
 
+    public bool HasUnitsLoaded()
+    {
+        foreach (Unit slot in cargoSlots)
+        {
+            if (slot != null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void LoadUnit(Unit unit)
     {
         for(int i = 0; i < cargoSlots.Length; i++)

@@ -228,6 +228,13 @@ public class Unit : MonoBehaviour
                 }
             }
         }
+        if (transportUnit)
+        {
+            if (GetComponent<Cargo>().HasUnitsLoaded())
+            {
+                InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.UNLOAD);
+            }
+        }
         InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.WAIT);
         InGameMenu.inGameMenu.ActivateMenu();
         GameManager.gameState = GameManager.state.NAVIGATING_MENU;

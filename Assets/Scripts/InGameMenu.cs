@@ -105,6 +105,8 @@ public class InGameMenu : MonoBehaviour
                 break;
             case MenuOption.menuOptions.UNLOAD:
                 Debug.Log("Unload selected");
+                GameManager.instance.unitSelected.EstablishNewTile();
+                GameManager.gameState = GameManager.state.MOVING_CURSOR;
                 break;
             case MenuOption.menuOptions.CAPTURE:
                 GameManager.instance.unitSelected.CaptureTile();
