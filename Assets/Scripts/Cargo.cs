@@ -50,7 +50,11 @@ public class Cargo : MonoBehaviour
     {
         for(int i = 0; i < cargoSlots.Length; i++)
         {
-            cargoSlots[i] = unit;
+            if (cargoSlots[i] == null)
+            {
+                cargoSlots[i] = unit;
+                break;
+            }
         }
     }
 }
