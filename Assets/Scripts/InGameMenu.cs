@@ -9,11 +9,15 @@ public class InGameMenu : MonoBehaviour
 
     [SerializeField]
     GameObject menuPanel;
+    [SerializeField]
+    CargoMenu cargoMenu;
 
     [SerializeField]
     List<MenuOption> allOptions;
 
     List<MenuOption> optionsShowing = new List<MenuOption>();
+
+    
 
     int optionIndex = 0;
 
@@ -105,7 +109,8 @@ public class InGameMenu : MonoBehaviour
                 break;
             case MenuOption.menuOptions.UNLOAD:
                 Debug.Log("Unload selected");
-                GameManager.instance.unitSelected.EstablishNewTile();
+                //GameManager.instance.unitSelected.EstablishNewTile();
+                GameManager.instance.unitSelected.GetComponent<Cargo>().BeginUnload();
                 GameManager.gameState = GameManager.state.MOVING_CURSOR;
                 break;
             case MenuOption.menuOptions.CAPTURE:

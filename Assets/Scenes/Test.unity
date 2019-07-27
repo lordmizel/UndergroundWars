@@ -177,6 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuPanel: {fileID: 1504158781}
+  cargoMenu: {fileID: 893900}
   allOptions:
   - {fileID: 1477355071}
   - {fileID: 1052231200}
