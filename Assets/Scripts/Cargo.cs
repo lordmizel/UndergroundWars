@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Cargo : MonoBehaviour
 {
+    public static CargoMenu instance;
+
     public List<Unit.typeOfMovement> acceptedMovementTypes;
     [SerializeField]
     int cargoSpace = 1;
-
+    
     public Unit[] cargoSlots;
-
-    CargoMenu cargoMenu;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         cargoSlots = new Unit[cargoSpace];
-        cargoMenu = FindObjectOfType<CargoMenu>();
     }
 
     // Update is called once per frame
@@ -63,6 +63,6 @@ public class Cargo : MonoBehaviour
 
     public void BeginUnload()
     {
-        cargoMenu.ActivateUnitCargoMenu(cargoSlots);
+        CargoMenu.instance.ActivateUnitCargoMenu(cargoSlots);
     }
 }

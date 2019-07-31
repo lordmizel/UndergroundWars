@@ -5,12 +5,19 @@ using UnityEngine.UI;
 
 public class CargoMenu : MonoBehaviour
 {
+    public static CargoMenu instance;
+
     [SerializeField]
     GameObject menuContainer;
     [SerializeField]
     List<GameObject> unitButtons;
     [SerializeField]
     List<Text> buttonTexts;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()

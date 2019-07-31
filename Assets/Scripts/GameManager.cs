@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
 		IDLE,
 		MOVING_UNIT,
 		NAVIGATING_MENU,
+        NAVIGATING_CARGO_MENU,
 		SELECTING_OBJECTIVE,
 		CHECKING_ENEMY_UNIT
 	}
