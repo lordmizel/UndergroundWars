@@ -14,6 +14,9 @@ public class CargoMenu : MonoBehaviour
     [SerializeField]
     List<Text> buttonTexts;
 
+    List<GameObject> activeButtons;
+    int buttonIndex = 0;
+
     void Awake()
     {
         instance = this;
@@ -28,11 +31,16 @@ public class CargoMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (GameManager.gameState == GameManager.state.NAVIGATING_CARGO_MENU)
+        {
+            SelectMenuOption();
+        }
     }
 
     public void ActivateUnitCargoMenu(Unit[] unitsToShow)
     {
+        activeButtons = new List<GameObject>();
+        buttonIndex = 0;
         menuContainer.SetActive(true);
         for (int x = 0; x < unitsToShow.Length; x++)
         {
@@ -40,8 +48,11 @@ public class CargoMenu : MonoBehaviour
             {
                 buttonTexts[x].text = unitsToShow[x].name;
                 unitButtons[x].SetActive(true);
+                activeButtons.Add(unitButtons[x]);
+                activeButtons[x].GetComponent<Image>().color = Color.white;
             }
         }
+        activeButtons[0].GetComponent<Image>().color = Color.yellow;
     }
 
     public void DeactivateUnitCargoMenu()
@@ -50,6 +61,36 @@ public class CargoMenu : MonoBehaviour
         {
             buttonTexts[x].text = "";
             unitButtons[x].SetActive(false);
+        }
+    }
+
+    void SelectMenuOption()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            activeButtons[buttonIndex].GetComponent<Image>().color = Color.white;
+            if (buttonIndex != 0)
+            {
+                buttonIndex--;
+            }
+            else
+            {
+                buttonIndex =  activeButtons.Count - 1;
+            }
+            activeButtons[buttonIndex].GetComponent<Image>().color = Color.yellow;
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            activeButtons[buttonIndex].GetComponent<Image>().color = Color.white;
+            if (buttonIndex != activeButtons.Count - 1)
+            {
+                buttonIndex++;
+            }
+            else
+            {
+                buttonIndex = 0;
+            }
+            activeButtons[buttonIndex].GetComponent<Image>().color = Color.yellow;
         }
     }
 }
