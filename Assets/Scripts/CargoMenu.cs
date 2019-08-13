@@ -62,6 +62,7 @@ public class CargoMenu : MonoBehaviour
             buttonTexts[x].text = "";
             unitButtons[x].SetActive(false);
         }
+        menuContainer.SetActive(false);
     }
 
     void SelectMenuOption()
@@ -91,6 +92,11 @@ public class CargoMenu : MonoBehaviour
                 buttonIndex = 0;
             }
             activeButtons[buttonIndex].GetComponent<Image>().color = Color.yellow;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            DeactivateUnitCargoMenu();
+            GameManager.instance.unitSelected.ArrivedAtDestination(GameManager.instance.unitSelected.possibleDestination.GetTileCoordX(), GameManager.instance.unitSelected.possibleDestination.GetTileCoordY());
         }
     }
 }
