@@ -80,7 +80,7 @@ public class CargoMenu : MonoBehaviour
             }
             activeButtons[buttonIndex].GetComponent<Image>().color = Color.yellow;
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.S))
         {
             activeButtons[buttonIndex].GetComponent<Image>().color = Color.white;
             if (buttonIndex != activeButtons.Count - 1)
@@ -93,10 +93,15 @@ public class CargoMenu : MonoBehaviour
             }
             activeButtons[buttonIndex].GetComponent<Image>().color = Color.yellow;
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        else if (Input.GetKeyDown(KeyCode.Escape))
         {
             DeactivateUnitCargoMenu();
             GameManager.instance.unitSelected.ArrivedAtDestination(GameManager.instance.unitSelected.possibleDestination.GetTileCoordX(), GameManager.instance.unitSelected.possibleDestination.GetTileCoordY());
+        }
+        else if (Input.GetKeyDown(KeyCode.Return))
+        {
+            DeactivateUnitCargoMenu();
+            GameManager.instance.unitSelected.GetComponent<Cargo>().UnloadUnitSelected(buttonIndex);
         }
     }
 }

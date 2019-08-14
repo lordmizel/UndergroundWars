@@ -61,8 +61,13 @@ public class Cargo : MonoBehaviour
         }
     }
 
-    public void BeginUnload()
+    public void UnloadSelected()
     {
         CargoMenu.instance.ActivateUnitCargoMenu(cargoSlots);
+    }
+
+    public void UnloadUnitSelected(int unitIndex)
+    {
+
     }
 }
