@@ -101,7 +101,7 @@ public class CargoMenu : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Return))
         {
             DeactivateUnitCargoMenu();
-            GameManager.instance.unitSelected.GetComponent<Cargo>().UnloadUnitSelected(buttonIndex);
+            GameManager.instance.unitSelected.GetComponent<Cargo>().GetUnloadArea(buttonIndex);
         }
     }
 }

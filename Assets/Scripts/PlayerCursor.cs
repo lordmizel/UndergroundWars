@@ -28,12 +28,20 @@ public class PlayerCursor : MonoBehaviour
 		}
 	}
 
-	public void TeleportCursorToTile(int x, int y)
-	{
-		currentPositionX = x;
-		currentPositionY = y;
-		SetCursorPosition ();
-	}
+    public void PinPointTile(ClickableTile tile)
+    {
+        //TeleportCursorToTile(tile.GetTileCoordX(), tile.GetTileCoordY());
+        currentPositionX = tile.GetTileCoordX();
+        currentPositionY = tile.GetTileCoordY();
+        SetCursorPosition();
+    }
+
+	//public void TeleportCursorToTile(int x, int y)
+	//{
+	//	currentPositionX = x;
+	//	currentPositionY = y;
+	//	SetCursorPosition ();
+	//}
 
 	void SetCursorPosition()
 	{
@@ -91,6 +99,7 @@ public class PlayerCursor : MonoBehaviour
 
     public void TeleportCursorToLastTileOfCharacter()
     {
-        TeleportCursorToTile((int)GameManager.instance.activePlayer.GetPlaceOfCursor().x, (int)GameManager.instance.activePlayer.GetPlaceOfCursor().y);
+        Vector2 location = GameManager.instance.activePlayer.GetPlaceOfCursor();
+        PinPointTile(Map.instance.GetTile((int)location.x, (int)location.y));
     }
 }

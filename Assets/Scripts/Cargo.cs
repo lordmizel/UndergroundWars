@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Cargo : MonoBehaviour
 {
-    public static CargoMenu instance;
+    Unit mainUnitController;
 
     public List<Unit.typeOfMovement> acceptedMovementTypes;
     [SerializeField]
     int cargoSpace = 1;
+
     
     public Unit[] cargoSlots;
     
@@ -16,6 +17,7 @@ public class Cargo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mainUnitController = gameObject.GetComponent<Unit>();
         cargoSlots = new Unit[cargoSpace];
     }
 
@@ -66,8 +68,18 @@ public class Cargo : MonoBehaviour
         CargoMenu.instance.ActivateUnitCargoMenu(cargoSlots);
     }
 
-    public void UnloadUnitSelected(int unitIndex)
+    public void GetUnloadArea(int unitIndex)
     {
-
+        List<ClickableTile> validUnloadTiles = new List<ClickableTile>();
+        foreach (ClickableTile tile in mainUnitController.possibleDestination.neighbors)
+        {
+            validUnloadTiles.Add(tile);
+        }
+        int objectiveIndex = 0;
+        //readyToLoad = true;
+        //interactableObjectives = validUnloadTiles;
+        //GetMyAttackRange();
+        PlayerCursor.instance.PinPointTile(validUnloadTiles[objectiveIndex]);
+        GameManager.gameState = GameManager.state.SELECTING_OBJECTIVE;
     }
 }

@@ -6,7 +6,7 @@ public class Unit : MonoBehaviour
 {
     SpriteRenderer mySprite;
     Animator myAnimator;
-    PlayerCursor cursor;
+    //PlayerCursor cursor;
     [SerializeField]
     SpriteRenderer hpSprite;
     [SerializeField]
@@ -83,7 +83,7 @@ public class Unit : MonoBehaviour
     void Start()
     {
         mySprite = gameObject.GetComponent<SpriteRenderer>();
-        cursor = FindObjectOfType<PlayerCursor>();
+        //cursor = FindObjectOfType<PlayerCursor>();
         myAnimator = gameObject.GetComponent<Animator>();
 
         attackSpots = new List<ClickableTile>();
@@ -189,7 +189,8 @@ public class Unit : MonoBehaviour
             myAnimator.SetTrigger("idleState");
         }
         possibleDestination = Map.instance.GetTile(x, y);
-        cursor.TeleportCursorToTile(x, y);
+        PlayerCursor.instance.PinPointTile(possibleDestination);
+        //cursor.TeleportCursorToTile(x, y);
         if (ranged == false || unitHasMoved == false)
         {
             List<ClickableTile> tilesInAttackRange = Map.instance.unitMovementManager.CalculateRangeMatrix(x, y, maxAttackRange, minAttackRange);
@@ -300,7 +301,8 @@ public class Unit : MonoBehaviour
         interactableObjectives.Clear();
         unitHasMoved = false;
         Map.instance.ReturnTilesToNormal();
-        cursor.TeleportCursorToTile(originTile.GetTileCoordX(), originTile.GetTileCoordY());
+        PlayerCursor.instance.PinPointTile(originTile);
+        //cursor.TeleportCursorToTile(originTile.GetTileCoordX(), originTile.GetTileCoordY());
     }
 
     //Unit has already moved and won't be used again this turn
@@ -362,7 +364,7 @@ public class Unit : MonoBehaviour
         readyToAttack = true;
         interactableObjectives = attackSpots;
         //GetMyAttackRange();
-        PinpointUnit(interactableObjectives[objectiveIndex]);
+        PlayerCursor.instance.PinPointTile(interactableObjectives[objectiveIndex]);
     }
 
     public void PrepareToLoad()
@@ -371,7 +373,7 @@ public class Unit : MonoBehaviour
         readyToLoad = true;
         interactableObjectives = loadSpots;
         //GetMyAttackRange();
-        PinpointUnit(interactableObjectives[objectiveIndex]);
+        PlayerCursor.instance.PinPointTile(interactableObjectives[objectiveIndex]);
     }
 
     void SelectObjective()
@@ -386,7 +388,7 @@ public class Unit : MonoBehaviour
             {
                 objectiveIndex++;
             }
-            PinpointUnit(interactableObjectives[objectiveIndex]);
+            PlayerCursor.instance.PinPointTile(interactableObjectives[objectiveIndex]);
         }
         else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S))
         {
@@ -398,7 +400,7 @@ public class Unit : MonoBehaviour
             {
                 objectiveIndex--;
             }
-            PinpointUnit(interactableObjectives[objectiveIndex]);
+            PlayerCursor.instance.PinPointTile(interactableObjectives[objectiveIndex]);
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -407,11 +409,6 @@ public class Unit : MonoBehaviour
         }
     }
     
-    void PinpointUnit(ClickableTile objective)
-    {
-        cursor.TeleportCursorToTile(objective.GetTileCoordX(), objective.GetTileCoordY());
-    }
-
     public void AttackNow()
     {
         if (readyToAttack == true)
