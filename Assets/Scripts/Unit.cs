@@ -31,6 +31,7 @@ public class Unit : MonoBehaviour
     int maxAttackRange = 1;
     List<ClickableTile> attackSpots;
     List<ClickableTile> loadSpots;
+    public List<ClickableTile> unloadSpots;
     public List<ClickableTile> interactableObjectives;
     int objectiveIndex;
     [HideInInspector]
@@ -77,6 +78,8 @@ public class Unit : MonoBehaviour
     public bool transportUnit = false;
     [HideInInspector]
     public bool readyToLoad = false;
+    [HideInInspector]
+    public bool readyToUnload = false;
 
 
     // Use this for initialization
@@ -88,6 +91,7 @@ public class Unit : MonoBehaviour
 
         attackSpots = new List<ClickableTile>();
         loadSpots = new List<ClickableTile>();
+        unloadSpots = new List<ClickableTile>();
         interactableObjectives = new List<ClickableTile>();
 
         if(GetComponent<Cargo>() != null)
@@ -298,6 +302,7 @@ public class Unit : MonoBehaviour
         GameManager.instance.unitSelected = null;
         attackSpots.Clear();
         loadSpots.Clear();
+        unloadSpots.Clear();
         interactableObjectives.Clear();
         unitHasMoved = false;
         Map.instance.ReturnTilesToNormal();
@@ -317,6 +322,7 @@ public class Unit : MonoBehaviour
     {
         attackSpots.Clear();
         loadSpots.Clear();
+        unloadSpots.Clear();
         interactableObjectives.Clear();
         GrayUnGray(false);
         unitHasMoved = false;
@@ -358,22 +364,24 @@ public class Unit : MonoBehaviour
         mySprite.color = Color.HSVToRGB(h, s, v);
     }
 
-    public void PrepareToAttack()
+    public void LayOutInteractableTiles(List<ClickableTile> interactableTiles)
     {
         objectiveIndex = 0;
-        readyToAttack = true;
-        interactableObjectives = attackSpots;
+        interactableObjectives = interactableTiles;
         //GetMyAttackRange();
         PlayerCursor.instance.PinPointTile(interactableObjectives[objectiveIndex]);
     }
 
+    public void PrepareToAttack()
+    {
+        LayOutInteractableTiles(attackSpots);
+        readyToAttack = true;
+    }
+
     public void PrepareToLoad()
     {
-        objectiveIndex = 0;
+        LayOutInteractableTiles(loadSpots);
         readyToLoad = true;
-        interactableObjectives = loadSpots;
-        //GetMyAttackRange();
-        PlayerCursor.instance.PinPointTile(interactableObjectives[objectiveIndex]);
     }
 
     void SelectObjective()
@@ -485,6 +493,7 @@ public class Unit : MonoBehaviour
     {
         if (readyToLoad == true)
         {
+            readyToLoad = false;
             originTile.UnassignUnit();
             interactableObjectives[objectiveIndex].GetUnitAssigned().GetComponent<Cargo>().LoadUnit(this);
 

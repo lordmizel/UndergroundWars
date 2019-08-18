@@ -10,6 +10,8 @@ public class Cargo : MonoBehaviour
     [SerializeField]
     int cargoSpace = 1;
 
+    public bool unloadingUnit = false;
+
     
     public Unit[] cargoSlots;
     
@@ -65,21 +67,22 @@ public class Cargo : MonoBehaviour
 
     public void UnloadSelected()
     {
+        unloadingUnit = true;
         CargoMenu.instance.ActivateUnitCargoMenu(cargoSlots);
     }
 
-    public void GetUnloadArea(int unitIndex)
+    public List<ClickableTile> GetUnloadArea(int unitIndex)
     {
         List<ClickableTile> validUnloadTiles = new List<ClickableTile>();
         foreach (ClickableTile tile in mainUnitController.possibleDestination.neighbors)
         {
             validUnloadTiles.Add(tile);
         }
-        int objectiveIndex = 0;
-        //readyToLoad = true;
-        //interactableObjectives = validUnloadTiles;
-        //GetMyAttackRange();
-        PlayerCursor.instance.PinPointTile(validUnloadTiles[objectiveIndex]);
-        GameManager.gameState = GameManager.state.SELECTING_OBJECTIVE;
+        return validUnloadTiles;
+    }
+
+    public void UnloadUnitInTile()
+    {
+
     }
 }
