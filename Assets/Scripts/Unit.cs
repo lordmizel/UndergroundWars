@@ -496,6 +496,7 @@ public class Unit : MonoBehaviour
             readyToLoad = false;
             originTile.UnassignUnit();
             interactableObjectives[objectiveIndex].GetUnitAssigned().GetComponent<Cargo>().LoadUnit(this);
+            Map.instance.ReturnTilesToNormal();
 
             GameManager.gameState = GameManager.state.MOVING_CURSOR;
             gameObject.SetActive(false);
