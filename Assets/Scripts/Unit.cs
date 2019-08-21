@@ -502,4 +502,9 @@ public class Unit : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
+    public ClickableTile GetSelectedTile()
+    {
+        return interactableObjectives[objectiveIndex];
+    }
 }

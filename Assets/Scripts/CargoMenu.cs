@@ -15,7 +15,7 @@ public class CargoMenu : MonoBehaviour
     List<Text> buttonTexts;
 
     List<GameObject> activeButtons;
-    int buttonIndex = 0;
+    public int buttonIndex = 0;
 
     void Awake()
     {
