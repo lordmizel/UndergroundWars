@@ -86,6 +86,11 @@ public class Cargo : MonoBehaviour
         Unit unitUnloaded = cargoSlots[CargoMenu.instance.buttonIndex];
         cargoSlots[CargoMenu.instance.buttonIndex] = null;
         unitUnloaded.gameObject.SetActive(true);
-        unitUnloaded.transform.position = new Vector3(mainUnitController.GetSelectedTile().GetTileCoordX(), mainUnitController.GetSelectedTile().GetTileCoordY(), 0);
+        unitUnloaded.possibleDestination = mainUnitController.GetSelectedTile();
+        unitUnloaded.EstablishNewTile();
+        mainUnitController.EstablishNewTile();
+
+        GameManager.gameState = GameManager.state.MOVING_CURSOR;
+        //unitUnloaded.transform.position = new Vector3(mainUnitController.GetSelectedTile().GetTileCoordX(), mainUnitController.GetSelectedTile().GetTileCoordY(), 0);
     }
 }
