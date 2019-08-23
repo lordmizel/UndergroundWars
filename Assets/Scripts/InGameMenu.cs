@@ -88,11 +88,13 @@ public class InGameMenu : MonoBehaviour
 
     public void SelectCurrentMenuOption()
     {
-        SelectOption(optionIndex);
+        StartCoroutine(SelectOption(optionIndex));
     }
 
-    void SelectOption(int optionSelected)
+    IEnumerator SelectOption(int optionSelected)
     {
+        yield return new WaitForEndOfFrame();
+
         switch (optionsShowing[optionSelected].myOption)
         {
             case MenuOption.menuOptions.ATTACK:
