@@ -76,7 +76,11 @@ public class Cargo : MonoBehaviour
         List<ClickableTile> validUnloadTiles = new List<ClickableTile>();
         foreach (ClickableTile tile in mainUnitController.possibleDestination.neighbors)
         {
-            validUnloadTiles.Add(tile);
+            //TODO: Make sure the initial tile of the unloading unit can be chosen as well
+            if(tile.GetUnitAssigned() == null)
+            {
+                validUnloadTiles.Add(tile);
+            }
         }
         return validUnloadTiles;
     }
