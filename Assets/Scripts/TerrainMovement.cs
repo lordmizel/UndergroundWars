@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class TerrainMovement : MonoBehaviour {
 
+    public static TerrainMovement instance;
+
 	Map map;
 
 	int[,] movementCostMatrix = new int[,] 
@@ -21,8 +23,13 @@ public class TerrainMovement : MonoBehaviour {
         {1, 1, 1, 1}
     };
 
-	// Use this for initialization
-	void Start () 
+    void Awake()
+    {
+        instance = this;
+    }
+
+    // Use this for initialization
+    void Start () 
 	{
 		map = gameObject.GetComponent<Map> ();
 
@@ -169,7 +176,7 @@ public class TerrainMovement : MonoBehaviour {
 		return Math.Abs (origin.GetTileCoordX() - destination.GetTileCoordX ()) + Math.Abs (origin.GetTileCoordY() - destination.GetTileCoordY ());
 	}
 
-	int GetCostForMovementType(int movementType, int terrainType)
+	public int GetCostForMovementType(int movementType, int terrainType)
 	{
 		return movementCostMatrix [terrainType, movementType];
 	}

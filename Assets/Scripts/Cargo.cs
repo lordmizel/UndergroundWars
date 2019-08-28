@@ -78,7 +78,10 @@ public class Cargo : MonoBehaviour
         {
             if(tile.GetUnitAssigned() == null || tile.GetUnitAssigned() == GameManager.instance.unitSelected)
             {
-                validUnloadTiles.Add(tile);
+                if(TerrainMovement.instance.GetCostForMovementType((int)cargoSlots[unitIndex].movementType, (int)tile.typeOfTerrain.terrainName) < cargoSlots[unitIndex].movementPoints)
+                {
+                    validUnloadTiles.Add(tile);
+                }
             }
         }
         return validUnloadTiles;
