@@ -96,7 +96,14 @@ public class Cargo : MonoBehaviour
         unitUnloaded.EstablishNewTile();
         mainUnitController.EstablishNewTile();
 
-        GameManager.gameState = GameManager.state.MOVING_CURSOR;
-        //unitUnloaded.transform.position = new Vector3(mainUnitController.GetSelectedTile().GetTileCoordX(), mainUnitController.GetSelectedTile().GetTileCoordY(), 0);
+        //TODO: Algorithm for when it has more units left in cargo.
+        if (HasUnitsLoaded())
+        {
+            Debug.Log("More units left");
+        }
+        else
+        {
+            GameManager.gameState = GameManager.state.MOVING_CURSOR;
+        }
     }
 }
