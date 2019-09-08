@@ -41,17 +41,19 @@ public class CargoMenu : MonoBehaviour
     {
         activeButtons = new List<GameObject>();
         buttonIndex = 0;
-        menuContainer.SetActive(true);
         for (int x = 0; x < unitsToShow.Length; x++)
         {
+            Debug.Log(unitsToShow[x]);
             if (unitsToShow[x] != null)
             {
                 buttonTexts[x].text = unitsToShow[x].name;
                 unitButtons[x].SetActive(true);
+                unitButtons[x].GetComponent<Image>().color = Color.white;
                 activeButtons.Add(unitButtons[x]);
-                activeButtons[x].GetComponent<Image>().color = Color.white;
+                
             }
         }
+        menuContainer.SetActive(true);
         activeButtons[0].GetComponent<Image>().color = Color.yellow;
     }
 

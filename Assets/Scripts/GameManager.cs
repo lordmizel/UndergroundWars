@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour {
                     Cargo unitCargo = unitSelected.GetComponent<Cargo>();
                     if(unitCargo != null && unitCargo.unloadingUnit)
                     {
-                        unitCargo.UnloadUnitInTile();
+                        StartCoroutine(unitCargo.UnloadUnitInTile());
                     }
                 }
             }

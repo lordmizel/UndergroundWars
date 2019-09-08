@@ -87,23 +87,50 @@ public class Cargo : MonoBehaviour
         return validUnloadTiles;
     }
 
-    public void UnloadUnitInTile()
+    public IEnumerator UnloadUnitInTile()
     {
+        yield return new WaitForEndOfFrame();
+
         Unit unitUnloaded = cargoSlots[CargoMenu.instance.buttonIndex];
         cargoSlots[CargoMenu.instance.buttonIndex] = null;
         unitUnloaded.gameObject.SetActive(true);
         unitUnloaded.possibleDestination = mainUnitController.GetSelectedTile();
         unitUnloaded.EstablishNewTile();
-        mainUnitController.EstablishNewTile();
+        //mainUnitController.EstablishNewTile();
 
         //TODO: Algorithm for when it has more units left in cargo.
         if (HasUnitsLoaded())
         {
-            Debug.Log("More units left");
+            ReorganizeCargo();
+            GameManager.instance.unitSelected = mainUnitController;
+            UnloadSelected();
+            GameManager.gameState = GameManager.state.NAVIGATING_CARGO_MENU;
         }
         else
         {
             GameManager.gameState = GameManager.state.MOVING_CURSOR;
         }
     }
+
+    void ReorganizeCargo()
+    {
+        List<Unit> unitsStillInCargo = new List<Unit>();
+        for(int x = 0; x < cargoSlots.Length; x++)
+        {
+            if(cargoSlots[x] != null)
+            {
+                unitsStillInCargo.Add(cargoSlots[x]);
+                cargoSlots[x] = null;
+            }
+        }
+
+        int i = 0;
+        foreach(Unit unit in unitsStillInCargo)
+        {
+            cargoSlots[i] = unit;
+            i++;
+        }
+    }
 }
+
+
