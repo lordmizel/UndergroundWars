@@ -11,6 +11,7 @@ public class Cargo : MonoBehaviour
     int cargoSpace = 1;
 
     public bool unloadingUnit = false;
+    public bool alreadyUnloadedAnUnit = false;
 
     
     public Unit[] cargoSlots;
@@ -68,6 +69,7 @@ public class Cargo : MonoBehaviour
     public void UnloadSelected()
     {
         unloadingUnit = true;
+        alreadyUnloadedAnUnit = false;
         CargoMenu.instance.ActivateUnitCargoMenu(cargoSlots);
     }
 
@@ -96,9 +98,10 @@ public class Cargo : MonoBehaviour
         unitUnloaded.gameObject.SetActive(true);
         unitUnloaded.possibleDestination = mainUnitController.GetSelectedTile();
         unitUnloaded.EstablishNewTile();
-        //mainUnitController.EstablishNewTile();
+        alreadyUnloadedAnUnit = true;
 
-        //TODO: Algorithm for when it has more units left in cargo.
+        //mainUnitController.EstablishNewTile();
+        
         if (HasUnitsLoaded())
         {
             ReorganizeCargo();
@@ -108,6 +111,7 @@ public class Cargo : MonoBehaviour
         }
         else
         {
+            mainUnitController.EstablishNewTile();
             GameManager.gameState = GameManager.state.MOVING_CURSOR;
         }
     }
