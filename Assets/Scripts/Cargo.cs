@@ -69,7 +69,6 @@ public class Cargo : MonoBehaviour
     public void UnloadSelected()
     {
         unloadingUnit = true;
-        alreadyUnloadedAnUnit = false;
         CargoMenu.instance.ActivateUnitCargoMenu(cargoSlots);
     }
 

@@ -97,8 +97,18 @@ public class CargoMenu : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
-            DeactivateUnitCargoMenu();
-            GameManager.instance.unitSelected.ArrivedAtDestination(GameManager.instance.unitSelected.possibleDestination.GetTileCoordX(), GameManager.instance.unitSelected.possibleDestination.GetTileCoordY());
+            if (GameManager.instance.unitSelected.gameObject.GetComponent<Cargo>().alreadyUnloadedAnUnit)
+            {
+                DeactivateUnitCargoMenu();
+                GameManager.instance.unitSelected.EstablishNewTile();
+                GameManager.gameState = GameManager.state.MOVING_CURSOR;
+            }
+            else
+            {
+                DeactivateUnitCargoMenu();
+                GameManager.instance.unitSelected.ArrivedAtDestination(GameManager.instance.unitSelected.possibleDestination.GetTileCoordX(), GameManager.instance.unitSelected.possibleDestination.GetTileCoordY());
+            }
+            
         }
         else if (Input.GetKeyDown(KeyCode.Return))
         {

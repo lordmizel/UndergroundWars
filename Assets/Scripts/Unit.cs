@@ -328,6 +328,11 @@ public class Unit : MonoBehaviour
         unitHasMoved = false;
         unitUsed = false;
         decidedToCapture = false;
+
+        if (transportUnit)
+        {
+            GetComponent<Cargo>().alreadyUnloadedAnUnit = false;
+        }
     }
 
     //Heal due to starting in a property
