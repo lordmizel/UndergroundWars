@@ -66,6 +66,8 @@ public class Unit : MonoBehaviour
     int attackMultiplier = 100;
     [SerializeField]
     int defenseMultiplier = 100;
+    [SerializeField]
+    int ammo = 10;
 
     [Header("Capturing stuff")]
     [SerializeField]
