@@ -66,8 +66,7 @@ public class Unit : MonoBehaviour
     int attackMultiplier = 100;
     [SerializeField]
     int defenseMultiplier = 100;
-    [SerializeField]
-    int ammo = 10;
+    public int ammo = 10;
 
     [Header("Capturing stuff")]
     [SerializeField]
@@ -444,6 +443,7 @@ public class Unit : MonoBehaviour
         enemy.ChangeHP(-actualDamage);
         propietary.AddPower((int)((enemy.moneyValue / 10) * actualDamage) / 2);
         enemy.propietary.AddPower((int)(enemy.moneyValue / 10) * actualDamage);
+        ammo--;
         //Counter
         if (ranged == false && enemy != null && enemy.ranged == false)
         {
@@ -452,7 +452,9 @@ public class Unit : MonoBehaviour
             ChangeHP(-actualDamage);
             propietary.AddPower((int)(moneyValue / 10) * actualDamage);
             enemy.propietary.AddPower((int)((moneyValue / 10) * actualDamage) / 2);
+            enemy.ammo--;
         }
+        
     }
 
     public void ChangeHP(int value)
