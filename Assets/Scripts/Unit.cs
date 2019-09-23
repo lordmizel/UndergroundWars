@@ -437,8 +437,18 @@ public class Unit : MonoBehaviour
 
     void AttackUnit(Unit enemy)
     {
+        int actualAttackValue;
+        if(ammo > 0)
+        {
+            actualAttackValue = attack;
+        }
+        else
+        {
+            actualAttackValue = attack / 2;
+        }
+
         readyToAttack = false;
-        float rawDamage = (((attack * attackMultiplier) / 100f) + Random.Range(0, 9)) * (hp / 10f) * ((200f - (enemy.defenseMultiplier + enemy.originTile.typeOfTerrain.defensiveStat * enemy.hp)) / 100f);
+        float rawDamage = (((actualAttackValue * attackMultiplier) / 100f) + Random.Range(0, 9)) * (hp / 10f) * ((200f - (enemy.defenseMultiplier + enemy.originTile.typeOfTerrain.defensiveStat * enemy.hp)) / 100f);
         int actualDamage = (int)rawDamage / 10;
         enemy.ChangeHP(-actualDamage);
         propietary.AddPower((int)((enemy.moneyValue / 10) * actualDamage) / 2);
