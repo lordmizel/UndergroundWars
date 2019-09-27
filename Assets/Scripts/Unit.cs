@@ -454,10 +454,20 @@ public class Unit : MonoBehaviour
         propietary.AddPower((int)((enemy.moneyValue / 10) * actualDamage) / 2);
         enemy.propietary.AddPower((int)(enemy.moneyValue / 10) * actualDamage);
         ammo--;
+
         //Counter
         if (ranged == false && enemy != null && enemy.ranged == false)
         {
-            rawDamage = (((enemy.attack * enemy.attackMultiplier) / 100f) + Random.Range(0, 9)) * (enemy.hp / 10f) * ((200f - (defenseMultiplier + originTile.typeOfTerrain.defensiveStat * hp)) / 100f);
+            if (enemy.ammo > 0)
+            {
+                actualAttackValue = enemy.attack;
+            }
+            else
+            {
+                actualAttackValue = enemy.attack / 2;
+            }
+
+            rawDamage = (((actualAttackValue * enemy.attackMultiplier) / 100f) + Random.Range(0, 9)) * (enemy.hp / 10f) * ((200f - (defenseMultiplier + originTile.typeOfTerrain.defensiveStat * hp)) / 100f);
             actualDamage = (int)rawDamage / 10;
             ChangeHP(-actualDamage);
             propietary.AddPower((int)(moneyValue / 10) * actualDamage);
