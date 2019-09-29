@@ -82,6 +82,9 @@ public class Unit : MonoBehaviour
     [HideInInspector]
     public bool readyToUnload = false;
 
+    [Header("Other")]
+    public bool supplyUnit = false;
+
 
     // Use this for initialization
     void Start()
