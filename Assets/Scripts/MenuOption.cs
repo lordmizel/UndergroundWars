@@ -9,6 +9,7 @@ public class MenuOption : MonoBehaviour {
         LOAD,
         UNLOAD,
         CAPTURE,
+        SUPPLY,
 		WAIT,
         SUPER_POWER,
 		END_TURN,

@@ -121,6 +121,8 @@ public class InGameMenu : MonoBehaviour
                 GameManager.gameState = GameManager.state.MOVING_CURSOR;
                 Debug.Log("Capture Selected");
                 break;
+            case MenuOption.menuOptions.SUPPLY:
+                break;
             case MenuOption.menuOptions.WAIT:
                 GameManager.instance.unitSelected.EstablishNewTile();
                 GameManager.gameState = GameManager.state.MOVING_CURSOR;
