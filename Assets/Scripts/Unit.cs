@@ -66,7 +66,10 @@ public class Unit : MonoBehaviour
     int attackMultiplier = 100;
     [SerializeField]
     int defenseMultiplier = 100;
-    public int ammo = 10;
+    [SerializeField]
+    int maxAmmo = 10;
+    [HideInInspector]
+    public int ammo;
 
     [Header("Capturing stuff")]
     [SerializeField]
@@ -98,6 +101,7 @@ public class Unit : MonoBehaviour
         unloadSpots = new List<ClickableTile>();
         interactableObjectives = new List<ClickableTile>();
 
+        ammo = maxAmmo;
         if(GetComponent<Cargo>() != null)
         {
             transportUnit = true;
@@ -355,6 +359,7 @@ public class Unit : MonoBehaviour
                 propietary.ChangeFunds((int)(-moneyValue * 1 / 10));
             }
         }
+        ammo = maxAmmo;
     }
 
     //Change the visual aspect of the unit to represent it already being used that turn
