@@ -221,6 +221,21 @@ public class Unit : MonoBehaviour
         {
             InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.CAPTURE);
         }
+        if(supplyUnit)
+        {
+            bool canSupply = false;
+            foreach(ClickableTile tile in possibleDestination.neighbors)
+            {
+                if(tile.GetUnitAssigned() != null && tile.GetUnitAssigned().propietary == propietary)
+                {
+                    canSupply = true;
+                }
+            }
+            if (canSupply)
+            {
+                InGameMenu.inGameMenu.ActivateMenuOption(MenuOption.menuOptions.SUPPLY);
+            }
+        }
         //Activate LOAD function in menu
         foreach(ClickableTile tile in possibleDestination.neighbors)
         {

@@ -33251,7 +33251,7 @@ PrefabInstance:
     - target: {fileID: 114217791466869802, guid: b5543dd0689d3964aba5d951684de67a,
         type: 3}
       propertyPath: m_Text
-      value: Capture
+      value: Supply
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5543dd0689d3964aba5d951684de67a, type: 3}
@@ -38229,6 +38229,16 @@ PrefabInstance:
         type: 3}
       propertyPath: movementType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114512531304379642, guid: d4eedb172a2a4074684a639dbd805839,
+        type: 3}
+      propertyPath: canCapture
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114512531304379642, guid: d4eedb172a2a4074684a639dbd805839,
+        type: 3}
+      propertyPath: supplyUnit
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 212354905650090936, guid: d4eedb172a2a4074684a639dbd805839,
         type: 3}
