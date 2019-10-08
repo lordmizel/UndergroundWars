@@ -555,6 +555,11 @@ public class Unit : MonoBehaviour
         }
     }
 
+    public void ResupplyUnits()
+    {
+        //TODO: Implement this
+    }
+
     public ClickableTile GetSelectedTile()
     {
         return interactableObjectives[objectiveIndex];

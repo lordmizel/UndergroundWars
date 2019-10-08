@@ -122,6 +122,10 @@ public class InGameMenu : MonoBehaviour
                 Debug.Log("Capture Selected");
                 break;
             case MenuOption.menuOptions.SUPPLY:
+                GameManager.instance.unitSelected.ResupplyUnits();
+                GameManager.instance.unitSelected.EstablishNewTile();
+                GameManager.gameState = GameManager.state.MOVING_CURSOR;
+                Debug.Log("Supply Selected");
                 break;
             case MenuOption.menuOptions.WAIT:
                 GameManager.instance.unitSelected.EstablishNewTile();
