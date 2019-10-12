@@ -557,6 +557,18 @@ public class Unit : MonoBehaviour
 
     public void ResupplyUnits()
     {
+        foreach(ClickableTile neighbor in possibleDestination.neighbors)
+        {
+            Unit neighboringUnit = neighbor.GetUnitAssigned();
+            if(neighboringUnit != null && neighboringUnit.propietary == propietary)
+            {
+                neighboringUnit.Resupply();
+            }
+        }
+    }
+
+    public void Resupply()
+    {
         //TODO: Implement this
     }
 
