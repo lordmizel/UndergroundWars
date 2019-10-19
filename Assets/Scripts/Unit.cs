@@ -569,7 +569,7 @@ public class Unit : MonoBehaviour
 
     public void Resupply()
     {
-        //TODO: Implement this
+        ammo = maxAmmo;
     }
 
     public ClickableTile GetSelectedTile()
