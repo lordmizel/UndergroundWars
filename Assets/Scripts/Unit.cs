@@ -226,7 +226,8 @@ public class Unit : MonoBehaviour
             bool canSupply = false;
             foreach(ClickableTile tile in possibleDestination.neighbors)
             {
-                if(tile.GetUnitAssigned() != null && tile.GetUnitAssigned().propietary == propietary)
+                Unit unitInSpace = tile.GetUnitAssigned();
+                if(unitInSpace != null && unitInSpace.propietary == propietary && unitInSpace.ammo < unitInSpace.maxAmmo)
                 {
                     canSupply = true;
                 }
