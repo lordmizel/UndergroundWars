@@ -31,7 +31,7 @@ public class InGameMenu : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (GameManager.gameState == GameManager.state.MOVING_CURSOR)
         {
