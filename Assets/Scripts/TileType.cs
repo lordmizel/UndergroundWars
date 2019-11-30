@@ -17,7 +17,16 @@ public class TileType : ScriptableObject{
         PORT
 	}
 
+    public enum factoryType
+    {
+        NONE,
+        LAND,
+        AIR,
+        SEA
+    }
+
 	public typeOfTerrain terrainName = typeOfTerrain.PLAINS;
+    public factoryType unitCreation = factoryType.NONE;
     
     [Header("Public tile data")]
     public int defensiveStat = 1;

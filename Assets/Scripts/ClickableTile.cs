@@ -3,122 +3,133 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClickableTile : MonoBehaviour {
+public class ClickableTile : MonoBehaviour
+{
 
-	int coordX;
-	int coordY;
-	public TileType typeOfTerrain;
+    int coordX;
+    int coordY;
+    public TileType typeOfTerrain;
     public string visibleName = "";
     public Sprite tileVisualPrefab;
 
     Unit unitAssigned;
 
-	[SerializeField]
-	GameObject moveColorOverlay;
-	[SerializeField]
-	GameObject attackColorOverlay;
+    [SerializeField]
+    GameObject moveColorOverlay;
+    [SerializeField]
+    GameObject attackColorOverlay;
 
     public Army propietary = null;
     [SerializeField]
     SpriteRenderer propietaryOverlay = null;
 
-	//Pathfinding stuff
-	public int movementCost = 1;
-	public List<ClickableTile> neighbors;
-	public ClickableTile parent;
-	[HideInInspector]
-	public int gCost;
-	public int hCost;
-    
+    //Pathfinding stuff
+    public int movementCost = 1;
+    public List<ClickableTile> neighbors;
+    public ClickableTile parent;
+    [HideInInspector]
+    public int gCost;
+    public int hCost;
 
-	public void SetTileCoordinates(int x, int y)
-	{
-		coordX = x;
-		coordY = y;
-	}
 
-	public int GetTileCoordX()
-	{
-		return coordX;
-	}
+    public void SetTileCoordinates(int x, int y)
+    {
+        coordX = x;
+        coordY = y;
+    }
 
-	public int GetTileCoordY()
-	{
-		return coordY;
-	}
+    public int GetTileCoordX()
+    {
+        return coordX;
+    }
 
-	public void AssignUnit(Unit unit)
-	{
-		unitAssigned = unit;
-	}
+    public int GetTileCoordY()
+    {
+        return coordY;
+    }
 
-	public void UnassignUnit()
-	{
-		unitAssigned = null;
-	}
+    public void AssignUnit(Unit unit)
+    {
+        unitAssigned = unit;
+    }
 
-	public Unit GetUnitAssigned()
-	{
-		return unitAssigned;
-	}
+    public void UnassignUnit()
+    {
+        unitAssigned = null;
+    }
 
-	public void TileSelected()
-	{
-		switch (GameManager.gameState) 
-		{
-		case GameManager.state.MOVING_CURSOR:
-			if (unitAssigned != null) 
-			{
-				unitAssigned.UnitSelected ();
-			} 
-			else 
-			{
-                InGameMenu.inGameMenu.ShowNeutralMenu();
-			}
-			break;
+    public Unit GetUnitAssigned()
+    {
+        return unitAssigned;
+    }
 
-		case GameManager.state.MOVING_UNIT:
-			if (GameManager.instance.unitSelected.originTile == this) 
-			{
-				Map.instance.ReturnTilesToNormal ();
-				GameManager.instance.unitSelected.ArrivedAtDestination (coordX, coordY);
-			} 
-			else 
-			{
-				if ((unitAssigned == null || unitAssigned == GameManager.instance.unitSelected) && GameManager.instance.unitSelected.unitMoving == false) 
-				{
-					GameManager.instance.unitSelected.StartMoving (Map.instance.unitMovementManager.CalculateShortestPath (GameManager.instance.unitSelected.originTile, this));
-				}
-			}
-			break;
-		}
-	}
+    public void TileSelected()
+    {
+        switch (GameManager.gameState)
+        {
+            case GameManager.state.MOVING_CURSOR:
+                if (unitAssigned != null)
+                {
+                    unitAssigned.UnitSelected();
+                }
+                else
+                {
+                    switch (typeOfTerrain.unitCreation)
+                    {
+                        case TileType.factoryType.NONE:
+                            InGameMenu.inGameMenu.ShowNeutralMenu();
+                            break;
 
-	public void ActivateMoveOverlay()
-	{
-		moveColorOverlay.SetActive (true);
-	}
+                            //case TileType.factoryType.LAND:
+                            //    Debug.Log("")
 
-	public void ActivateAttackOverlay()
-	{
-		attackColorOverlay.SetActive (true);
-	}
+                    }
 
-	public void DeactivateAllOverlays()
-	{
-		moveColorOverlay.SetActive (false);
-		attackColorOverlay.SetActive (false);
-	}
+                }
+                break;
 
-	public bool IsReachableByMovement()
-	{
-		return moveColorOverlay.activeSelf;
-	}
+            case GameManager.state.MOVING_UNIT:
+                if (GameManager.instance.unitSelected.originTile == this)
+                {
+                    Map.instance.ReturnTilesToNormal();
+                    GameManager.instance.unitSelected.ArrivedAtDestination(coordX, coordY);
+                }
+                else
+                {
+                    if ((unitAssigned == null || unitAssigned == GameManager.instance.unitSelected) && GameManager.instance.unitSelected.unitMoving == false)
+                    {
+                        GameManager.instance.unitSelected.StartMoving(Map.instance.unitMovementManager.CalculateShortestPath(GameManager.instance.unitSelected.originTile, this));
+                    }
+                }
+                break;
+        }
+    }
 
-	public int GetFCost()
-	{
-		return gCost + hCost;
-	}
+    public void ActivateMoveOverlay()
+    {
+        moveColorOverlay.SetActive(true);
+    }
+
+    public void ActivateAttackOverlay()
+    {
+        attackColorOverlay.SetActive(true);
+    }
+
+    public void DeactivateAllOverlays()
+    {
+        moveColorOverlay.SetActive(false);
+        attackColorOverlay.SetActive(false);
+    }
+
+    public bool IsReachableByMovement()
+    {
+        return moveColorOverlay.activeSelf;
+    }
+
+    public int GetFCost()
+    {
+        return gCost + hCost;
+    }
 
     public void ChangePropietary(Army newPropietary)
     {
