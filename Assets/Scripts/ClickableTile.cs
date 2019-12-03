@@ -11,7 +11,14 @@ public class ClickableTile : MonoBehaviour
     public TileType typeOfTerrain;
     public string visibleName = "";
     public Sprite tileVisualPrefab;
-
+    public enum factoryType
+    {
+        NONE,
+        LAND,
+        AIR,
+        SEA
+    }
+    public factoryType unitCreation = factoryType.NONE;
     Unit unitAssigned;
 
     [SerializeField]
@@ -74,13 +81,13 @@ public class ClickableTile : MonoBehaviour
                 }
                 else
                 {
-                    switch (typeOfTerrain.unitCreation)
+                    switch (unitCreation)
                     {
-                        case TileType.factoryType.NONE:
+                        case factoryType.NONE:
                             InGameMenu.inGameMenu.ShowNeutralMenu();
                             break;
 
-                            //case TileType.factoryType.LAND:
+                            //case factoryType.LAND:
                             //    Debug.Log("")
 
                     }
