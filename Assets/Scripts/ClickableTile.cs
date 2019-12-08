@@ -87,9 +87,17 @@ public class ClickableTile : MonoBehaviour
                             InGameMenu.inGameMenu.ShowNeutralMenu();
                             break;
 
-                            //case factoryType.LAND:
-                            //    Debug.Log("")
+                        case factoryType.LAND:
+                            Debug.Log("This is a land unit factory.");
+                            break;
 
+                        case factoryType.AIR:
+                            Debug.Log("This is an air unit factory.");
+                            break;
+
+                        case factoryType.SEA:
+                            Debug.Log("This is a sea unit factory.");
+                            break;
                     }
 
                 }
