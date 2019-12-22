@@ -285,6 +285,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeOfTerrain: {fileID: 11400000, guid: 1a2fa58f123d4f344a53c97f0937cf7f, type: 2}
   visibleName: Port
+  tileVisualPrefab: {fileID: 0}
+  unitCreation: 3
   moveColorOverlay: {fileID: 1801991070338691561}
   attackColorOverlay: {fileID: 3217338355914513994}
   propietary: {fileID: 0}

@@ -285,6 +285,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeOfTerrain: {fileID: 11400000, guid: 8850a6610ce1e8e4f8463b401066c1d2, type: 2}
   visibleName: Fort
+  tileVisualPrefab: {fileID: 0}
+  unitCreation: 1
   moveColorOverlay: {fileID: 1801991070338691561}
   attackColorOverlay: {fileID: 3217338355914513994}
   propietary: {fileID: 0}
