@@ -26,8 +26,15 @@ public class Army : MonoBehaviour {
 
     Vector2 lastPlaceOfCursor = new Vector2();
 
-	// Use this for initialization
-	void Start () 
+    [SerializeField]
+    List<Unit> landUnitCatalog = new List<Unit>();
+    [SerializeField]
+    List<Unit> airUnitCatalog = new List<Unit>();
+    [SerializeField]
+    List<Unit> seaUnitCatalog = new List<Unit>();
+
+    // Use this for initialization
+    void Start () 
 	{
         unitsInArmy = new List<Unit>();
         foreach(Unit unit in GetComponentsInChildren<Unit>())
