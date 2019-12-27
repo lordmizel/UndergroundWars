@@ -11,6 +11,8 @@ public class InGameMenu : MonoBehaviour
     GameObject menuPanel;
     [SerializeField]
     CargoMenu cargoMenu;
+    [SerializeField]
+    FactoryMenu factoryMenu;
 
     [SerializeField]
     List<MenuOption> allOptions;

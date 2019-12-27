@@ -88,15 +88,15 @@ public class ClickableTile : MonoBehaviour
                             break;
 
                         case factoryType.LAND:
-                            Debug.Log("This is a land unit factory.");
+                            FactoryMenu.instance.ActivateFactoryMenu();
                             break;
 
                         case factoryType.AIR:
-                            Debug.Log("This is an air unit factory.");
+                            FactoryMenu.instance.ActivateFactoryMenu();
                             break;
 
                         case factoryType.SEA:
-                            Debug.Log("This is a sea unit factory.");
+                            FactoryMenu.instance.ActivateFactoryMenu();
                             break;
                     }
 
