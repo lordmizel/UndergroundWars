@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FactoryMenu : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class FactoryMenu : MonoBehaviour
 
     [SerializeField]
     List<GameObject> allButtons;
+    [SerializeField]
+    List<Text> buttonTexts;
 
     List<GameObject> activeButtons = new List<GameObject>();
 
@@ -20,6 +23,19 @@ public class FactoryMenu : MonoBehaviour
     }
 
     public void ActivateFactoryMenu() {
+        activeButtons.Clear();
+        foreach(GameObject button in allButtons)
+        {
+            button.SetActive(false);
+        }
+        //TODO: FillFactory should take the type of factory as a parameter
+        GameManager.instance.activePlayer.FillFactory();
         menu.SetActive(true);
+    }
+
+    public void FillOption(int optionNumber, Unit unit)
+    {
+        buttonTexts[optionNumber].text = unit.name;
+        allButtons[optionNumber].SetActive(true);
     }
 }

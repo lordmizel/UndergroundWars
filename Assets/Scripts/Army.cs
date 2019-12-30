@@ -130,4 +130,15 @@ public class Army : MonoBehaviour {
     {
         return lastPlaceOfCursor;
     }
+
+    public void FillFactory()
+    {
+        //TODO: Deal with the different catalogs
+        List<Unit> catalogToShow = landUnitCatalog;
+
+        for (int i = 0; i < catalogToShow.Count; i++)
+        { 
+            FactoryMenu.instance.FillOption(i, catalogToShow[i]);
+        }
+    }
 }
