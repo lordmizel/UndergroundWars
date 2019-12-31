@@ -87,16 +87,8 @@ public class ClickableTile : MonoBehaviour
                             InGameMenu.inGameMenu.ShowNeutralMenu();
                             break;
 
-                        case factoryType.LAND:
-                            FactoryMenu.instance.ActivateFactoryMenu();
-                            break;
-
-                        case factoryType.AIR:
-                            FactoryMenu.instance.ActivateFactoryMenu();
-                            break;
-
-                        case factoryType.SEA:
-                            FactoryMenu.instance.ActivateFactoryMenu();
+                        default:
+                            FactoryMenu.instance.ActivateFactoryMenu(unitCreation);
                             break;
                     }
 

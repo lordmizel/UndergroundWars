@@ -15160,8 +15160,12 @@ MonoBehaviour:
   - {fileID: 114512531304379642, guid: d74c4fde6c2e3b54caf0e286a37736c6, type: 3}
   - {fileID: 114512531304379642, guid: ab782c5c62a633e4fb99df406349a801, type: 3}
   - {fileID: 114512531304379642, guid: cf8bbba8b095862419ac975a4dfb4ce0, type: 3}
-  airUnitCatalog: []
-  seaUnitCatalog: []
+  airUnitCatalog:
+  - {fileID: 114512531304379642, guid: cf8bbba8b095862419ac975a4dfb4ce0, type: 3}
+  - {fileID: 114512531304379642, guid: d74c4fde6c2e3b54caf0e286a37736c6, type: 3}
+  seaUnitCatalog:
+  - {fileID: 114512531304379642, guid: cf8bbba8b095862419ac975a4dfb4ce0, type: 3}
+  - {fileID: 114512531304379642, guid: d74c4fde6c2e3b54caf0e286a37736c6, type: 3}
 --- !u!1001 &482939432
 PrefabInstance:
   m_ObjectHideFlags: 0

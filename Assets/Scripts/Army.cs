@@ -131,10 +131,24 @@ public class Army : MonoBehaviour {
         return lastPlaceOfCursor;
     }
 
-    public void FillFactory()
+    public void FillFactory(ClickableTile.factoryType factoryType)
     {
-        //TODO: Deal with the different catalogs
-        List<Unit> catalogToShow = landUnitCatalog;
+        List<Unit> catalogToShow = new List<Unit>();
+        switch (factoryType)
+        {
+            case ClickableTile.factoryType.LAND:
+                catalogToShow = landUnitCatalog;
+                break;
+            case ClickableTile.factoryType.AIR:
+                catalogToShow = airUnitCatalog;
+                break;
+            case ClickableTile.factoryType.SEA:
+                catalogToShow = seaUnitCatalog;
+                break;
+            default:
+                Debug.Log("ERROR: Non-factory tile recognized as factory.");
+                break;
+        }
 
         for (int i = 0; i < catalogToShow.Count; i++)
         { 

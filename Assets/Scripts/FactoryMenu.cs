@@ -22,14 +22,14 @@ public class FactoryMenu : MonoBehaviour
         instance = this;
     }
 
-    public void ActivateFactoryMenu() {
+    public void ActivateFactoryMenu(ClickableTile.factoryType factoryType) {
         activeButtons.Clear();
         foreach(GameObject button in allButtons)
         {
             button.SetActive(false);
         }
         //TODO: FillFactory should take the type of factory as a parameter
-        GameManager.instance.activePlayer.FillFactory();
+        GameManager.instance.activePlayer.FillFactory(factoryType);
         menu.SetActive(true);
     }
 
