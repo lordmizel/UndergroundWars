@@ -81,17 +81,14 @@ public class ClickableTile : MonoBehaviour
                 }
                 else
                 {
-                    switch (unitCreation)
+                    if(unitCreation != factoryType.NONE && propietary == GameManager.instance.activePlayer)
                     {
-                        case factoryType.NONE:
-                            InGameMenu.inGameMenu.ShowNeutralMenu();
-                            break;
-
-                        default:
-                            FactoryMenu.instance.ActivateFactoryMenu(unitCreation);
-                            break;
+                        FactoryMenu.instance.ActivateFactoryMenu(unitCreation);
                     }
-
+                    else
+                    {
+                        InGameMenu.inGameMenu.ShowNeutralMenu();
+                    }
                 }
                 break;
 
