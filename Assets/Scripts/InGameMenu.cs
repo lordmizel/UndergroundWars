@@ -46,7 +46,6 @@ public class InGameMenu : MonoBehaviour
         {
             SelectMenuOption();
         }
-
     }
 
     void SelectMenuOption()

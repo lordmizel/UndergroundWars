@@ -60,6 +60,7 @@ public class FactoryMenu : MonoBehaviour
     {
         //currentOption = 0;
         menu.SetActive(false);
+        GameManager.gameState = GameManager.state.MOVING_CURSOR;
     }
 
     public void FillOption(int optionNumber, Unit unit)
@@ -114,7 +115,7 @@ public class FactoryMenu : MonoBehaviour
         }*/
         else if (Input.GetKeyDown(KeyCode.Return))
         {
-            //DeactivateFactoryMenu();
+            DeactivateFactoryMenu();
             //TODO: Create unit in factory
         }
     }
