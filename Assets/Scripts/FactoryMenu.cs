@@ -24,24 +24,21 @@ public class FactoryMenu : MonoBehaviour
         instance = this;
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
+        
         if (GameManager.gameState == GameManager.state.NAVIGATING_FACTORY_MENU)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                DeactivateFactoryMenu();
-                GameManager.gameState = GameManager.state.MOVING_CURSOR;
-            }
+            SelectMenuOption();
         }
     }
 
     void Update()
     {
-        if (GameManager.gameState == GameManager.state.NAVIGATING_FACTORY_MENU)
-        {
-            SelectMenuOption();
-        }
+        //if (GameManager.gameState == GameManager.state.NAVIGATING_FACTORY_MENU)
+        //{
+        //    SelectMenuOption();
+        //}
     }
 
     public void ActivateFactoryMenu(ClickableTile.factoryType factoryType) {
@@ -68,6 +65,12 @@ public class FactoryMenu : MonoBehaviour
         buttonTexts[optionNumber].text = unit.name;
         allButtons[optionNumber].SetActive(true);
         activeButtons.Add(allButtons[optionNumber]);
+    }
+
+    public void SelectCurrentMenuOption()
+    {
+        DeactivateFactoryMenu();
+        //TODO: Create unit in factory
     }
 
     void SelectMenuOption()
@@ -98,25 +101,9 @@ public class FactoryMenu : MonoBehaviour
             }
             activeButtons[currentOption].GetComponent<Image>().color = Color.yellow;
         }
-        /*else if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (GameManager.instance.unitSelected.gameObject.GetComponent<Cargo>().alreadyUnloadedAnUnit)
-            {
-                DeactivateUnitCargoMenu();
-                GameManager.instance.unitSelected.EstablishNewTile();
-                GameManager.gameState = GameManager.state.MOVING_CURSOR;
-            }
-            else
-            {
-                DeactivateUnitCargoMenu();
-                GameManager.instance.unitSelected.ArrivedAtDestination(GameManager.instance.unitSelected.possibleDestination.GetTileCoordX(), GameManager.instance.unitSelected.possibleDestination.GetTileCoordY());
-            }
-
-        }*/
-        else if (Input.GetKeyDown(KeyCode.Return))
+        else if (Input.GetKeyDown(KeyCode.Escape))
         {
             DeactivateFactoryMenu();
-            //TODO: Create unit in factory
         }
     }
 }

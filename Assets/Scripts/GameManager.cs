@@ -64,6 +64,10 @@ public class GameManager : MonoBehaviour {
             {
                 InGameMenu.inGameMenu.SelectCurrentMenuOption();
             }
+            else if (gameState == state.NAVIGATING_FACTORY_MENU)
+            {
+                FactoryMenu.instance.SelectCurrentMenuOption();
+            }
             else if (gameState == state.MOVING_CURSOR || gameState == state.MOVING_UNIT)
             {
                 PlayerCursor.instance.GetCurrentTile();
