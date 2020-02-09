@@ -49,6 +49,7 @@ public class FactoryMenu : MonoBehaviour
             button.SetActive(false);
         }
         GameManager.instance.activePlayer.FillFactory(factoryType);
+        activeButtons[currentOption].GetComponent<Image>().color = Color.yellow;
         menu.SetActive(true);
         GameManager.gameState = GameManager.state.NAVIGATING_FACTORY_MENU;
     }
@@ -56,6 +57,10 @@ public class FactoryMenu : MonoBehaviour
     void DeactivateFactoryMenu()
     {
         //currentOption = 0;
+        foreach(GameObject button in activeButtons)
+        {
+            activeButtons[currentOption].GetComponent<Image>().color = Color.white;
+        }
         menu.SetActive(false);
         GameManager.gameState = GameManager.state.MOVING_CURSOR;
     }
