@@ -16,6 +16,7 @@ public class FactoryMenu : MonoBehaviour
     List<Text> buttonTexts;
 
     List<GameObject> activeButtons = new List<GameObject>();
+    List<Unit> currentUnitsShown = new List<Unit>();
 
     int currentOption = 0;
 
@@ -62,6 +63,7 @@ public class FactoryMenu : MonoBehaviour
             activeButtons[currentOption].GetComponent<Image>().color = Color.white;
         }
         menu.SetActive(false);
+        currentUnitsShown.Clear();
         GameManager.gameState = GameManager.state.MOVING_CURSOR;
     }
 
@@ -70,12 +72,22 @@ public class FactoryMenu : MonoBehaviour
         buttonTexts[optionNumber].text = unit.name;
         allButtons[optionNumber].SetActive(true);
         activeButtons.Add(allButtons[optionNumber]);
+        currentUnitsShown.Add(unit);
     }
 
     public void SelectCurrentMenuOption()
     {
+        //Create unit in factory tile
+        Unit newUnit = Instantiate(currentUnitsShown[currentOption], PlayerCursor.instance.transform.position, Quaternion.identity);
+
+        ///////////////////////
+        //TODO: this should eventually be deleted as the initialX/Y variables are just for debug
+        newUnit.initialX = (int)PlayerCursor.instance.transform.position.x;
+        newUnit.initialY = (int)PlayerCursor.instance.transform.position.y;
+        ///////////////////////
+
+        //newUnit.EstablishNewTile(Map.instance.GetTile((int)PlayerCursor.instance.transform.position.x, (int)PlayerCursor.instance.transform.position.y));
         DeactivateFactoryMenu();
-        //TODO: Create unit in factory
     }
 
     void SelectMenuOption()

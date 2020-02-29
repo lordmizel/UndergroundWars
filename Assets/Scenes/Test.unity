@@ -53137,6 +53137,11 @@ PrefabInstance:
       propertyPath: movementType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114512531304379642, guid: d4eedb172a2a4074684a639dbd805839,
+        type: 3}
+      propertyPath: canCapture
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 212354905650090936, guid: d4eedb172a2a4074684a639dbd805839,
         type: 3}
       propertyPath: m_Sprite

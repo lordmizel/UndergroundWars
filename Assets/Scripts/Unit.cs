@@ -92,6 +92,7 @@ public class Unit : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Debug.Log(gameObject.name + " instantiated");
         mySprite = gameObject.GetComponent<SpriteRenderer>();
         //cursor = FindObjectOfType<PlayerCursor>();
         myAnimator = gameObject.GetComponent<Animator>();
@@ -317,6 +318,14 @@ public class Unit : MonoBehaviour
         GameManager.instance.unitSelected = null;
         TireUnit();
         Map.instance.ReturnTilesToNormal();
+    }
+
+    public void EstablishNewTile(ClickableTile newTile)
+    {
+        gameObject.transform.position = new Vector3(newTile.GetTileCoordX(), newTile.GetTileCoordY(), gameObject.transform.position.z);
+        newTile.AssignUnit(this);
+        originTile = newTile;
+        TireUnit();
     }
 
     //Player cancels the movement after the unit has moved

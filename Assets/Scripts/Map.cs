@@ -41,11 +41,6 @@ public class Map : MonoBehaviour {
 		AssignNeighbors ();
 	}
 	
-	// Update is called once per frame
-	void Update () 
-	{
-	}
-
 	void GenerateMap()
 	{
 		tiles = new ClickableTile[mapWidth, mapHeight];
