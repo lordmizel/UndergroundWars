@@ -79,6 +79,8 @@ public class FactoryMenu : MonoBehaviour
     {
         //Create unit in factory tile
         Unit newUnit = Instantiate(currentUnitsShown[currentOption], PlayerCursor.instance.transform.position, Quaternion.identity);
+        newUnit.SetPropietary(GameManager.instance.activePlayer);
+        newUnit.TireUnit();
 
         ///////////////////////
         //TODO: this should eventually be deleted as the initialX/Y variables are just for debug

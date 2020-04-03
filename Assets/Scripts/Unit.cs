@@ -92,9 +92,7 @@ public class Unit : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Debug.Log(gameObject.name + " instantiated");
         mySprite = gameObject.GetComponent<SpriteRenderer>();
-        //cursor = FindObjectOfType<PlayerCursor>();
         myAnimator = gameObject.GetComponent<Animator>();
 
         attackSpots = new List<ClickableTile>();
@@ -126,6 +124,13 @@ public class Unit : MonoBehaviour
         {
             SelectObjective();
         }
+    }
+
+    public void SetPropietary(Army army)
+    {
+        mySprite = gameObject.GetComponent<SpriteRenderer>();
+        mySprite.color = army.assignedColor;
+        propietary = army;
     }
 
     //Unit has been selected by the cursor
