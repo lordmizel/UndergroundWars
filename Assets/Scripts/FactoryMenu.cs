@@ -11,9 +11,11 @@ public class FactoryMenu : MonoBehaviour
     GameObject menu;
 
     [SerializeField]
-    List<GameObject> allButtons;
-    [SerializeField]
-    List<Text> buttonTexts;
+    List<FactoryMenuOption> allButtons;
+
+    List<Image> buttonImages = new List<Image>();
+    List<Text> buttonTexts = new List<Text>();
+    List<Text> buttonPrices = new List<Text>();
 
     List<GameObject> activeButtons = new List<GameObject>();
     List<Unit> currentUnitsShown = new List<Unit>();
@@ -23,6 +25,16 @@ public class FactoryMenu : MonoBehaviour
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
+        foreach(FactoryMenuOption o in allButtons)
+        {
+            buttonImages.Add(o.unitSprite);
+            buttonTexts.Add(o.unitName);
+            buttonPrices.Add(o.unitPrice);
+        }
     }
 
     private void LateUpdate()
@@ -45,9 +57,9 @@ public class FactoryMenu : MonoBehaviour
     public void ActivateFactoryMenu(ClickableTile.factoryType factoryType) {
         currentOption = 0;
         activeButtons.Clear();
-        foreach(GameObject button in allButtons)
+        foreach(FactoryMenuOption button in allButtons)
         {
-            button.SetActive(false);
+            button.gameObject.SetActive(false);
         }
         GameManager.instance.activePlayer.FillFactory(factoryType);
         activeButtons[currentOption].GetComponent<Image>().color = Color.yellow;
@@ -70,8 +82,8 @@ public class FactoryMenu : MonoBehaviour
     public void FillOption(int optionNumber, Unit unit)
     {
         buttonTexts[optionNumber].text = unit.name;
-        allButtons[optionNumber].SetActive(true);
-        activeButtons.Add(allButtons[optionNumber]);
+        allButtons[optionNumber].gameObject.SetActive(true);
+        activeButtons.Add(allButtons[optionNumber].gameObject);
         currentUnitsShown.Add(unit);
     }
 
