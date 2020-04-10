@@ -82,6 +82,7 @@ public class FactoryMenu : MonoBehaviour
     public void FillOption(int optionNumber, Unit unit)
     {
         buttonTexts[optionNumber].text = unit.name;
+        buttonPrices[optionNumber].text = unit.moneyValue.ToString() + "G";
         allButtons[optionNumber].gameObject.SetActive(true);
         activeButtons.Add(allButtons[optionNumber].gameObject);
         currentUnitsShown.Add(unit);
