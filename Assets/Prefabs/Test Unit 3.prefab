@@ -120,7 +120,7 @@ MonoBehaviour:
   movementPoints: 5
   unitMoving: 0
   movementType: 0
-  moneyValue: 3000
+  moneyValue: 9000
   attack: 60
   attackMultiplier: 100
   defenseMultiplier: 100

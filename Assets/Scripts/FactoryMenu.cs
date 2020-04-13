@@ -83,6 +83,14 @@ public class FactoryMenu : MonoBehaviour
     {
         buttonTexts[optionNumber].text = unit.name;
         buttonPrices[optionNumber].text = unit.moneyValue.ToString() + "G";
+        if(unit.moneyValue > GameManager.instance.activePlayer.GetFunds())
+        {
+            buttonPrices[optionNumber].color = Color.red;
+        }
+        else
+        {
+            buttonPrices[optionNumber].color = Color.black;
+        }
         allButtons[optionNumber].gameObject.SetActive(true);
         activeButtons.Add(allButtons[optionNumber].gameObject);
         currentUnitsShown.Add(unit);
