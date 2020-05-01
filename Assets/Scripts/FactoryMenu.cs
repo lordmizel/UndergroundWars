@@ -98,19 +98,27 @@ public class FactoryMenu : MonoBehaviour
 
     public void SelectCurrentMenuOption()
     {
-        //Create unit in factory tile
-        Unit newUnit = Instantiate(currentUnitsShown[currentOption], PlayerCursor.instance.transform.position, Quaternion.identity);
-        newUnit.SetPropietary(GameManager.instance.activePlayer);
-        newUnit.TireUnit();
+        if (currentUnitsShown[currentOption].moneyValue > GameManager.instance.activePlayer.GetFunds())
+        {
+            //Unit is too expensive for the player.
+            //TODO: Play some sound here.
+        }
+        else
+        {
+            //Create unit in factory tile
+            Unit newUnit = Instantiate(currentUnitsShown[currentOption], PlayerCursor.instance.transform.position, Quaternion.identity);
+            newUnit.SetPropietary(GameManager.instance.activePlayer);
+            newUnit.TireUnit();
 
-        ///////////////////////
-        //TODO: this should eventually be deleted as the initialX/Y variables are just for debug
-        newUnit.initialX = (int)PlayerCursor.instance.transform.position.x;
-        newUnit.initialY = (int)PlayerCursor.instance.transform.position.y;
-        ///////////////////////
+            ///////////////////////
+            //TODO: this should eventually be deleted as the initialX/Y variables are just for debug
+            newUnit.initialX = (int)PlayerCursor.instance.transform.position.x;
+            newUnit.initialY = (int)PlayerCursor.instance.transform.position.y;
+            ///////////////////////
 
-        //newUnit.EstablishNewTile(Map.instance.GetTile((int)PlayerCursor.instance.transform.position.x, (int)PlayerCursor.instance.transform.position.y));
-        DeactivateFactoryMenu();
+            //newUnit.EstablishNewTile(Map.instance.GetTile((int)PlayerCursor.instance.transform.position.x, (int)PlayerCursor.instance.transform.position.y));
+            DeactivateFactoryMenu();
+        }
     }
 
     void SelectMenuOption()
