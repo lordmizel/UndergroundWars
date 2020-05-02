@@ -110,6 +110,8 @@ public class FactoryMenu : MonoBehaviour
             newUnit.SetPropietary(GameManager.instance.activePlayer);
             newUnit.TireUnit();
 
+            GameManager.instance.activePlayer.ChangeFunds(-currentUnitsShown[currentOption].moneyValue);
+
             ///////////////////////
             //TODO: this should eventually be deleted as the initialX/Y variables are just for debug
             newUnit.initialX = (int)PlayerCursor.instance.transform.position.x;
