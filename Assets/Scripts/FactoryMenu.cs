@@ -81,6 +81,7 @@ public class FactoryMenu : MonoBehaviour
 
     public void FillOption(int optionNumber, Unit unit)
     {
+        buttonImages[optionNumber].sprite = unit.menuSprite;
         buttonTexts[optionNumber].text = unit.name;
         buttonPrices[optionNumber].text = unit.moneyValue.ToString() + "G";
         if(unit.moneyValue > GameManager.instance.activePlayer.GetFunds())

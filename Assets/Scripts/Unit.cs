@@ -5,6 +5,7 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     SpriteRenderer mySprite;
+    public Sprite menuSprite;
     Animator myAnimator;
     //PlayerCursor cursor;
     [SerializeField]

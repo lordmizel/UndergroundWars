@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6044898435753358222}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 291b8989ef2859d40a31c303f24f3059, type: 3}
+  m_Script: {fileID: 11500000, guid: 749f2c4fd15a89140b463c05b8d86ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   unitSprite: {fileID: 5940466000509815424}
@@ -146,7 +146,7 @@ PrefabInstance:
     - target: {fileID: 224037586009381108, guid: b5543dd0689d3964aba5d951684de67a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 31.4675
+      value: 31.46753
       objectReference: {fileID: 0}
     - target: {fileID: 224037586009381108, guid: b5543dd0689d3964aba5d951684de67a,
         type: 3}
@@ -199,6 +199,11 @@ PrefabInstance:
       value: 'Attack
 
 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 114084343551330302, guid: b5543dd0689d3964aba5d951684de67a,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1761796608720624, guid: b5543dd0689d3964aba5d951684de67a, type: 3}
       propertyPath: m_Name
