@@ -63,6 +63,12 @@ public class Army : MonoBehaviour {
         unitsInArmy.Remove(unit);
     }
 
+    public void AddUnitToArmy(Unit unit)
+    {
+        unitsInArmy.Add(unit);
+        unit.SetPropietary(this);
+    }
+
     public void AddFunds()
     {
         warFunds = warFunds + fundsPerPropierty;

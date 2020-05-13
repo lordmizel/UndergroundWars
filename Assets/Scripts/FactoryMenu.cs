@@ -108,7 +108,7 @@ public class FactoryMenu : MonoBehaviour
         {
             //Create unit in factory tile
             Unit newUnit = Instantiate(currentUnitsShown[currentOption], PlayerCursor.instance.transform.position, Quaternion.identity);
-            newUnit.SetPropietary(GameManager.instance.activePlayer);
+            GameManager.instance.activePlayer.AddUnitToArmy(newUnit);
             newUnit.TireUnit();
 
             GameManager.instance.activePlayer.ChangeFunds(-currentUnitsShown[currentOption].moneyValue);
