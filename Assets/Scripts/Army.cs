@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Army : MonoBehaviour {
+public abstract class Army : MonoBehaviour {
 
     public Color assignedColor;
 
@@ -161,4 +161,6 @@ public class Army : MonoBehaviour {
             FactoryMenu.instance.FillOption(i, catalogToShow[i]);
         }
     }
+
+    public abstract void SpecialPower();
 }
