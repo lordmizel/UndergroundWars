@@ -163,4 +163,5 @@ public abstract class Army : MonoBehaviour {
     }
 
     public abstract void SpecialPower();
+    public abstract void UnitModification();
 }
