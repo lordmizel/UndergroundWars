@@ -6,7 +6,7 @@ public abstract class Army : MonoBehaviour {
 
     public Color assignedColor;
 
-	List<Unit> unitsInArmy;
+	internal List<Unit> unitsInArmy;
     
     int warFunds = 0;
     [SerializeField]
@@ -47,7 +47,7 @@ public abstract class Army : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        
 	}
 
 	public void RefreshAllUnits()
@@ -124,6 +124,7 @@ public abstract class Army : MonoBehaviour {
         }
         UI.instance.UpdatePowerDisplay();
         poweredUp = true;
+        SpecialPower();
     }
 
     public void SetLastPlaceOfCursor(int x, int y)

@@ -12,7 +12,10 @@ public class CO1 : Army
 
     public override void SpecialPower()
     {
-        throw new System.NotImplementedException();
+        foreach(Unit unit in unitsInArmy)
+        {
+            unit.ChangeHP(2);
+        }
     }
 
     

@@ -115,9 +115,15 @@ public class GameManager : MonoBehaviour {
 				Map.instance.ReturnTilesToNormal ();
 				gameState = state.MOVING_CURSOR;
 			}
-		} 
-		//else 
-	}
+		}
+
+        /////////////////////////
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            activePlayer.AddPower(2000);
+        }
+        /////////////////////////
+    }
 
 	public void PassTurn()
 	{
