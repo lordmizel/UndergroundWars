@@ -50,6 +50,16 @@ public abstract class Army : MonoBehaviour {
         
 	}
 
+    public void StartNewTurn()
+    {
+        RefreshAllUnits();
+        if (poweredUp)
+        {
+            DeactivatePower();
+            poweredUp = false;
+        }
+    }
+
 	public void RefreshAllUnits()
 	{
 		foreach (Unit unit in unitsInArmy) 
@@ -164,5 +174,6 @@ public abstract class Army : MonoBehaviour {
     }
 
     public abstract void SpecialPower();
+    public abstract void DeactivatePower();
     public abstract void UnitModification();
 }

@@ -140,8 +140,7 @@ public class GameManager : MonoBehaviour {
 			playerTurnIndex++;
 		}
         activePlayer = players [playerTurnIndex];
-		activePlayer.RefreshAllUnits ();
-        activePlayer.poweredUp = false;
+        activePlayer.StartNewTurn();
         PlayerCursor.instance.TeleportCursorToLastTileOfCharacter();
         Map.instance.RecountPlayerPropierties();
         UI.instance.UpdateFundsDisplay();

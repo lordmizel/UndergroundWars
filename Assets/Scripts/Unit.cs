@@ -63,10 +63,8 @@ public class Unit : MonoBehaviour
     //TODO: Attack should be based on a table. The attack is given face-value here for debugging purposes.
     [SerializeField]
     int attack = 60;
-    [SerializeField]
-    int attackMultiplier = 100;
-    [SerializeField]
-    int defenseMultiplier = 100;
+    public int attackMultiplier = 100;
+    public int defenseMultiplier = 100;
     [SerializeField]
     int maxAmmo = 10;
     [HideInInspector]
