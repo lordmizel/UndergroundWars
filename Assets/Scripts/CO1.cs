@@ -5,9 +5,9 @@ using UnityEngine;
 public class CO1 : Army
 {
     [SerializeField]
-    int unitAtkMullSP = 20;
+    int unitAtkMullSP = 10;
     [SerializeField]
-    int unitDefMullSP = 20;
+    int unitDefMullSP = 10;
 
     public override void UnitModification()
     {
@@ -17,12 +17,26 @@ public class CO1 : Army
 
     public override void SpecialPower()
     {
-        foreach(Unit unit in unitsInArmy)
+        switch (poweredUpLevel)
         {
-            unit.ChangeHP(2);
-            unit.attackMultiplier += unitDefMullSP;
-            unit.defenseMultiplier += unitDefMullSP;
+            case 1:
+                foreach (Unit unit in unitsInArmy)
+                {
+                    unit.ChangeHP(2);
+                    unit.attackMultiplier += unitDefMullSP;
+                    unit.defenseMultiplier += unitDefMullSP;
+                }
+                break;
+            case 2:
+                break;
+            default:
+                break;
         }
+    }
+
+    public override void SuperSpecialPower()
+    {
+
     }
 
     public override void DeactivatePower()

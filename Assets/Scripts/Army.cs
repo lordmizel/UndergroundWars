@@ -15,8 +15,11 @@ public abstract class Army : MonoBehaviour {
     [SerializeField]
     int specialPowerSections = 6;
     [SerializeField]
+    int minorPowerPercentage = 50;
+    [SerializeField]
     int startingFundsPerPowerSection = 9000;
     int currentMaxSpecialPower;
+    int mediumPowerThreshold;
     int maxPowerIncrement;
     int timesPowerWasUsed = 0;
     public int currentSpecialPower = 0;
@@ -42,6 +45,7 @@ public abstract class Army : MonoBehaviour {
             unitsInArmy.Add(unit);
         }
         currentMaxSpecialPower = specialPowerSections * startingFundsPerPowerSection;
+        currentMaxSpecialPower = currentMaxSpecialPower * minorPowerPercentage / 100;
         maxPowerIncrement = startingFundsPerPowerSection * 20 / 100;
 	}
 	
@@ -103,7 +107,7 @@ public abstract class Army : MonoBehaviour {
 
     public void AddPower(int value)
     {
-        if (poweredUp == false)
+        if (!poweredUp)
         {
             currentSpecialPower += value;
             if (currentSpecialPower > currentMaxSpecialPower)
@@ -125,16 +129,27 @@ public abstract class Army : MonoBehaviour {
     }
 
     //TODO: Check how to activate powers
-    public void ActivatePower()
+    public void ActivatePower(int powerLevel)
     {
-        currentSpecialPower = 0;
+        switch (powerLevel)
+        {
+            case 1:
+                currentSpecialPower -= mediumPowerThreshold;
+                SpecialPower();
+                break;
+            case 2:
+                currentSpecialPower = 0;
+                SuperSpecialPower();
+                break;
+            default:
+                break;
+        }
         timesPowerWasUsed++;
         if (timesPowerWasUsed <= 10) {
             currentMaxSpecialPower = currentMaxSpecialPower + (maxPowerIncrement * specialPowerSections);
         }
         UI.instance.UpdatePowerDisplay();
         poweredUp = true;
-        SpecialPower();
     }
 
     public void SetLastPlaceOfCursor(int x, int y)
@@ -174,6 +189,7 @@ public abstract class Army : MonoBehaviour {
     }
 
     public abstract void SpecialPower();
+    public abstract void SuperSpecialPower();
     public abstract void DeactivatePower();
     public abstract void UnitModification();
 }
