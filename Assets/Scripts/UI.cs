@@ -16,6 +16,8 @@ public class UI : MonoBehaviour
     Color normalPowerFillColor;
     [SerializeField]
     Color poweredUpFillColor;
+    [SerializeField]
+    Color superPoweredUpFillColor;
 
     [SerializeField]
     Image tileImage;
@@ -60,6 +62,10 @@ public class UI : MonoBehaviour
         powerDisplay.maxValue = GameManager.instance.activePlayer.GetMaxPower();
         powerDisplay.value = GameManager.instance.activePlayer.GetPower();
         if(powerDisplay.value == powerDisplay.maxValue)
+        {
+            powerDisplayFill.color = superPoweredUpFillColor;
+        }
+        else if (powerDisplay.value >= GameManager.instance.activePlayer.mediumPowerThreshold)
         {
             powerDisplayFill.color = poweredUpFillColor;
         }

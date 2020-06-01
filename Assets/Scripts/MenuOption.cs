@@ -11,6 +11,7 @@ public class MenuOption : MonoBehaviour {
         CAPTURE,
         SUPPLY,
 		WAIT,
+        POWER,
         SUPER_POWER,
 		END_TURN,
 		TEST_OPTION

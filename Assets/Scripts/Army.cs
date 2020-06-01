@@ -19,7 +19,8 @@ public abstract class Army : MonoBehaviour {
     [SerializeField]
     int startingFundsPerPowerSection = 9000;
     int currentMaxSpecialPower;
-    int mediumPowerThreshold;
+    [HideInInspector]
+    public int mediumPowerThreshold;
     int maxPowerIncrement;
     int timesPowerWasUsed = 0;
     public int currentSpecialPower = 0;
@@ -45,7 +46,7 @@ public abstract class Army : MonoBehaviour {
             unitsInArmy.Add(unit);
         }
         currentMaxSpecialPower = specialPowerSections * startingFundsPerPowerSection;
-        currentMaxSpecialPower = currentMaxSpecialPower * minorPowerPercentage / 100;
+        mediumPowerThreshold = currentMaxSpecialPower * minorPowerPercentage / 100;
         maxPowerIncrement = startingFundsPerPowerSection * 20 / 100;
 	}
 	
@@ -147,6 +148,7 @@ public abstract class Army : MonoBehaviour {
         timesPowerWasUsed++;
         if (timesPowerWasUsed <= 10) {
             currentMaxSpecialPower = currentMaxSpecialPower + (maxPowerIncrement * specialPowerSections);
+            mediumPowerThreshold = currentMaxSpecialPower * minorPowerPercentage / 100;
         }
         UI.instance.UpdatePowerDisplay();
         poweredUp = true;

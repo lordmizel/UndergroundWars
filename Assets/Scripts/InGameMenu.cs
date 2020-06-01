@@ -133,8 +133,13 @@ public class InGameMenu : MonoBehaviour
                 GameManager.gameState = GameManager.state.MOVING_CURSOR;
                 Debug.Log("Wait selected");
                 break;
+            case MenuOption.menuOptions.POWER:
+                GameManager.instance.activePlayer.ActivatePower(1);
+                GameManager.gameState = GameManager.state.MOVING_CURSOR;
+                Debug.Log("Power selected");
+                break;
             case MenuOption.menuOptions.SUPER_POWER:
-                GameManager.instance.activePlayer.ActivatePower();
+                GameManager.instance.activePlayer.ActivatePower(2);
                 GameManager.gameState = GameManager.state.MOVING_CURSOR;
                 Debug.Log("Super power selected");
                 break;

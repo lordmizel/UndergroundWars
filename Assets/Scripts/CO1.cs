@@ -17,20 +17,11 @@ public class CO1 : Army
 
     public override void SpecialPower()
     {
-        switch (poweredUpLevel)
+        foreach (Unit unit in unitsInArmy)
         {
-            case 1:
-                foreach (Unit unit in unitsInArmy)
-                {
-                    unit.ChangeHP(2);
-                    unit.attackMultiplier += unitDefMullSP;
-                    unit.defenseMultiplier += unitDefMullSP;
-                }
-                break;
-            case 2:
-                break;
-            default:
-                break;
+            unit.ChangeHP(2);
+            unit.attackMultiplier += unitDefMullSP;
+            unit.defenseMultiplier += unitDefMullSP;
         }
     }
 
