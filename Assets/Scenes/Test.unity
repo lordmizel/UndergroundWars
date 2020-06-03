@@ -46819,7 +46819,7 @@ PrefabInstance:
     - target: {fileID: 114217791466869802, guid: b5543dd0689d3964aba5d951684de67a,
         type: 3}
       propertyPath: m_Text
-      value: Super Power
+      value: Power
       objectReference: {fileID: 0}
     - target: {fileID: 114519663829898652, guid: b5543dd0689d3964aba5d951684de67a,
         type: 3}

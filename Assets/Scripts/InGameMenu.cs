@@ -197,6 +197,10 @@ public class InGameMenu : MonoBehaviour
 
     public void ShowNeutralMenu()
     {
+        if (GameManager.instance.activePlayer.currentSpecialPower >= GameManager.instance.activePlayer.mediumPowerThreshold)
+        {
+            ActivateMenuOption(MenuOption.menuOptions.POWER);
+        }
         if (GameManager.instance.activePlayer.currentSpecialPower >= GameManager.instance.activePlayer.GetMaxPower())
         {
             ActivateMenuOption(MenuOption.menuOptions.SUPER_POWER);
