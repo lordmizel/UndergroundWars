@@ -24,7 +24,8 @@ public abstract class Army : MonoBehaviour {
     int maxPowerIncrement;
     int timesPowerWasUsed = 0;
     public int currentSpecialPower = 0;
-    public bool poweredUp = false;
+    // armyPowerLevel variable: 0 = normal; 1 = normal power active; 2 = super power active
+    public int armyPowerLevel = 0;
     
     public AudioClip armyTheme;
 
@@ -58,10 +59,18 @@ public abstract class Army : MonoBehaviour {
     public void StartNewTurn()
     {
         RefreshAllUnits();
-        if (poweredUp)
+        switch (armyPowerLevel)
         {
-            DeactivatePower();
-            poweredUp = false;
+            case 1:
+                DeactivatePower();
+                armyPowerLevel = 0;
+                break;
+            case 2:
+                DeactivateSuperPower();
+                armyPowerLevel = 0;
+                break;
+            default:
+                break;
         }
     }
 
@@ -108,7 +117,7 @@ public abstract class Army : MonoBehaviour {
 
     public void AddPower(int value)
     {
-        if (!poweredUp)
+        if (armyPowerLevel == 0)
         {
             currentSpecialPower += value;
             if (currentSpecialPower > currentMaxSpecialPower)
@@ -132,7 +141,8 @@ public abstract class Army : MonoBehaviour {
     //TODO: Check how to activate powers
     public void ActivatePower(int powerLevel)
     {
-        switch (powerLevel)
+        armyPowerLevel = powerLevel;
+        switch (armyPowerLevel)
         {
             case 1:
                 currentSpecialPower -= mediumPowerThreshold;
@@ -151,7 +161,6 @@ public abstract class Army : MonoBehaviour {
             mediumPowerThreshold = currentMaxSpecialPower * minorPowerPercentage / 100;
         }
         UI.instance.UpdatePowerDisplay();
-        poweredUp = true;
     }
 
     public void SetLastPlaceOfCursor(int x, int y)
@@ -190,8 +199,12 @@ public abstract class Army : MonoBehaviour {
         }
     }
 
+    public abstract void UnitBaseModification(Unit unit);
+    public abstract void UnitSpecialPowerModification(Unit unit);
+    public abstract void UnitSuperSpecialPowerModification(Unit unit);
     public abstract void SpecialPower();
     public abstract void SuperSpecialPower();
     public abstract void DeactivatePower();
-    public abstract void UnitModification();
+    public abstract void DeactivateSuperPower();
+    
 }

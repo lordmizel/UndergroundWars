@@ -12,8 +12,7 @@ public class Unit : MonoBehaviour
     SpriteRenderer hpSprite;
     [SerializeField]
     Sprite[] hpNumbers;
-
-    //TODO: This is public for debug purposes
+    
     public Army propietary;
 
     //TODO: Delete this
@@ -23,6 +22,7 @@ public class Unit : MonoBehaviour
     bool unitUsed = false;
     bool unitHasMoved = false;
     bool unitSelected = false;
+    public bool poweredUpUnit = false;
 
     [SerializeField]
     bool ranged = false;
