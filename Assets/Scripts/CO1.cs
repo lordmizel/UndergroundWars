@@ -21,13 +21,13 @@ public class CO1 : Army
 
     public override void UnitSpecialPowerModification(Unit unit)
     {
-        unit.attackMultiplier += unitDefMul_P;
+        unit.attackMultiplier += unitAtkMul_P;
         unit.defenseMultiplier += unitDefMul_P;
     }
 
     public override void UnitSuperSpecialPowerModification(Unit unit)
     {
-        unit.attackMultiplier += unitDefMul_SP;
+        unit.attackMultiplier += unitAtkMul_SP;
         unit.defenseMultiplier += unitDefMul_SP;
         unit.movementPoints += 1;
     }

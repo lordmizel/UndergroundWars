@@ -45,6 +45,7 @@ public abstract class Army : MonoBehaviour {
         foreach(Unit unit in GetComponentsInChildren<Unit>())
         {
             unitsInArmy.Add(unit);
+            UnitBaseModification(unit);
         }
         currentMaxSpecialPower = specialPowerSections * startingFundsPerPowerSection;
         mediumPowerThreshold = currentMaxSpecialPower * minorPowerPercentage / 100;
@@ -91,6 +92,15 @@ public abstract class Army : MonoBehaviour {
     {
         unitsInArmy.Add(unit);
         unit.SetPropietary(this);
+        UnitBaseModification(unit);
+        if(armyPowerLevel == 1)
+        {
+            UnitSpecialPowerModification(unit);
+        }
+        else if (armyPowerLevel == 2)
+        {
+            UnitSuperSpecialPowerModification(unit);
+        }
     }
 
     public void AddFunds()
@@ -137,8 +147,7 @@ public abstract class Army : MonoBehaviour {
     {
         return currentMaxSpecialPower;
     }
-
-    //TODO: Check how to activate powers
+    
     public void ActivatePower(int powerLevel)
     {
         armyPowerLevel = powerLevel;
