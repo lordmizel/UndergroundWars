@@ -23,6 +23,7 @@ public class CO1 : Army
     {
         unit.attackMultiplier += unitAtkMul_P;
         unit.defenseMultiplier += unitDefMul_P;
+        unit.poweredUpUnit = true;
     }
 
     public override void UnitSuperSpecialPowerModification(Unit unit)
@@ -30,6 +31,7 @@ public class CO1 : Army
         unit.attackMultiplier += unitAtkMul_SP;
         unit.defenseMultiplier += unitDefMul_SP;
         unit.movementPoints += 1;
+        unit.poweredUpUnit = true;
     }
 
     public override void SpecialPower()
@@ -38,7 +40,6 @@ public class CO1 : Army
         {
             unit.ChangeHP(2);
             UnitSpecialPowerModification(unit);
-            unit.poweredUpUnit = true;
         }
     }
 
