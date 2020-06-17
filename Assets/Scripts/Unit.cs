@@ -23,13 +23,10 @@ public class Unit : MonoBehaviour
     bool unitHasMoved = false;
     bool unitSelected = false;
     public bool poweredUpUnit = false;
-
-    [SerializeField]
-    bool ranged = false;
-    [SerializeField]
-    int minAttackRange = 1;
-    [SerializeField]
-    int maxAttackRange = 1;
+    
+    public bool ranged = false;
+    public int minAttackRange = 1;
+    public int maxAttackRange = 1;
     List<ClickableTile> attackSpots;
     List<ClickableTile> loadSpots;
     public List<ClickableTile> unloadSpots;
@@ -71,8 +68,7 @@ public class Unit : MonoBehaviour
     public int ammo;
 
     [Header("Capturing stuff")]
-    [SerializeField]
-    bool canCapture = false;
+    public bool canCapture = false;
     int capturePoints = 0;
     bool decidedToCapture = false;
 

@@ -15153,7 +15153,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 478958789}
-  - component: {fileID: 478958790}
+  - component: {fileID: 478958791}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Untagged
@@ -15180,7 +15180,7 @@ Transform:
   m_Father: {fileID: 20084422}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &478958790
+--- !u!114 &478958791
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15189,17 +15189,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 478958788}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 574a6628662851b4cb09d797ad13d6e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 12a3bdab593a2374e8ebb0acd2fde0d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignedColor: {r: 0.024959564, g: 0, b: 1, a: 1}
+  assignedColor: {r: 0, g: 0, b: 1, a: 1}
   fundsPerPropierty: 1000
   specialPowerSections: 6
   minorPowerPercentage: 50
   startingFundsPerPowerSection: 9000
   mediumPowerThreshold: 0
   currentSpecialPower: 0
-  poweredUp: 0
+  armyPowerLevel: 0
   armyTheme: {fileID: 8300000, guid: 54ec3d4a8d56d034f854e4c132ca2fa8, type: 3}
   landUnitCatalog:
   - {fileID: 114512531304379642, guid: d74c4fde6c2e3b54caf0e286a37736c6, type: 3}
@@ -15207,8 +15207,10 @@ MonoBehaviour:
   - {fileID: 114512531304379642, guid: cf8bbba8b095862419ac975a4dfb4ce0, type: 3}
   airUnitCatalog: []
   seaUnitCatalog: []
-  unitAtkMullSP: 10
-  unitDefMullSP: 10
+  unitAtkMul_P: 20
+  unitDefMul_P: 10
+  unitAtkMul_SP: 40
+  unitDefMul_SP: 10
 --- !u!1001 &482939432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34743,7 +34745,7 @@ PrefabInstance:
         type: 3}
       propertyPath: propietary
       value: 
-      objectReference: {fileID: 478958790}
+      objectReference: {fileID: 478958791}
     - target: {fileID: 114512531304379642, guid: d4eedb172a2a4074684a639dbd805839,
         type: 3}
       propertyPath: canCapture
@@ -38106,7 +38108,7 @@ PrefabInstance:
         type: 3}
       propertyPath: propietary
       value: 
-      objectReference: {fileID: 478958790}
+      objectReference: {fileID: 478958791}
     - target: {fileID: 114512531304379642, guid: d4eedb172a2a4074684a639dbd805839,
         type: 3}
       propertyPath: canCapture
@@ -38726,7 +38728,7 @@ PrefabInstance:
         type: 3}
       propertyPath: propietary
       value: 
-      objectReference: {fileID: 478958790}
+      objectReference: {fileID: 478958791}
     - target: {fileID: 114512531304379642, guid: d4eedb172a2a4074684a639dbd805839,
         type: 3}
       propertyPath: initialX
@@ -38760,7 +38762,7 @@ PrefabInstance:
     - target: {fileID: 114512531304379642, guid: d4eedb172a2a4074684a639dbd805839,
         type: 3}
       propertyPath: canCapture
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114512531304379642, guid: d4eedb172a2a4074684a639dbd805839,
         type: 3}
@@ -43514,7 +43516,7 @@ PrefabInstance:
         type: 3}
       propertyPath: propietary
       value: 
-      objectReference: {fileID: 478958790}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 986dc3aeec7a44a42b316a31d3a22340, type: 3}
 --- !u!1 &1551381544 stripped
@@ -53264,7 +53266,7 @@ PrefabInstance:
         type: 3}
       propertyPath: propietary
       value: 
-      objectReference: {fileID: 478958790}
+      objectReference: {fileID: 478958791}
     - target: {fileID: 114512531304379642, guid: d4eedb172a2a4074684a639dbd805839,
         type: 3}
       propertyPath: initialX
@@ -54848,13 +54850,15 @@ MonoBehaviour:
   startingFundsPerPowerSection: 9000
   mediumPowerThreshold: 0
   currentSpecialPower: 0
-  poweredUp: 0
+  armyPowerLevel: 0
   armyTheme: {fileID: 8300000, guid: 172632184364a77478a3e1310bf451b8, type: 3}
   landUnitCatalog: []
   airUnitCatalog: []
   seaUnitCatalog: []
-  unitAtkMullSP: 10
-  unitDefMullSP: 10
+  unitAtkMul_P: 10
+  unitDefMul_P: 10
+  unitAtkMul_SP: 30
+  unitDefMul_SP: 10
 --- !u!1001 &2111449520
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55825,7 +55829,7 @@ PrefabInstance:
         type: 3}
       propertyPath: propietary
       value: 
-      objectReference: {fileID: 478958790}
+      objectReference: {fileID: 478958791}
     - target: {fileID: 114512531304379642, guid: d4eedb172a2a4074684a639dbd805839,
         type: 3}
       propertyPath: canCapture
