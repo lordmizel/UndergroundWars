@@ -38,6 +38,13 @@ public class ClickableTile : MonoBehaviour
     public int gCost;
     public int hCost;
 
+    private void Start()
+    {
+        if(propietary != null)
+        {
+            propietaryOverlay.color = propietary.assignedColor;
+        }
+    }
 
     public void SetTileCoordinates(int x, int y)
     {
