@@ -4,18 +4,12 @@ using UnityEngine;
 
 public abstract class Army : MonoBehaviour {
 
+    public CommandingOfficer COIdentity;
     public Color assignedColor;
 
 	internal List<Unit> unitsInArmy;
     
     int warFunds = 0;
-    [SerializeField]
-    int fundsPerPropierty = 1000;
-
-    [SerializeField]
-    int specialPowerSections = 6;
-    [SerializeField]
-    int minorPowerPercentage = 50;
     [SerializeField]
     int startingFundsPerPowerSection = 9000;
     int currentMaxSpecialPower;
@@ -26,8 +20,6 @@ public abstract class Army : MonoBehaviour {
     public int currentSpecialPower = 0;
     // armyPowerLevel variable: 0 = normal; 1 = normal power active; 2 = super power active
     public int armyPowerLevel = 0;
-    
-    public AudioClip armyTheme;
 
     Vector2 lastPlaceOfCursor = new Vector2();
 
@@ -47,8 +39,8 @@ public abstract class Army : MonoBehaviour {
             unitsInArmy.Add(unit);
             UnitBaseModification(unit);
         }
-        currentMaxSpecialPower = specialPowerSections * startingFundsPerPowerSection;
-        mediumPowerThreshold = currentMaxSpecialPower * minorPowerPercentage / 100;
+        currentMaxSpecialPower = COIdentity.specialPowerSections * startingFundsPerPowerSection;
+        mediumPowerThreshold = currentMaxSpecialPower * COIdentity.minorPowerPercentage / 100;
         maxPowerIncrement = startingFundsPerPowerSection * 20 / 100;
 	}
 	
@@ -105,7 +97,7 @@ public abstract class Army : MonoBehaviour {
 
     public void AddFunds()
     {
-        warFunds = warFunds + fundsPerPropierty;
+        warFunds = warFunds + COIdentity.fundsPerPropierty;
 
         UI.instance.UpdateFundsDisplay();
     }
@@ -166,8 +158,8 @@ public abstract class Army : MonoBehaviour {
         }
         timesPowerWasUsed++;
         if (timesPowerWasUsed <= 10) {
-            currentMaxSpecialPower = currentMaxSpecialPower + (maxPowerIncrement * specialPowerSections);
-            mediumPowerThreshold = currentMaxSpecialPower * minorPowerPercentage / 100;
+            currentMaxSpecialPower = currentMaxSpecialPower + (maxPowerIncrement * COIdentity.specialPowerSections);
+            mediumPowerThreshold = currentMaxSpecialPower * COIdentity.minorPowerPercentage / 100;
         }
         UI.instance.UpdatePowerDisplay();
     }

@@ -15192,15 +15192,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12a3bdab593a2374e8ebb0acd2fde0d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  COIdentity: {fileID: 985748911}
   assignedColor: {r: 0, g: 0, b: 1, a: 1}
-  fundsPerPropierty: 1000
-  specialPowerSections: 6
-  minorPowerPercentage: 50
   startingFundsPerPowerSection: 9000
   mediumPowerThreshold: 0
   currentSpecialPower: 0
   armyPowerLevel: 0
-  armyTheme: {fileID: 8300000, guid: 54ec3d4a8d56d034f854e4c132ca2fa8, type: 3}
   landUnitCatalog:
   - {fileID: 114512531304379642, guid: d74c4fde6c2e3b54caf0e286a37736c6, type: 3}
   - {fileID: 114512531304379642, guid: ab782c5c62a633e4fb99df406349a801, type: 3}
@@ -30426,6 +30423,53 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b89a174731f2efc4cb2c7298f252f730, type: 3}
+--- !u!1 &985748910
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 985748912}
+  - component: {fileID: 985748911}
+  m_Layer: 0
+  m_Name: CO1 (Test Only - Delete this)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &985748911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985748910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba049ba812f09ae4aa4388d8b761f52a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armyTheme: {fileID: 8300000, guid: 54ec3d4a8d56d034f854e4c132ca2fa8, type: 3}
+  specialPowerSections: 6
+  minorPowerPercentage: 50
+  fundsPerPropierty: 1000
+--- !u!4 &985748912
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985748910}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20.608484, y: 8.554369, z: 2.4659524}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &986277861
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54828,6 +54872,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2107136743}
   - component: {fileID: 2107136744}
+  - component: {fileID: 2107136745}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Untagged
@@ -54863,15 +54908,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 574a6628662851b4cb09d797ad13d6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  COIdentity: {fileID: 985748911}
   assignedColor: {r: 1, g: 0, b: 0.037724495, a: 1}
-  fundsPerPropierty: 1000
-  specialPowerSections: 6
-  minorPowerPercentage: 50
   startingFundsPerPowerSection: 9000
   mediumPowerThreshold: 0
   currentSpecialPower: 0
   armyPowerLevel: 0
-  armyTheme: {fileID: 8300000, guid: 172632184364a77478a3e1310bf451b8, type: 3}
   landUnitCatalog:
   - {fileID: 114512531304379642, guid: d74c4fde6c2e3b54caf0e286a37736c6, type: 3}
   - {fileID: 114512531304379642, guid: ab782c5c62a633e4fb99df406349a801, type: 3}
@@ -54882,6 +54924,22 @@ MonoBehaviour:
   unitDefMul_P: 10
   unitAtkMul_SP: 30
   unitDefMul_SP: 10
+--- !u!114 &2107136745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107136742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba049ba812f09ae4aa4388d8b761f52a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armyTheme: {fileID: 8300000, guid: 54ec3d4a8d56d034f854e4c132ca2fa8, type: 3}
+  specialPowerSections: 6
+  minorPowerPercentage: 50
+  fundsPerPropierty: 1000
 --- !u!1001 &2111449520
 PrefabInstance:
   m_ObjectHideFlags: 0

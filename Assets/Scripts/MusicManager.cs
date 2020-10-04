@@ -17,7 +17,7 @@ public class MusicManager : MonoBehaviour
     void Start()
     {
         myAudioSource = GetComponent<AudioSource>();
-        PlayMusic(GameManager.instance.activePlayer.armyTheme);
+        PlayMusic(GameManager.instance.activePlayer.COIdentity.armyTheme);
     }
 
     // Update is called once per frame

@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour {
         Map.instance.RecountPlayerPropierties();
         UI.instance.UpdateFundsDisplay();
         UI.instance.UpdatePowerDisplay();
-        MusicManager.instance.PlayMusic(activePlayer.armyTheme);
+        MusicManager.instance.PlayMusic(activePlayer.COIdentity.armyTheme);
         turnLabel.gameObject.SetActive(true);
     }
 }
