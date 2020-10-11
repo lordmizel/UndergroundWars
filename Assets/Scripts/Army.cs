@@ -23,12 +23,6 @@ public abstract class Army : MonoBehaviour {
 
     Vector2 lastPlaceOfCursor = new Vector2();
 
-    [SerializeField]
-    List<Unit> landUnitCatalog = new List<Unit>();
-    [SerializeField]
-    List<Unit> airUnitCatalog = new List<Unit>();
-    [SerializeField]
-    List<Unit> seaUnitCatalog = new List<Unit>();
 
     // Use this for initialization
     void Start () 
@@ -181,13 +175,13 @@ public abstract class Army : MonoBehaviour {
         switch (factoryType)
         {
             case ClickableTile.factoryType.LAND:
-                catalogToShow = landUnitCatalog;
+                catalogToShow = COIdentity.landUnitCatalog;
                 break;
             case ClickableTile.factoryType.AIR:
-                catalogToShow = airUnitCatalog;
+                catalogToShow = COIdentity.airUnitCatalog;
                 break;
             case ClickableTile.factoryType.SEA:
-                catalogToShow = seaUnitCatalog;
+                catalogToShow = COIdentity.seaUnitCatalog;
                 break;
             default:
                 Debug.Log("ERROR: Non-factory tile recognized as factory.");

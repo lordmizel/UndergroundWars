@@ -10,6 +10,10 @@ public /*abstract*/ class CommandingOfficer : MonoBehaviour
     public int minorPowerPercentage = 50;
     
     public int fundsPerPropierty = 1000;
+    
+    public List<Unit> landUnitCatalog = new List<Unit>();
+    public List<Unit> airUnitCatalog = new List<Unit>();
+    public List<Unit> seaUnitCatalog = new List<Unit>();
 
     // Start is called before the first frame update
     void Start()

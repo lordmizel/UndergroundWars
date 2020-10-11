@@ -15198,12 +15198,6 @@ MonoBehaviour:
   mediumPowerThreshold: 0
   currentSpecialPower: 0
   armyPowerLevel: 0
-  landUnitCatalog:
-  - {fileID: 114512531304379642, guid: d74c4fde6c2e3b54caf0e286a37736c6, type: 3}
-  - {fileID: 114512531304379642, guid: ab782c5c62a633e4fb99df406349a801, type: 3}
-  - {fileID: 114512531304379642, guid: cf8bbba8b095862419ac975a4dfb4ce0, type: 3}
-  airUnitCatalog: []
-  seaUnitCatalog: []
   unitAtkMul_P: 20
   unitDefMul_P: 10
   unitAtkMul_SP: 40
@@ -30456,6 +30450,12 @@ MonoBehaviour:
   specialPowerSections: 6
   minorPowerPercentage: 50
   fundsPerPropierty: 1000
+  landUnitCatalog:
+  - {fileID: 114512531304379642, guid: d74c4fde6c2e3b54caf0e286a37736c6, type: 3}
+  - {fileID: 114512531304379642, guid: ab782c5c62a633e4fb99df406349a801, type: 3}
+  - {fileID: 114512531304379642, guid: cf8bbba8b095862419ac975a4dfb4ce0, type: 3}
+  airUnitCatalog: []
+  seaUnitCatalog: []
 --- !u!4 &985748912
 Transform:
   m_ObjectHideFlags: 0
@@ -54914,12 +54914,6 @@ MonoBehaviour:
   mediumPowerThreshold: 0
   currentSpecialPower: 0
   armyPowerLevel: 0
-  landUnitCatalog:
-  - {fileID: 114512531304379642, guid: d74c4fde6c2e3b54caf0e286a37736c6, type: 3}
-  - {fileID: 114512531304379642, guid: ab782c5c62a633e4fb99df406349a801, type: 3}
-  - {fileID: 114512531304379642, guid: cf8bbba8b095862419ac975a4dfb4ce0, type: 3}
-  airUnitCatalog: []
-  seaUnitCatalog: []
   unitAtkMul_P: 10
   unitDefMul_P: 10
   unitAtkMul_SP: 30
@@ -54940,6 +54934,9 @@ MonoBehaviour:
   specialPowerSections: 6
   minorPowerPercentage: 50
   fundsPerPropierty: 1000
+  landUnitCatalog: []
+  airUnitCatalog: []
+  seaUnitCatalog: []
 --- !u!1001 &2111449520
 PrefabInstance:
   m_ObjectHideFlags: 0
