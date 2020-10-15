@@ -31,7 +31,7 @@ public abstract class Army : MonoBehaviour {
         foreach(Unit unit in GetComponentsInChildren<Unit>())
         {
             unitsInArmy.Add(unit);
-            UnitBaseModification(unit);
+            COIdentity.UnitBaseModification(unit);
         }
         currentMaxSpecialPower = COIdentity.specialPowerSections * startingFundsPerPowerSection;
         mediumPowerThreshold = currentMaxSpecialPower * COIdentity.minorPowerPercentage / 100;
@@ -49,11 +49,11 @@ public abstract class Army : MonoBehaviour {
         switch (armyPowerLevel)
         {
             case 1:
-                DeactivatePower();
+                COIdentity.DeactivatePower();
                 armyPowerLevel = 0;
                 break;
             case 2:
-                DeactivateSuperPower();
+                COIdentity.DeactivateSuperPower();
                 armyPowerLevel = 0;
                 break;
             default:
@@ -78,14 +78,14 @@ public abstract class Army : MonoBehaviour {
     {
         unitsInArmy.Add(unit);
         unit.SetPropietary(this);
-        UnitBaseModification(unit);
+        COIdentity.UnitBaseModification(unit);
         if(armyPowerLevel == 1)
         {
-            UnitSpecialPowerModification(unit);
+            COIdentity.UnitSpecialPowerModification(unit);
         }
         else if (armyPowerLevel == 2)
         {
-            UnitSuperSpecialPowerModification(unit);
+            COIdentity.UnitSuperSpecialPowerModification(unit);
         }
     }
 
@@ -141,11 +141,11 @@ public abstract class Army : MonoBehaviour {
         {
             case 1:
                 currentSpecialPower -= mediumPowerThreshold;
-                SpecialPower();
+                COIdentity.SpecialPower();
                 break;
             case 2:
                 currentSpecialPower = 0;
-                SuperSpecialPower();
+                COIdentity.SuperSpecialPower();
                 break;
             default:
                 break;
@@ -194,12 +194,6 @@ public abstract class Army : MonoBehaviour {
         }
     }
 
-    public abstract void UnitBaseModification(Unit unit);
-    public abstract void UnitSpecialPowerModification(Unit unit);
-    public abstract void UnitSuperSpecialPowerModification(Unit unit);
-    public abstract void SpecialPower();
-    public abstract void SuperSpecialPower();
-    public abstract void DeactivatePower();
-    public abstract void DeactivateSuperPower();
+
     
 }

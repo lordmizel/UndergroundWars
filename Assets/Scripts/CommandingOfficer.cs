@@ -15,15 +15,12 @@ public /*abstract*/ class CommandingOfficer : MonoBehaviour
     public List<Unit> airUnitCatalog = new List<Unit>();
     public List<Unit> seaUnitCatalog = new List<Unit>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //TODO: The following should be abstracts
+    public /*abstract*/ void UnitBaseModification(Unit unit) { }//;
+    public /*abstract*/ void UnitSpecialPowerModification(Unit unit) { }//;
+    public /*abstract*/ void UnitSuperSpecialPowerModification(Unit unit) { }//;
+    public /*abstract*/ void SpecialPower() { }//;
+    public /*abstract*/ void SuperSpecialPower() { }//;
+    public /*abstract*/ void DeactivatePower() { }//;
+    public /*abstract*/ void DeactivateSuperPower() { }//;
 }

@@ -13,7 +13,7 @@ public class CO2 : Army
     [SerializeField]
     int unitDefMul_SP = 10;
 
-    public override void UnitBaseModification(Unit unit)
+    public /*override*/ void UnitBaseModification(Unit unit)
     {
         if(unit.ranged)
         {
@@ -30,7 +30,7 @@ public class CO2 : Army
         unit.defenseMultiplier = 100;
     }
 
-    public override void UnitSpecialPowerModification(Unit unit)
+    public /*override*/ void UnitSpecialPowerModification(Unit unit)
     {
         if(!unit.ranged && !unit.canCapture)
         {
@@ -40,7 +40,7 @@ public class CO2 : Army
         unit.poweredUpUnit = true;
     }
 
-    public override void UnitSuperSpecialPowerModification(Unit unit)
+    public /*override*/ void UnitSuperSpecialPowerModification(Unit unit)
     {
         if (!unit.ranged && !unit.canCapture)
         {
@@ -50,7 +50,7 @@ public class CO2 : Army
         unit.poweredUpUnit = true;
     }
 
-    public override void SpecialPower()
+    public /*override*/ void SpecialPower()
     {
         foreach (Unit unit in unitsInArmy)
         {
@@ -58,15 +58,15 @@ public class CO2 : Army
         }
     }
 
-    public override void SuperSpecialPower()
+    public /*override*/ void SuperSpecialPower()
     {
         foreach (Unit unit in unitsInArmy)
         {
             UnitSuperSpecialPowerModification(unit);
         }
     }
-    
-    public override void DeactivatePower()
+
+    public /*override*/ void DeactivatePower()
     {
         foreach (Unit unit in unitsInArmy)
         {
@@ -75,7 +75,7 @@ public class CO2 : Army
         }
     }
 
-    public override void DeactivateSuperPower()
+    public /*override*/ void DeactivateSuperPower()
     {
         foreach (Unit unit in unitsInArmy)
         {

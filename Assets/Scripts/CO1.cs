@@ -13,20 +13,20 @@ public class CO1 : Army
     [SerializeField]
     int unitDefMul_SP = 10;
 
-    public override void UnitBaseModification(Unit unit)
+    public /*override*/ void UnitBaseModification(Unit unit)
     {
         unit.attackMultiplier = 100;
         unit.defenseMultiplier = 100;
     }
 
-    public override void UnitSpecialPowerModification(Unit unit)
+    public /*override*/ void UnitSpecialPowerModification(Unit unit)
     {
         unit.attackMultiplier += unitAtkMul_P;
         unit.defenseMultiplier += unitDefMul_P;
         unit.poweredUpUnit = true;
     }
 
-    public override void UnitSuperSpecialPowerModification(Unit unit)
+    public /*override*/ void UnitSuperSpecialPowerModification(Unit unit)
     {
         unit.attackMultiplier += unitAtkMul_SP;
         unit.defenseMultiplier += unitDefMul_SP;
@@ -34,7 +34,7 @@ public class CO1 : Army
         unit.poweredUpUnit = true;
     }
 
-    public override void SpecialPower()
+    public /*override*/ void SpecialPower()
     {
         foreach (Unit unit in unitsInArmy)
         {
@@ -43,7 +43,7 @@ public class CO1 : Army
         }
     }
 
-    public override void SuperSpecialPower()
+    public /*override*/ void SuperSpecialPower()
     {
         foreach (Unit unit in unitsInArmy)
         {
@@ -52,8 +52,8 @@ public class CO1 : Army
             unit.poweredUpUnit = true;
         }
     }
-    
-    public override void DeactivatePower()
+
+    public /*override*/ void DeactivatePower()
     {
         foreach (Unit unit in unitsInArmy)
         {
@@ -62,7 +62,7 @@ public class CO1 : Army
         }
     }
 
-    public override void DeactivateSuperPower()
+    public /*override*/ void DeactivateSuperPower()
     {
         foreach (Unit unit in unitsInArmy)
         {
