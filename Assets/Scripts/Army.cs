@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Army : MonoBehaviour {
+public class Army : MonoBehaviour {
 
     public CommandingOfficer COIdentity;
     public Color assignedColor;
