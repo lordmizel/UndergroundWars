@@ -53,7 +53,8 @@ public class GameManager : MonoBehaviour {
     {
 		gameState = state.MOVING_CURSOR;
         turnLabel.gameObject.SetActive(true);
-	}
+        Map.instance.RecountPlayerPropierties();
+    }
 	
 	// Update is called once per frame
 	void Update () 

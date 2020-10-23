@@ -54913,7 +54913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   COIdentity: {fileID: 985748911}
-  assignedColor: {r: 0, g: 0, b: 0, a: 0}
+  assignedColor: {r: 1, g: 0, b: 0, a: 1}
   startingFundsPerPowerSection: 9000
   mediumPowerThreshold: 0
   currentSpecialPower: 0
