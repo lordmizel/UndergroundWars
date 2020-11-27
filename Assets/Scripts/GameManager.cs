@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour {
         players = FindObjectsOfType<Army>();
         for (int i = 0; i < players.Length; i++)
         {
+            players[i].COIdentity = characterHolder.officers[i];
             players[i].SetLastPlaceOfCursor((int)initialCursorPositions[i].x, (int)initialCursorPositions[i].y);
         }
         activePlayer = players[0];
