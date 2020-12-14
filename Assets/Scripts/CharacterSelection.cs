@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CharacterSelection : MonoBehaviour
 {
+    int selectedCharacter = 0;
+    CharacterPortraitSelector[] portraits = new CharacterPortraitSelector[4];
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +16,26 @@ public class CharacterSelection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            ChangeSelectedPortrait(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            ChangeSelectedPortrait(-1);
+        }
+    }
+
+    void ChangeSelectedPortrait(int next)
+    {
+        selectedCharacter += next;
+        if(selectedCharacter < 0)
+        {
+            selectedCharacter = portraits.Length - 1;
+        }
+        else if (selectedCharacter >= portraits.Length)
+        {
+            selectedCharacter = 0;
+        }
     }
 }
