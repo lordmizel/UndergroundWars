@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterPortraitSelector : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    Image highlightBorder;
+    
+    public void HighlightMe()
     {
-        
+        var tempcolor = highlightBorder.color;
+        tempcolor.a = 1f;
+        highlightBorder.color = tempcolor;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UnHighlightMe()
     {
-        
+
     }
 }
