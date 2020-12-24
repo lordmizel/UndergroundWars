@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterSelection : MonoBehaviour
 {
     int selectedCharacter = 0;
+    [SerializeField]
     CharacterPortraitSelector[] portraits = new CharacterPortraitSelector[4];
 
     // Start is called before the first frame update
@@ -28,6 +29,7 @@ public class CharacterSelection : MonoBehaviour
 
     void ChangeSelectedPortrait(int next)
     {
+        portraits[selectedCharacter].UnHighlightMe();
         selectedCharacter += next;
         if(selectedCharacter < 0)
         {
@@ -37,5 +39,6 @@ public class CharacterSelection : MonoBehaviour
         {
             selectedCharacter = 0;
         }
+        portraits[selectedCharacter].HighlightMe();
     }
 }
