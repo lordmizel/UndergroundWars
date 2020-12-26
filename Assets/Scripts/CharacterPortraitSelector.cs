@@ -17,6 +17,8 @@ public class CharacterPortraitSelector : MonoBehaviour
 
     public void UnHighlightMe()
     {
-
+        var tempcolor = highlightBorder.color;
+        tempcolor.a = 0f;
+        highlightBorder.color = tempcolor;
     }
 }
