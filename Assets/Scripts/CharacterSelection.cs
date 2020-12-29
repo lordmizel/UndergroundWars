@@ -7,11 +7,13 @@ public class CharacterSelection : MonoBehaviour
     int selectedCharacter = 0;
     [SerializeField]
     CharacterPortraitSelector[] portraits = new CharacterPortraitSelector[4];
+    [SerializeField]
+    List<CommandingOfficer> characters = new List<CommandingOfficer>();
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        portraits[selectedCharacter].HighlightMe();
     }
 
     // Update is called once per frame
