@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class CommandingOfficer : MonoBehaviour
 {
+    public Sprite portrait;
     public AudioClip armyTheme;
 
     public int specialPowerSections = 6;

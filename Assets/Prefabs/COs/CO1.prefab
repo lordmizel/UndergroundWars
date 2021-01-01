@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 574a6628662851b4cb09d797ad13d6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  portrait: {fileID: 21300016, guid: a9c021e957fbfac488ba0805f35771cf, type: 3}
   armyTheme: {fileID: 8300000, guid: 54ec3d4a8d56d034f854e4c132ca2fa8, type: 3}
   specialPowerSections: 6
   minorPowerPercentage: 50
