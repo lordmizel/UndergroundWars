@@ -279,6 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlightBorder: {fileID: 163099155}
+  portrait: {fileID: 1452002228}
 --- !u!1 &327245459
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,6 +709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlightBorder: {fileID: 711564026}
+  portrait: {fileID: 1787421941}
 --- !u!1 &835943047
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,6 +885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlightBorder: {fileID: 1022678839}
+  portrait: {fileID: 835943049}
 --- !u!1 &1037705744
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,6 +975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlightBorder: {fileID: 1037705746}
+  portrait: {fileID: 1250161658}
 --- !u!1 &1237212466
 GameObject:
   m_ObjectHideFlags: 0
@@ -1703,6 +1707,11 @@ MonoBehaviour:
   - {fileID: 163099157}
   - {fileID: 1022678841}
   - {fileID: 711564028}
+  characters:
+  - {fileID: 1596966384175997193, guid: 638682e1332667a48a604031ba2dee94, type: 3}
+  - {fileID: 1223751225785184868, guid: 0bca77945d33349478fbc98718ca92cc, type: 3}
+  - {fileID: 1596966384175997193, guid: 638682e1332667a48a604031ba2dee94, type: 3}
+  - {fileID: 1223751225785184868, guid: 0bca77945d33349478fbc98718ca92cc, type: 3}
 --- !u!4 &2099412104
 Transform:
   m_ObjectHideFlags: 0

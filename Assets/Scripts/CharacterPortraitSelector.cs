@@ -7,6 +7,7 @@ public class CharacterPortraitSelector : MonoBehaviour
 {
     [SerializeField]
     Image highlightBorder;
+    public Image portrait;
     
     public void HighlightMe()
     {
