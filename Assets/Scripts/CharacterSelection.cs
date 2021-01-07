@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterSelection : MonoBehaviour
 {
     int selectedSlot = 0;
+    int selectedCO = 0;
     [SerializeField]
     CharacterPortraitSelector[] portraits = new CharacterPortraitSelector[4];
     int[] selectedCharacters = new int[4] { 0, 1, 2, 3};
@@ -32,6 +33,14 @@ public class CharacterSelection : MonoBehaviour
         {
             ChangeSelectedPortrait(-1);
         }
+        else if (Input.GetKeyDown(KeyCode.W))
+        {
+            ChangeSelectedCO(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            ChangeSelectedCO(-1);
+        }
     }
 
     void ChangeSelectedPortrait(int next)
@@ -47,5 +56,19 @@ public class CharacterSelection : MonoBehaviour
             selectedSlot = 0;
         }
         portraits[selectedSlot].HighlightMe();
+    }
+
+    void ChangeSelectedCO(int next)
+    {
+        selectedCO += next;
+        if (selectedCO < 0)
+        {
+            selectedCO = characters.Count - 1;
+        }
+        else if (selectedCO >= characters.Count)
+        {
+            selectedCO = 0;
+        }
+        portraits[selectedSlot].portrait.sprite = characters[selectedCO].portrait;
     }
 }
