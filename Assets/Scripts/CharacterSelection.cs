@@ -56,6 +56,7 @@ public class CharacterSelection : MonoBehaviour
             selectedSlot = 0;
         }
         portraits[selectedSlot].HighlightMe();
+        selectedCO = selectedCharacters[selectedSlot];
     }
 
     void ChangeSelectedCO(int next)
@@ -69,6 +70,7 @@ public class CharacterSelection : MonoBehaviour
         {
             selectedCO = 0;
         }
+        selectedCharacters[selectedSlot] = selectedCO;
         portraits[selectedSlot].portrait.sprite = characters[selectedCO].portrait;
     }
 }
