@@ -8,9 +8,8 @@ public class CharacterSelection : MonoBehaviour
     int selectedCO = 0;
     [SerializeField]
     CharacterPortraitSelector[] portraits = new CharacterPortraitSelector[4];
-    int[] selectedCharacters = new int[4] { 0, 1, 2, 3};
-    [SerializeField]
-    List<CommandingOfficer> characters = new List<CommandingOfficer>();
+    public int[] selectedCharacters = new int[4] { 0, 1, 2, 3};
+    public List<CommandingOfficer> characters = new List<CommandingOfficer>();
 
     // Start is called before the first frame update
     void Start()

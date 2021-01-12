@@ -5,6 +5,8 @@ using UnityEngine;
 public class CharacterHolder : MonoBehaviour
 {
     public CommandingOfficer[] officers = new CommandingOfficer[4];
+    [SerializeField]
+    CharacterSelection selectionManager;
     
     // Start is called before the first frame update
     void Start()
@@ -12,9 +14,11 @@ public class CharacterHolder : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void EstablishCharacters()
     {
-        
+        for(int x = 0; x < selectionManager.characters.Count; x++)
+        {
+            Instantiate(selectionManager.characters[selectionManager.selectedCharacters[x]], this.transform);
+        }
     }
 }

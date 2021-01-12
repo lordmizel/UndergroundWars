@@ -5,9 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField]
+    CharacterHolder characterHolder;
+
     public void StartGame()
     {
-        SceneManager.LoadScene("Test");
+        characterHolder.EstablishCharacters();
+        //SceneManager.LoadScene("Test");
     }
 
     public void ExitGame()
