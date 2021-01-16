@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         characterHolder.EstablishCharacters();
-        //SceneManager.LoadScene("Test");
+        SceneManager.LoadScene("Test");
     }
 
     public void ExitGame()

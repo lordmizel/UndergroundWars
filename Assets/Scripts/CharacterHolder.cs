@@ -18,7 +18,7 @@ public class CharacterHolder : MonoBehaviour
     {
         for(int x = 0; x < selectionManager.characters.Count; x++)
         {
-            Instantiate(selectionManager.characters[selectionManager.selectedCharacters[x]], this.transform);
+            officers[x] = Instantiate(selectionManager.characters[selectionManager.selectedCharacters[x]], this.transform);
         }
     }
 }
