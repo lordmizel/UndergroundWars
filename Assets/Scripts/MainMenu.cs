@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField]
-    CharacterHolder characterHolder;
+    GameSpecifications characterHolder;
 
     public void StartGame()
     {

@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour {
 
 	public static state gameState;
 
-    CharacterHolder characterHolder;
+    GameSpecifications characterHolder;
 	Army[] players;
 	public Army activePlayer;
 	int playerTurnIndex = 0;
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour {
     void Awake()
     {
         instance = this;
-        characterHolder = FindObjectOfType<CharacterHolder>();
+        characterHolder = FindObjectOfType<GameSpecifications>();
         players = FindObjectsOfType<Army>();
         for (int i = 0; i < players.Length; i++)
         {
