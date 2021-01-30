@@ -14,11 +14,17 @@ public class CharacterSelection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        portraits[selectedSlot].HighlightMe();
-        for(int x = 0; x < selectedCharacters.Length; x++)
+        GameSpecifications gameSpecs = FindObjectOfType<GameSpecifications>();
+        for(int x = 0; x < gameSpecs.playerNumber; x++)
         {
+            portraits[x].gameObject.SetActive(true);
             portraits[x].portrait.sprite = characters[x].portrait;
         }
+        portraits[selectedSlot].HighlightMe();
+        //for(int x = 0; x < selectedCharacters.Length; x++)
+        //{
+        //    portraits[x].portrait.sprite = characters[x].portrait;
+        //}
     }
 
     // Update is called once per frame
