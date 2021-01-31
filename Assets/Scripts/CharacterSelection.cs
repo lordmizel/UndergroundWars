@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterSelection : MonoBehaviour
 {
+    GameSpecifications gameSpecs;
     int selectedSlot = 0;
     int selectedCO = 0;
     [SerializeField]
@@ -14,7 +15,7 @@ public class CharacterSelection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameSpecifications gameSpecs = FindObjectOfType<GameSpecifications>();
+        gameSpecs = FindObjectOfType<GameSpecifications>();
         for(int x = 0; x < gameSpecs.playerNumber; x++)
         {
             portraits[x].gameObject.SetActive(true);
@@ -54,9 +55,9 @@ public class CharacterSelection : MonoBehaviour
         selectedSlot += next;
         if(selectedSlot < 0)
         {
-            selectedSlot = portraits.Length - 1;
+            selectedSlot = gameSpecs.playerNumber - 1;
         }
-        else if (selectedSlot >= portraits.Length)
+        else if (selectedSlot >= gameSpecs.playerNumber)
         {
             selectedSlot = 0;
         }
