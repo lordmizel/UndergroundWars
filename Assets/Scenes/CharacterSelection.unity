@@ -376,7 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e26040d6b000647ba16002bb573fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNumber: 3
+  playerNumber: 2
   officers:
   - {fileID: 0}
   - {fileID: 0}

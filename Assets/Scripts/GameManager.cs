@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour {
 
 	public static state gameState;
 
-    GameSpecifications characterHolder;
+    GameSpecifications gameSpecs;
 	Army[] players;
 	public Army activePlayer;
 	int playerTurnIndex = 0;
@@ -40,11 +40,11 @@ public class GameManager : MonoBehaviour {
     void Awake()
     {
         instance = this;
-        characterHolder = FindObjectOfType<GameSpecifications>();
+        gameSpecs = FindObjectOfType<GameSpecifications>();
         players = FindObjectsOfType<Army>();
-        for (int i = 0; i < players.Length; i++)
+        for (int i = 0; i < gameSpecs.playerNumber; i++)
         {
-            players[i].COIdentity = characterHolder.officers[i];
+            players[i].COIdentity = gameSpecs.officers[i];
             players[i].SetLastPlaceOfCursor((int)initialCursorPositions[i].x, (int)initialCursorPositions[i].y);
         }
         activePlayer = players[0];
