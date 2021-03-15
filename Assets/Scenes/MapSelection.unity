@@ -430,7 +430,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1237212471}
+      - m_Target: {fileID: 0}
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -675,10 +675,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1237212466}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97c8dfb6d84204f459101101a62cddb3, type: 3}
+  m_Script: {fileID: 11500000, guid: ee6723c703dbb4a48a2379bd5b630926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterHolder: {fileID: 584589148}
 --- !u!1 &1325303430
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,7 +989,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1237212471}
+      - m_Target: {fileID: 0}
         m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
