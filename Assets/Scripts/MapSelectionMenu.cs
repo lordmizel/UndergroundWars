@@ -10,6 +10,9 @@ public class MapSelectionMenu : MonoBehaviour
     int minPlayers = 2;
     int currentNumberOfPlayers;
 
+    [SerializeField]
+    List<BattleMap> maps2p, maps3p, maps4p;
+
 
 
     // Start is called before the first frame update
