@@ -11,6 +11,8 @@ public class MapSelectionMenu : MonoBehaviour
     int currentNumberOfPlayers;
 
     [SerializeField]
+    Text numberText;
+    [SerializeField]
     List<BattleMap> maps2p, maps3p, maps4p;
 
 
@@ -47,6 +49,6 @@ public class MapSelectionMenu : MonoBehaviour
             currentNumberOfPlayers = minPlayers;
         }
 
-
+        numberText.text = currentNumberOfPlayers + " Players";
     }
 }
