@@ -14,6 +14,8 @@ public class MapSelectionMenu : MonoBehaviour
     Text numberText;
     [SerializeField]
     List<BattleMap> maps2p, maps3p, maps4p;
+    [SerializeField]
+    List<MapMenuOption> mapMenuEntries;
 
 
 
@@ -22,6 +24,7 @@ public class MapSelectionMenu : MonoBehaviour
     {
         gameSpecs = FindObjectOfType<GameSpecifications>();
         currentNumberOfPlayers = minPlayers;
+        SeedMapMenu(maps2p);
     }
 
     // Update is called once per frame
@@ -50,5 +53,21 @@ public class MapSelectionMenu : MonoBehaviour
         }
 
         numberText.text = currentNumberOfPlayers + " Players";
+    }
+
+    void SeedMapMenu(List<BattleMap> maps)
+    {
+        for(int x = 0; x < mapMenuEntries.Count; x++)
+        {
+            if (x >= maps.Count)
+            {
+                mapMenuEntries[x].gameObject.SetActive(false);
+            }
+            else
+            {
+                mapMenuEntries[x].gameObject.SetActive(true);
+                mapMenuEntries[x].ChangeName(maps[x].mapName);
+            }
+        }
     }
 }
