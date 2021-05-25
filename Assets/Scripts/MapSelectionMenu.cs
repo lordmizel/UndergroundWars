@@ -14,8 +14,10 @@ public class MapSelectionMenu : MonoBehaviour
     Text numberText;
     [SerializeField]
     List<BattleMap> maps2p, maps3p, maps4p;
+    List<BattleMap>[] battleMapLists;
     [SerializeField]
     List<MapMenuOption> mapMenuEntries;
+
 
 
 
@@ -24,6 +26,7 @@ public class MapSelectionMenu : MonoBehaviour
     {
         gameSpecs = FindObjectOfType<GameSpecifications>();
         currentNumberOfPlayers = minPlayers;
+        battleMapLists = new List<BattleMap>[3] { maps2p, maps3p, maps4p};
         SeedMapMenu(maps2p);
     }
 
@@ -53,6 +56,7 @@ public class MapSelectionMenu : MonoBehaviour
         }
 
         numberText.text = currentNumberOfPlayers + " Players";
+        SeedMapMenu(battleMapLists[currentNumberOfPlayers - 2]);
     }
 
     void SeedMapMenu(List<BattleMap> maps)
