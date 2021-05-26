@@ -27,7 +27,7 @@ public class MapSelectionMenu : MonoBehaviour
         gameSpecs = FindObjectOfType<GameSpecifications>();
         currentNumberOfPlayers = minPlayers;
         battleMapLists = new List<BattleMap>[3] { maps2p, maps3p, maps4p};
-        SeedMapMenu(maps2p);
+        ChangePlayerNumber(0);
     }
 
     // Update is called once per frame
