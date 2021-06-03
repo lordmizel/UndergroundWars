@@ -6,12 +6,13 @@ using UnityEngine.UI;
 public class MapMenuOption : MonoBehaviour
 {
     public Text buttonText;
+    [SerializeField]
     Image myImage;
-    Color initialColor, litColor;
+    Color initialColor;
+    Color litColor;
 
     private void Start()
     {
-        myImage = this.GetComponent<Image>();
         initialColor = myImage.color;
         litColor = Color.yellow;
     }

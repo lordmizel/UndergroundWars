@@ -141,7 +141,6 @@ GameObject:
   - component: {fileID: 81088409}
   - component: {fileID: 81088410}
   - component: {fileID: 81088412}
-  - component: {fileID: 81088411}
   m_Layer: 5
   m_Name: Map List
   m_TagString: Untagged
@@ -180,19 +179,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 81088408}
   m_CullTransparentMesh: 0
---- !u!114 &81088411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 81088408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 606732d100adad44abcde480988396e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonText: {fileID: 0}
 --- !u!114 &81088412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,6 +503,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7891618450117621602, guid: 1eeb8a537e7b0384c98376a51c861aff,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7891618450117621602, guid: 1eeb8a537e7b0384c98376a51c861aff,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1eeb8a537e7b0384c98376a51c861aff, type: 3}
