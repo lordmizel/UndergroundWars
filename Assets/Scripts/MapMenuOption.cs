@@ -11,7 +11,7 @@ public class MapMenuOption : MonoBehaviour
     Color initialColor;
     Color litColor;
 
-    private void Start()
+    private void Awake()
     {
         initialColor = myImage.color;
         litColor = Color.yellow;

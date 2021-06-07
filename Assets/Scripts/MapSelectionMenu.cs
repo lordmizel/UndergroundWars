@@ -27,7 +27,7 @@ public class MapSelectionMenu : MonoBehaviour
         currentNumberOfPlayers = minPlayers;
         battleMapLists = new List<BattleMap>[3] { maps2p, maps3p, maps4p};
         ChangePlayerNumber(0);
-        //mapMenuEntries[selectedMap].LightUp();
+        mapMenuEntries[selectedMap].LightUp();
     }
 
     // Update is called once per frame
