@@ -18,6 +18,8 @@ public class MapSelectionMenu : MonoBehaviour
     [SerializeField]
     List<MapMenuOption> mapMenuEntries;
     int selectedMap = 0;
+    [SerializeField]
+    Image mapImage;
     
 
     // Start is called before the first frame update
@@ -65,6 +67,7 @@ public class MapSelectionMenu : MonoBehaviour
 
         numberText.text = currentNumberOfPlayers + " Players";
         SeedMapMenu(battleMapLists[currentNumberOfPlayers - 2]);
+        mapImage.sprite = battleMapLists[currentNumberOfPlayers - 2][selectedMap].mapImage;
     }
 
     void SeedMapMenu(List<BattleMap> maps)
@@ -96,6 +99,7 @@ public class MapSelectionMenu : MonoBehaviour
             selectedMap = 0;
         }
 
+        mapImage.sprite = battleMapLists[currentNumberOfPlayers - 2][selectedMap].mapImage;
         mapMenuEntries[selectedMap].LightUp();
     }
 }
