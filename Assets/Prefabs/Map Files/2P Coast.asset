@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapName: Mapple Island
   playerNumber: 2
+  mapImage: {fileID: 21300000, guid: a1e34c6b9c1cf70469c57975a564604e, type: 3}

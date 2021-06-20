@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapName: Deep Hive
   playerNumber: 3
+  mapImage: {fileID: 21300000, guid: 25849ef9a4948c54fb3b46998b452b5f, type: 3}

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapName: Frontlines
   playerNumber: 2
+  mapImage: {fileID: 21300000, guid: 8c1d30be7512a9148b9a877e8810c7df, type: 3}

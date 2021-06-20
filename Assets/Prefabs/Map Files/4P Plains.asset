@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapName: The Surface
   playerNumber: 4
+  mapImage: {fileID: 21300000, guid: 7ffb1b1baf21a3741a752a93558c125e, type: 3}

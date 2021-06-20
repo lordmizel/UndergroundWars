@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapName: Stone Forest
   playerNumber: 4
+  mapImage: {fileID: 21300000, guid: 5e362c4726636b3498ba7941e11b21c5, type: 3}

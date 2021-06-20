@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapName: Sea of Woe
   playerNumber: 3
+  mapImage: {fileID: 21300000, guid: 002a64eda0426db40ab8f4166953b240, type: 3}

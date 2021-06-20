@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapName: Tug o' War
   playerNumber: 2
+  mapImage: {fileID: 21300000, guid: 132665466b0291c44b2257a5dca064cf, type: 3}
