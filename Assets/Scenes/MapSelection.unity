@@ -631,6 +631,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   selectionManager: {fileID: 0}
+  mapToLoad: 
 --- !u!4 &584589149
 Transform:
   m_ObjectHideFlags: 0
@@ -724,8 +725,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: StartGame
+      - m_Target: {fileID: 1237212471}
+        m_MethodName: AcceptSelection
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

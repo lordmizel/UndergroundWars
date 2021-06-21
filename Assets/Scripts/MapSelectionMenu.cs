@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MapSelectionMenu : MonoBehaviour
 {
@@ -101,5 +102,12 @@ public class MapSelectionMenu : MonoBehaviour
 
         mapImage.sprite = battleMapLists[currentNumberOfPlayers - 2][selectedMap].mapImage;
         mapMenuEntries[selectedMap].LightUp();
+    }
+
+    public void AcceptSelection()
+    {
+        gameSpecs.mapToLoad = battleMapLists[currentNumberOfPlayers - 2][selectedMap].mapName;
+        gameSpecs.playerNumber = battleMapLists[currentNumberOfPlayers - 2][selectedMap].playerNumber;
+        SceneManager.LoadScene("CharacterSelection");
     }
 }

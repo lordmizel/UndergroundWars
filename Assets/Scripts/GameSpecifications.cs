@@ -8,6 +8,7 @@ public class GameSpecifications : MonoBehaviour
     public CommandingOfficer[] officers = new CommandingOfficer[4];
     [SerializeField]
     CharacterSelection selectionManager;
+    public string mapToLoad;
     
     // Start is called before the first frame update
     void Start()
