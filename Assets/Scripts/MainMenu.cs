@@ -8,10 +8,15 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     GameSpecifications characterHolder;
 
+    void Start()
+    {
+        characterHolder = FindObjectOfType<GameSpecifications>();
+    }
+
     public void StartGame()
     {
         characterHolder.EstablishCharacters();
-        SceneManager.LoadScene("Test");
+        SceneManager.LoadScene(characterHolder.mapToLoad);
     }
 
     public void ExitGame()
